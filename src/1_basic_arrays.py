@@ -1,35 +1,22 @@
 import numpy as np
 
+def array_from_list(_list):
+	return np.array(_list)
 
-my_array = np.array([1, 3, 5])
+def array_of_ints(start, end, step):
+	return np.arange(start, end, step)
 
-my_matrix = np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9]])
+def array_of_doubles(start, end, n):
+	return np.linspace(start, end, n)
 
-#consecutive integers 
-np.arange(0, 21)
+def array_of_zeros(n):
+	return np.zeros(n)
 
-#arithmetic sequence
-np.arange(0, 21, 3)
+def array_of_ones(n):
+	return np.ones(n)
 
-#zeros and ones
-np.zeros(20)
-np.ones(50)
+def identity_matrix(n):
+	return np.eye(n)
 
-np.linspace(0,100,1000)
-
-#identity matrix
-np.eye(10)
-
-#random between 0 and 1
-np.random.rand(10)
-
-#change dimension
-arr = np.array([0,1,2,3,4,5,6,7,8])
-arr.reshape(3,3)
-
-#min and max and indexes
-def max_value(arr):
-	arr.min()
-
-def min_index(arr):
-	arr.argmin()
+def random_doubles(n)
+	return np.random.rand(n)
