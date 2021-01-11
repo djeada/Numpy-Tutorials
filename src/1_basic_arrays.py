@@ -18,5 +18,5 @@ def array_of_ones(n):
 def identity_matrix(n):
 	return np.eye(n)
 
-def random_doubles(n)
+def random_doubles(n):
 	return np.random.rand(n)
