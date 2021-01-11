@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def change_dimension(array, n, m):
 	array.reshape(n, m)
 
@@ -27,6 +26,12 @@ def multiply_by_k(array, k):
 
 def divide_by_k(array, k):
 	return array / k
+
+def elements_greater_than_k(array, k):
+	array > k
+
+def elements_less_than_k(array, k):
+	array < k
 
 def sqrt_of_each_element(array):
 	return np.sqrt(array)
