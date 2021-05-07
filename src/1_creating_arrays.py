@@ -49,7 +49,7 @@ def main():
     assert array_from_list_3D.size == 27
     assert array_from_list_3D.dtype == "int64"
 
-    """ np.linspace(start, end, n)
+    """
     2. Creating np array from numpy methods
     - np.arange(start, end, step) creates an array of ints from start to end with step differece between each element
     - np.linspace(start, end, n) creates an array of doubles from start to end with step differece between each element
