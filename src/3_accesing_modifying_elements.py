@@ -8,6 +8,7 @@ def main():
     - You may modify a single element, a group of elements, or all elements in an array at once.
     - A new element/row may be appended or inserted.
     - Elements and rows can be deleted as well.
+    - Selecting elements by condition is possible.
     """
 
     array_1 = np.array([0, 1, 2, 3, 4, 5])
