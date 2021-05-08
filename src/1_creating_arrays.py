@@ -9,7 +9,8 @@ def main():
     - arrays created from them are equal
     - basic operations (ex. multiplication) have different meaning for python ds and np arrays
     - you can insert and delete items in a list by assigning a sequence of different length to a slice, 
-    whereas np would raise an error.
+    whereas np would raise an error
+    - when modifying an array you have to reassign it (like with strings)
     """
 
     list_1D = [0, 9, -3, 5, 4]
