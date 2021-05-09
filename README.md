@@ -270,6 +270,7 @@ Basic statistical operations include:
 | standard deviation | np.std(arr) | |
 
 <h1>Code Samples</h1>
+
 * </a href="https://github.com/djeada/Numpy/blob/main/src/1_creating_arrays.py">Creating arrays.</a>
 * </a href="https://github.com/djeada/Numpy/blob/main/src/2_join_split.py">Joining and splitting.</a>
 * </a href="https://github.com/djeada/Numpy/blob/main/src/3_accessing_modifying_elements.py">Accessing and modyfing elements.</a>
