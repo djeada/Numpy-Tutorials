@@ -1,6 +1,7 @@
 import numpy as np
 
 
+#TODO: add slices, also for 2D
 def main():
 
     """ 
