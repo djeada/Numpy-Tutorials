@@ -23,7 +23,7 @@ print(arr)
 print(type(arr))
 ```
 
-Expected output
+Expected output:
 
 ```
 [1 2 3 4]
@@ -34,7 +34,38 @@ Ndarray provides a lot of useful functions.
 
 <h1>Accessing elements </h1>
 
+The indices in NumPY arrays start with 0. The first element has index 0, the second index 1 and so on.
+
+```Python
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr[1])
+```
+
+Expected output:
+
+```
+2
+```
+
+In matrices you have to first provide row index and then column index.
+
 ![Matrix](https://github.com/djeada/Numpy/blob/main/resources/matrix.png)
+
+
+```Python
+import numpy as np
+arr = np.array([[7, 1, 2, 6], [6, 4, 9, 3], [2, 1, 4, 5], [2, 7, 3, 8]])
+print(arr[1][2])
+print(arr[3][0])
+```
+
+Expected output:
+
+```
+9
+2
+```
 
 <h1>Random Numbers</h1>
 
