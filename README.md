@@ -1,6 +1,20 @@
 # Numpy
 Tutorials about Numpy.
 
+Table of Contents
+=================
+
+<!--ts-->
+   * [About Numpy](#About-Numpy)
+   * [Creating an array](#Creating-an-array)
+   * [Joining and splitting arrays](#Joining-and-splitting-arrays)
+   * [Accessing elements](#Accessing-elements)
+   * [Matrix and vector operations](#Matrix-and-vector-operations)
+   * [Matrix manipulations](#Matrix-manipulations)
+   * [Random numbers](#Random-numbers)
+   * [Numpy Statistics](#Numpy-Statistics)
+   * [Code Samples](#Code-Samples)
+
 <h1>About Numpy</h1>
 Numpy stands for Numerical Python.
 
@@ -54,7 +68,7 @@ The axis parameter determines the position of the new axis in the result's dimen
 
 * Concatenating refers to joining a sequence of arrays along an existing axis. 
 * Appending means adding values along the specified axis at the end of the array.
-* Spliting is a process of breaking an array into sub-arrays of identical size.
+* Spliting is the process of breaking an array into sub-arrays of identical size.
 
 <h1>Accessing elements </h1>
 
@@ -254,3 +268,7 @@ Basic statistical operations include:
 | median | np.median(arr) | 
 | variance |  np.var(arr) |
 | standard deviation | np.std(arr) | |
+
+<h1>Code Samples</h1>
+* </a href=""> </href>
+*
