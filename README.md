@@ -34,7 +34,7 @@ Ndarray provides a lot of useful functions.
 
 <h1>Accessing elements </h1>
 
-The indices in NumPY arrays start with 0. The first element has index 0, the second index 1 and so on.
+The indices in NumPy arrays start with 0. The first element has index 0, the second index 1 and so on.
 
 ```Python
 import numpy as np
@@ -70,6 +70,44 @@ Expected output:
 ```
 9
 2
+```
+
+Numpy arrays are mutable. You can change the value under index.
+
+```Python
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+arr[2] = 5
+print(arr)
+```
+
+Expected output:
+
+```
+[1 2 5 4]```
+```
+
+You can access group of elements with slicing.
+You pass slice instead of single index to square brackets. <i>\[start:end:step\] </i>
+
+* If you don't pass start it will keep it's default value 0.
+* If you don't pass end it will keep it's default value size().
+* If you don't pass step it will keep it's deafult value 1.
+
+```Python
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr[::2])
+print(arr[1:])
+print(arr[:-3])
+```
+
+Expected output:
+
+```
+[1 3]
+[2 3 4]
+[1]```
 ```
 
 <h1>Random Numbers</h1>
