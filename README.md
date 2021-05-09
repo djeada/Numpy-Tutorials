@@ -4,17 +4,16 @@ Tutorials about Numpy.
 <h1>About Numpy</h1>
 Numpy stands for Numerical Python.
 
-It is a Python library used for working with arrays.
-
-It also has functions for working in domain of linear algerba, fourer transform and matrices.
-
-It is an open source project.
-
-Efficient for scientific computation.
+* It's a Python library for manipulating arrays.
+* It also includes functions for working in the linear algebra domain, the fourier transform, and matrices.
+* It's a free and open source initiative.
+* It is very effective for scientific computations.
 
 I highly recommend to read this <a href="https://betterprogramming.pub/numpy-illustrated-the-visual-guide-to-numpy-3b1d4976de1d">article</a>. 
 
 <h1>Creating an array</h1>
+
+<h2>Creating from list</h2>
 
 ```Python
 import numpy as np
@@ -30,7 +29,9 @@ Expected output:
 <class 'numpy.ndarrray'>
 ```
 
-Ndarray provides a lot of useful functions.
+Arrays are objects of <i>Ndarray</i> class. It provides a lot of useful functions for working with arrays.
+
+<h2>Evenly spaced numbers</h2>
 
 The np.linspace(start, end, n) function return evenly spaced n numbers over a specified interval.
 
@@ -45,6 +46,15 @@ Expected output:
 ```
 [1. 1.5 2. 2.5 3. 3.5 4. 4.5 5.]
 ```
+
+<h1>Joining and splitting arrays</h1>
+
+* Stacking is the process of joining a sequence of identical-dimension arrays around a new axis.
+The axis parameter determines the position of the new axis in the result's dimensions.
+
+* Concatenating refers to joining a sequence of arrays along an existing axis. 
+* Appending means adding values along the specified axis at the end of the array.
+* Spliting is a process of breaking an array into sub-arrays of identical size.
 
 <h1>Accessing elements </h1>
 
