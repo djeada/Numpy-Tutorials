@@ -1,10 +1,26 @@
-my_first_matrix = np.matrix([[3, 1, 4], [1, 5, 9], [2, 6, 5]])
-my_first_inverse = my_first_matrix.I
-right_hand_side = np.matrix([[11], [22], [33]])
-solution = my_first_inverse * right_hand_side
-
-my_first_matrix * solution - right_hand_side
-
+import numpy as np
 from numpy.linalg import solve
 
-solve(my_first_matrix, right_hand_side)
+
+def main():
+
+    """ 
+    You can solve linear equations from definition.
+    y = A*x
+    x = A^-1*y
+    or using numpy solve method.
+    """
+
+    matrix = np.matrix([[2, 0, 5], [3, 4, 8], [2, 7, 3]])
+    inverse = matrix.I
+
+    y = np.matrix([[10], [15], [5]])
+
+    solution = inverse * y
+
+    assert np.allclose(matrix * solution - y, np.array([[0, 0, 0]]))
+    assert np.allclose(solution, solve(matrix, y))
+
+
+if __name__ == "__main__":
+    main()
