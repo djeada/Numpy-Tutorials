@@ -32,6 +32,10 @@ Expected output
 
 Ndarray provides a lot of useful functions.
 
+<h1>Accessing elements </h1>
+
+![Matrix](https://github.com/djeada/Numpy/blob/main/resources/matrix.png)
+
 <h1>Random Numbers</h1>
 
 1. Floats between 0 and 1.
