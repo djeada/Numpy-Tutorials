@@ -32,9 +32,23 @@ Expected output:
 
 Ndarray provides a lot of useful functions.
 
+The np.linspace(start, end, n) function return evenly spaced n numbers over a specified interval.
+
+```Python
+import numpy as np
+arr = np.linspace(1, 5, 9)
+print(arr)
+```
+
+Expected output:
+
+```
+[1. 1.5 2. 2.5 3. 3.5 4. 4.5 5.]
+```
+
 <h1>Accessing elements </h1>
 
-The indices in NumPy arrays start with 0. The first element has index 0, the second index 1 and so on.
+NumPy arrays have indices that begin with 0. The first element has an index of 0, the second element has an index of 1, and so on.
 
 ```Python
 import numpy as np
@@ -132,6 +146,42 @@ Expected output:
 ```
 [0 0 0 0]
 ```
+
+<h1>Matrix manipulations</h1>
+The term "reshape" refers to changing the shape of an array.
+The number of elements in each dimension determines the shape of an array.
+We may adjust the number of elements in each dimension or add or subtract dimensions.
+
+```Python
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+print(arr.reshape(2,5))
+```
+
+Expected output:
+
+```
+[[1 2 3 4 5]
+[6 7 8 9 10]]
+```
+
+Flatten returns a one-dimensional version of the array.
+
+```Python
+import numpy as np
+arr = np.array([
+[1, 2, 3, 4, 5],
+[6, 7, 8, 9, 10]
+])
+print(arr.flatten())
+```
+
+Expected output:
+
+```
+[1 2 3 4 5 6 7 8 9 10]
+```
+
 
 <h1>Random Numbers</h1>
 
