@@ -55,7 +55,12 @@ In matrices you have to first provide row index and then column index.
 
 ```Python
 import numpy as np
-arr = np.array([[7, 1, 2, 6], [6, 4, 9, 3], [2, 1, 4, 5], [2, 7, 3, 8]])
+arr = np.array([
+  [7, 1, 2, 6], 
+  [6, 4, 9, 3], 
+  [2, 1, 4, 5], 
+  [2, 7, 3, 8]
+])
 print(arr[1][2])
 print(arr[3][0])
 ```
