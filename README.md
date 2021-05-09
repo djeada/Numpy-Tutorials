@@ -178,9 +178,15 @@ Basic statistical operations include:
 
 2. Median
 
+![median](https://github.com/djeada/Numpy/blob/main/resources/median.png)
+
 3. Variance
 
+![variance](https://github.com/djeada/Numpy/blob/main/resources/variance.png)
+
 4. Standard deviation
+
+![standard deviation](https://github.com/djeada/Numpy/blob/main/resources/std.png)
 
 | Operation | Function |
 | --- | --- |
