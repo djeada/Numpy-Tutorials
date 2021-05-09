@@ -1,11 +1,11 @@
 # Numpy
-Tutorials about Numpy.
+Tutorials about NumPy.
 
 Table of Contents
 =================
 
 <!--ts-->
-   * [About Numpy](#About-Numpy)
+   * [About NumPy](#About-NumPy)
    * [Creating an array](#Creating-an-array)
    * [Joining and splitting arrays](#Joining-and-splitting-arrays)
    * [Accessing elements](#Accessing-elements)
@@ -15,7 +15,7 @@ Table of Contents
    * [Numpy Statistics](#Numpy-Statistics)
    * [Code Samples](#Code-Samples)
 
-<h1>About Numpy</h1>
+<h1>About NumPy</h1>
 Numpy stands for Numerical Python.
 
 * It's a Python library for manipulating arrays.
