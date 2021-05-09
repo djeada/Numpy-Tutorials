@@ -1,4 +1,4 @@
-# Numpy
+# NumPy
 Tutorials about NumPy.
 
 Table of Contents
