@@ -84,7 +84,7 @@ print(arr)
 Expected output:
 
 ```
-[1 2 5 4]```
+[1 2 5 4]
 ```
 
 You can access group of elements with slicing.
@@ -108,6 +108,29 @@ Expected output:
 [1 3]
 [2 3 4]
 [1]
+```
+<h1>Matrix and vector operations</h1>
+
+Element wise operations:
+
+| Operation | Function | Operator |
+| --- | --- | --- |
+| addition |  np.add(arr_1, arr_2) | arr_1 + arr_2 |
+| subtraction | np.subtract(arr_1, arr_2) | arr_1 - arr_2 |
+| multiplication |  np.multiply(arr_1, arr_2) | arr_1 * arr_2 |
+| division | np.divide(arr_1, arr_2) | arr_1 / arr_2 |
+
+```Python
+import numpy as np
+arr_1 = np.array([1, 2, 3, 4])
+arr_2 = np.array([1, 2, 3, 4])
+print(arr_1 - arr_2)
+```
+
+Expected output:
+
+```
+[0 0 0 0]
 ```
 
 <h1>Random Numbers</h1>
@@ -143,4 +166,25 @@ np.random.uniform(low=0.0, high=1.0, size=None)
 
 It generates an array with random numbers (float) between given numbers.
 
+<h1>Numpy Statistics</h1>
 
+Statistics is a field of study that uses data to make observations about populations (groups of objects). In statistics textbooks they are often called "distributions" instead of "populations". Probability is integral part of statistics.
+
+Basic statistical operations include:
+
+1. Mean
+
+![mean](https://github.com/djeada/Numpy/blob/main/resources/mean.png)
+
+2. Median
+
+3. Variance
+
+4. Standard deviation
+
+| Operation | Function |
+| --- | --- |
+| mean |  np.mean(arr) |
+| median | np.median(arr) | 
+| variance |  np.var(arr) |
+| standard deviation | np.std(arr) | |
