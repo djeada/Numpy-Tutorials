@@ -270,5 +270,11 @@ Basic statistical operations include:
 | standard deviation | np.std(arr) | |
 
 <h1>Code Samples</h1>
-* </a href=""> </href>
-*
+* </a href="https://github.com/djeada/Numpy/blob/main/src/1_creating_arrays.py">Creating arrays.</href>
+* </a href="https://github.com/djeada/Numpy/blob/main/src/2_join_split.py">Joining and splitting.</href>
+* </a href="https://github.com/djeada/Numpy/blob/main/src/3_accessing_modifying_elements.py">Accessing and modyfing elements.</href>
+* </a href="https://github.com/djeada/Numpy/blob/main/src/4_searching.py">Searching.</href>
+* </a href="https://github.com/djeada/Numpy/blob/main/src/5_matrix_operations.py">Matrix operations.</href>
+* </a href="https://github.com/djeada/Numpy/blob/main/src/6_manipulating_matrices.py">Matrix manipulations.</href>
+* </a href="https://github.com/djeada/Numpy/blob/main/src/7_linear_equations.py">Linear equations</href>
+* </a href="https://github.com/djeada/Numpy/blob/main/src/8_statistics_and_random_numbers.py">Statistics and random numbers</href>
