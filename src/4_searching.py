@@ -35,9 +35,9 @@ def main():
     assert array_2D.max() == 9
     assert array_2D.min() == 0
 
-    result = np.unique(array_2D)
+    unique_values = np.unique(array_2D)
 
-    assert (result == [0, 1, 5, 9]).all()
+    assert (unique_values == [0, 1, 5, 9]).all()
 
     unique, freq = np.unique(array_2D, return_counts=True)
     histogram = dict(zip(unique, freq))
