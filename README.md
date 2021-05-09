@@ -107,7 +107,7 @@ Expected output:
 ```
 [1 3]
 [2 3 4]
-[1]```
+[1]
 ```
 
 <h1>Random Numbers</h1>
