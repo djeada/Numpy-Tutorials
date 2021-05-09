@@ -126,11 +126,11 @@ Expected output:
 ```
 
 You can access group of elements with slicing.
-You pass slice instead of single index to square brackets. <i>\[start:end:step\] </i>
+You pass slice instead of single index to square brackets. <i>\[start\:end\:step\] </i>
 
-* If you don't pass start it will keep it's default value 0.
-* If you don't pass end it will keep it's default value size().
-* If you don't pass step it will keep it's deafult value 1.
+* If you don't specify a value for start, it will default to 0.
+* If you don't specify a value for end, it will default to array's size.
+* If you don't specify a value for step, it will default to 1.
 
 ```Python
 import numpy as np
