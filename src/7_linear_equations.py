@@ -20,7 +20,14 @@ def main():
 
     assert np.allclose(matrix * solution - y, np.array([[0, 0, 0]]))
     assert np.allclose(solution, solve(matrix, y))
-
-
+        
+    #Eigenvalues and Eigenvectors
+    A = np.array([[1,2], [2,1]])
+    x = np.array([1,0])
+    
+    for i in range(10):
+         x = A @ x
+    
+   
 if __name__ == "__main__":
     main()
