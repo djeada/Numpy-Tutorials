@@ -10,6 +10,7 @@ Table of Contents
    * [Joining and splitting arrays](#Joining-and-splitting-arrays)
    * [Accessing elements](#Accessing-elements)
    * [Matrix and vector operations](#Matrix-and-vector-operations)
+   * [About vectors](#About-vectors)
    * [Matrix manipulations](#Matrix-manipulations)
    * [Random numbers](#Random-numbers)
    * [Numpy Statistics](#Numpy-Statistics)
@@ -70,7 +71,7 @@ The axis parameter determines the position of the new axis in the result's dimen
 * Appending means adding values along the specified axis at the end of the array.
 * Spliting is the process of breaking an array into sub-arrays of identical size.
 
-<h1>Accessing elements </h1>
+<h1>Accessing elements</h1>
 
 NumPy arrays have indices that begin with 0. The first element has an index of 0, the second element has an index of 1, and so on.
 
@@ -147,13 +148,6 @@ Expected output:
 [2 3 4]
 [1]
 ```
-<h1>Vectors</h1>
-A vector in R^n is an n-tuple. 
-
-In a <b>row vector</b>, the elements of the vector are written next to each other, and in a <b>column vector</b>, the elements of the vector are written on top of each other.
-
-A column vector's transpose is a row vector of the same length, and a row vector's transpose is a column vector.
-
 <h1>Matrix and vector operations</h1>
 
 Element wise operations:
@@ -178,7 +172,42 @@ Expected output:
 [0 0 0 0]
 ```
 
+<h1>About vectors</h1>
+A vector in R^n is an n-tuple. 
+
+In a <b>row vector</b>, the elements of the vector are written next to each other, and in a <b>column vector</b>, the elements of the vector are written on top of each other.
+
+A column <b>vector's transpose</b> is a row vector of the same length, and a row vector's transpose is a column vector.
+
+The <b>norm</b> is a way to measure vector's length. Depending on the metric used, there are a variety of ways to define the length of a vector . The most common is L2 norm, which uses the distance formula.
+
+Operations:
+
+1) Vector addition: 
+The pairwise addition of respective elements.
+
+2) Scalar multiplication:
+The product of each element of the vector by the given scalar.
+
+3) Dot product:
+The sum of pairwise products of respective elements.
+
+4) The cross product:
+The cross product's geometric representation is a vector perpendicular to both v and w, with a length equal to the region enclosed by the parallelogram formed by the two vectors.
+
+v x w = |v||w|sin(θ)n
+
+Where n is a unit vector perpendicular to plane.
+
+5) The angle between two vectors:
+v⋅w = |v||w|cosθ
+
+If the angle between the vectors θ=π/2, then the vectors are said to be perpendicular or orthogonal, and the dot product is 0.
+
 <h1>Matrix manipulations</h1>
+
+An m×n matrix is a rectangular table of numbers consisting of m rows and n columns. 
+
 The term "reshape" refers to changing the shape of an array.
 The number of elements in each dimension determines the shape of an array.
 We may adjust the number of elements in each dimension or add or subtract dimensions.
