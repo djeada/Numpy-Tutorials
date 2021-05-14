@@ -147,6 +147,13 @@ Expected output:
 [2 3 4]
 [1]
 ```
+<h1>Vectors</h1>
+A vector in R^n is an n-tuple. 
+
+In a <b>row vector</b>, the elements of the vector are written next to each other, and in a <b>column vector</b>, the elements of the vector are written on top of each other.
+
+A column vector's transpose is a row vector of the same length, and a row vector's transpose is a column vector.
+
 <h1>Matrix and vector operations</h1>
 
 Element wise operations:
