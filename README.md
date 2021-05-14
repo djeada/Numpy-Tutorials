@@ -12,7 +12,7 @@ Table of Contents
    * [About vectors](#About-vectors)
    * [About matrices](#About-matrices)
    * [Matrix and vector operations](#Matrix-and-vector-operations)
-   * [Matrix manipulations](#Matrix-manipulations)
+   * [Matrix fations](#Matrix-manipulations)
    * [Random numbers](#Random-numbers)
    * [Numpy Statistics](#Numpy-Statistics)
    * [Code Samples](#Code-Samples)
@@ -303,8 +303,8 @@ Flatten returns a one-dimensional version of the array.
 ```Python
 import numpy as np
 arr = np.array([
-[1, 2, 3, 4, 5],
-[6, 7, 8, 9, 10]
+    [1, 2, 3, 4, 5],
+    [6, 7, 8, 9, 10]
 ])
 print(arr.flatten())
 ```
