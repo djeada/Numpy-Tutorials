@@ -9,8 +9,9 @@ Table of Contents
    * [Creating an array](#Creating-an-array)
    * [Joining and splitting arrays](#Joining-and-splitting-arrays)
    * [Accessing elements](#Accessing-elements)
-   * [Matrix and vector operations](#Matrix-and-vector-operations)
    * [About vectors](#About-vectors)
+   * [About matrices](#About-matrices)
+   * [Matrix and vector operations](#Matrix-and-vector-operations)
    * [Matrix manipulations](#Matrix-manipulations)
    * [Random numbers](#Random-numbers)
    * [Numpy Statistics](#Numpy-Statistics)
@@ -148,7 +149,113 @@ Expected output:
 [2 3 4]
 [1]
 ```
-<h1>Matrix and vector operations</h1>
+
+<h1>About vectors</h1>
+
+A vector in R^n is an n-tuple. 
+
+In a <b>row vector</b>, the elements of the vector are written next to each other, and in a <b>column vector</b>, the elements of the vector are written on top of each other.
+
+A column <b>vector's transpose</b> is a row vector of the same length, and a row vector's transpose is a column vector.
+
+The <b>norm</b> is a way to measure vector's length. Depending on the metric used, there are a variety of ways to define the length of a vector . The most common is L2 norm, which uses the distance formula.
+
+Operations:
+
+1) Vector addition: 
+The pairwise addition of respective elements.
+
+```Python
+arr_1 = np.array([9, 2, 5])
+arr_2 = np.array([-3, 8, 2])
+print(np.add(arr_1, arr_2))
+```
+
+2) Scalar multiplication:
+The product of each element of the vector by the given scalar.
+
+```Python
+arr = np.array([6, 3, 4])
+scalar = 2
+print(scalar * arr)
+```
+
+3) Dot product:
+The sum of pairwise products of respective elements.
+
+```Python
+arr_1 = np.array([9, 2, 5])
+arr_2 = np.array([-3, 8, 2])
+print(np.dot(arr_1, arr_2))
+```
+
+4) The cross product:
+
+  The cross product's geometric representation is a vector perpendicular to both v and w, with a length equal to the region enclosed by the parallelogram formed by the two vectors.
+
+  v x w = |v||w|sin(θ)n
+
+  Where <i>n</i> is a unit vector perpendicular to plane.
+
+```Python
+arr_1 = np.array([9, 2, 5])
+arr_2 = np.array([-3, 8, 2])
+print(np.cross(arr_1, arr_2))
+```
+
+5) The angle between two vectors:
+
+  v⋅w = |v||w|cosθ
+
+If the angle between the vectors θ=π/2, then the vectors are said to be perpendicular or orthogonal, and the dot product is 0.
+
+```Python
+arr_1 = np.array([9, 2, 5])
+arr_2 = np.array([-3, 8, 2])
+print(np.arccos(np.dot(arr_1, arr_2)/(np.norm(arr_1)*np.norm(arr_2)))
+```
+
+<h1>About matrices</h1>
+An m×n matrix is a rectangular table of numbers consisting of m rows and n columns. 
+
+Matrix addition and scalar multiplication for matrices work the same way as for vectors. 
+
+In order for  M⋅N to be defined, the number of rows of  N  has to equal the number of columns of M.
+The product of an m × n matrix and an n × p matrix is an m × p matrix.
+
+```Python
+M = np.array([[-4, 5], [1, 7], [8, 3]])
+N = np.array([[3, -5, 2, 7], [-5, 1, -4, -3]])
+print(np.dot(M, N))
+```
+
+The transpose of a matrix is a reversal of its rows with its columns.
+
+```Python
+M = np.array([[-4, 5], [1, 7], [8, 3]])
+print(np.transpose(M))
+```
+
+A matrix with the same number of elements in rows and colums is called a <b>square matrix</b>. 
+Square matrices have determinants.
+
+```Python
+M = np.array([[-4, 5], [1, 7]])
+print(np.linalg.det(M))
+```
+
+The <b>identity matrix</b> is a square matrix with ones on the diagonal and zeros elsewhere.
+The <b>inverse</b> of a square matrix M is a matrix of the same size, N, such that M⋅N=I.
+
+```Python
+M = np.array([[-4, 5], [1, 7]])
+print(np.linalg.inv(M))
+```
+
+The number of linearly independent columns or rows of a m x n matrix M is denoted by <b>rank (M)</b>.
+An augmented matrix is a matrix M that has been concatenated with a vector v and written as [M,v]. “M augmented with v,” as it is usually written.
+
+<h1>Summary of matrix and vector operations</h1>
 
 Element wise operations:
 
@@ -172,41 +279,7 @@ Expected output:
 [0 0 0 0]
 ```
 
-<h1>About vectors</h1>
-A vector in R^n is an n-tuple. 
-
-In a <b>row vector</b>, the elements of the vector are written next to each other, and in a <b>column vector</b>, the elements of the vector are written on top of each other.
-
-A column <b>vector's transpose</b> is a row vector of the same length, and a row vector's transpose is a column vector.
-
-The <b>norm</b> is a way to measure vector's length. Depending on the metric used, there are a variety of ways to define the length of a vector . The most common is L2 norm, which uses the distance formula.
-
-Operations:
-
-1) Vector addition: 
-The pairwise addition of respective elements.
-
-2) Scalar multiplication:
-The product of each element of the vector by the given scalar.
-
-3) Dot product:
-The sum of pairwise products of respective elements.
-
-4) The cross product:
-The cross product's geometric representation is a vector perpendicular to both v and w, with a length equal to the region enclosed by the parallelogram formed by the two vectors.
-
-v x w = |v||w|sin(θ)n
-
-Where n is a unit vector perpendicular to plane.
-
-5) The angle between two vectors:
-v⋅w = |v||w|cosθ
-
-If the angle between the vectors θ=π/2, then the vectors are said to be perpendicular or orthogonal, and the dot product is 0.
-
 <h1>Matrix manipulations</h1>
-
-An m×n matrix is a rectangular table of numbers consisting of m rows and n columns. 
 
 The term "reshape" refers to changing the shape of an array.
 The number of elements in each dimension determines the shape of an array.
