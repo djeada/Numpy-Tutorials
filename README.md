@@ -229,11 +229,26 @@ N = np.array([[3, -5, 2, 7], [-5, 1, -4, -3]])
 print(np.dot(M, N))
 ```
 
+Expected output:
+
+```
+[[-37  25 -28 -43]
+ [-32   2 -26 -14]
+ [  9 -37   4  47]
+```
+
 The transpose of a matrix is a reversal of its rows with its columns.
 
 ```Python
 M = np.array([[-4, 5], [1, 7], [8, 3]])
 print(np.transpose(M))
+```
+
+Expected output:
+
+```
+[[-4  1  8]
+ [ 5  7  3]]
 ```
 
 A matrix with the same number of elements in rows and colums is called a <b>square matrix</b>. 
@@ -244,12 +259,25 @@ M = np.array([[-4, 5], [1, 7]])
 print(np.linalg.det(M))
 ```
 
+Expected output:
+
+```
+-33
+```
+
 The <b>identity matrix</b> is a square matrix with ones on the diagonal and zeros elsewhere.
 The <b>inverse</b> of a square matrix M is a matrix of the same size, N, such that M⋅N=I.
 
 ```Python
 M = np.array([[-4, 5], [1, 7]])
 print(np.linalg.inv(M))
+```
+
+Expected output:
+
+```
+[[-0.21212121  0.15151515]
+ [ 0.03030303  0.12121212]]
 ```
 
 The number of linearly independent columns or rows of a m x n matrix M is denoted by <b>rank (M)</b>.
