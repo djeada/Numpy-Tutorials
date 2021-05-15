@@ -171,6 +171,12 @@ arr_2 = np.array([-3, 8, 2])
 print(np.add(arr_1, arr_2))
 ```
 
+Expected output:
+
+```
+[ 6 10  7]
+```
+
 2) Scalar multiplication:
 The product of each element of the vector by the given scalar.
 
@@ -180,6 +186,12 @@ scalar = 2
 print(scalar * arr)
 ```
 
+Expected output:
+
+```
+[12  6  8]
+```
+
 3) Dot product:
 The sum of pairwise products of respective elements.
 
@@ -187,6 +199,12 @@ The sum of pairwise products of respective elements.
 arr_1 = np.array([9, 2, 5])
 arr_2 = np.array([-3, 8, 2])
 print(np.dot(arr_1, arr_2))
+```
+
+Expected output:
+
+```
+-1
 ```
 
 4) The cross product:
@@ -203,6 +221,12 @@ arr_2 = np.array([-3, 8, 2])
 print(np.cross(arr_1, arr_2))
 ```
 
+Expected output:
+
+```
+[[-36 -33  78]]
+```
+
 5) The angle between two vectors:
 
   v⋅w = |v||w|cosθ
@@ -213,6 +237,12 @@ If the angle between the vectors θ=π/2, then the vectors are said to be perpen
 arr_1 = np.array([9, 2, 5])
 arr_2 = np.array([-3, 8, 2])
 print(np.arccos(np.dot(arr_1, arr_2)/(np.norm(arr_1)*np.norm(arr_2)))
+```
+
+Expected output:
+
+```
+1.582
 ```
 
 <h1>About matrices</h1>
