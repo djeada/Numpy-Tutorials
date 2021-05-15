@@ -442,7 +442,8 @@ Basic statistical operations include:
 * <a href="https://github.com/djeada/Numpy/blob/main/src/2_join_split.py">Joining and splitting.</a>
 * <a href="https://github.com/djeada/Numpy/blob/main/src/3_accessing_modifying_elements.py">Accessing and modyfing elements.</a>
 * <a href="https://github.com/djeada/Numpy/blob/main/src/4_searching.py">Searching.</a>
-* <a href="https://github.com/djeada/Numpy/blob/main/src/5_matrix_operations.py">Matrix operations.</a>
-* <a href="https://github.com/djeada/Numpy/blob/main/src/6_manipulating_matrices.py">Matrix manipulations.</a>
-* <a href="https://github.com/djeada/Numpy/blob/main/src/7_linear_equations.py">Linear equations</a>
-* <a href="https://github.com/djeada/Numpy/blob/main/src/8_statistics_and_random_numbers.py">Statistics and random numbers</a>
+* <a href="https://github.com/djeada/Numpy/blob/main/src/5_vector_operations.py">Vector operations.</a>
+* <a href="https://github.com/djeada/Numpy/blob/main/src/6_matrix_operations.py">Matrix operations.</a>
+* <a href="https://github.com/djeada/Numpy/blob/main/src/7_manipulating_matrices.py">Matrix manipulations.</a>
+* <a href="https://github.com/djeada/Numpy/blob/main/src/8_linear_equations.py">Linear equations</a>
+* <a href="https://github.com/djeada/Numpy/blob/main/src/9_statistics_and_random_numbers.py">Statistics and random numbers</a>
