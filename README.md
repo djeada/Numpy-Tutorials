@@ -160,6 +160,9 @@ A column <b>vector's transpose</b> is a row vector of the same length, and a row
 
 The <b>norm</b> is a way to measure vector's length. Depending on the metric used, there are a variety of ways to define the length of a vector . The most common is L2 norm, which uses the distance formula.
 
+![vector norm](https://github.com/djeada/Numpy/blob/main/resources/vector_norm.png)
+
+
 Operations:
 
 1) Vector addition: 
@@ -195,6 +198,9 @@ Expected output:
 3) Dot product:
 The sum of pairwise products of respective elements.
 
+![dot product](https://github.com/djeada/Numpy/blob/main/resources/dot_product.png)
+
+
 ```Python
 arr_1 = np.array([9, 2, 5])
 arr_2 = np.array([-3, 8, 2])
@@ -211,7 +217,7 @@ Expected output:
 
   The cross product's geometric representation is a vector perpendicular to both v and w, with a length equal to the region enclosed by the parallelogram formed by the two vectors.
 
-  v x w = |v||w|sin(θ)n
+![cross product](https://github.com/djeada/Numpy/blob/main/resources/cross_product.png)
 
   Where <i>n</i> is a unit vector perpendicular to plane.
 
@@ -248,10 +254,18 @@ Expected output:
 <h1>About matrices</h1>
 An m×n matrix is a rectangular table of numbers consisting of m rows and n columns. 
 
+Matrix norm is defined as:
+
+![matrix norm](https://github.com/djeada/Numpy/blob/main/resources/matrix_norm.png)
+
+
 Matrix addition and scalar multiplication for matrices work the same way as for vectors. 
 
 In order for  M⋅N to be defined, the number of rows of  N  has to equal the number of columns of M.
 The product of an m × n matrix and an n × p matrix is an m × p matrix.
+
+![matrix mult](https://github.com/djeada/Numpy/blob/main/resources/matrix mult.png)
+
 
 ```Python
 M = np.array([[-4, 5], [1, 7], [8, 3]])
