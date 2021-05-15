@@ -235,7 +235,7 @@ Expected output:
 
 5) The angle between two vectors:
 
-  v⋅w = |v||w|cosθ
+![dot product](https://github.com/djeada/Numpy/blob/main/resources/dot_product.png)
 
 If the angle between the vectors θ=π/2, then the vectors are said to be perpendicular or orthogonal, and the dot product is 0.
 
