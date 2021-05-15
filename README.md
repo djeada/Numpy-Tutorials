@@ -264,7 +264,7 @@ Matrix addition and scalar multiplication for matrices work the same way as for 
 In order for  M⋅N to be defined, the number of rows of  N  has to equal the number of columns of M.
 The product of an m × n matrix and an n × p matrix is an m × p matrix.
 
-![matrix mult](https://github.com/djeada/Numpy/blob/main/resources/matrix mult.png)
+![matrix mult](https://github.com/djeada/Numpy/blob/main/resources/matrix_mult.png)
 
 
 ```Python
