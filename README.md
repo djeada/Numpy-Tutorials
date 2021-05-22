@@ -1,5 +1,5 @@
 # NumPy
-Tutorials about NumPy.
+NumPy tutorials.
 
 Table of Contents
 =================
