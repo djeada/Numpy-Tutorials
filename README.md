@@ -1,6 +1,8 @@
 # NumPy
 NumPy tutorials.
 
+TODO: extracting rows and cols
+
 Table of Contents
 =================
 
