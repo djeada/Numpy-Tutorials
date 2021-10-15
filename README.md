@@ -389,7 +389,7 @@ Expected output:
 [1 2 3 4 5 6 7 8 9 10]
 ```
 
-<h1>Systems of Linear Equations</h1>
+<h1>Systems of linear equations</h1>
 A couple of linear equations with the same variables is known as a system of linear equations.
 
 If a system of linear equations in given in a matrix form, Mx=y, where N is an m×n matrix, then there are three possibilites:
@@ -420,7 +420,7 @@ Expected output:
  [ 1.73913043]]
 ```
 
-<h1>Random Numbers</h1>
+<h1>Random numbers</h1>
 
 1. Floats between 0 and 1.
 
@@ -453,7 +453,7 @@ np.random.uniform(low=0.0, high=1.0, size=None)
 
 It generates an array with random numbers (float) between given numbers.
 
-<h1>Numpy Statistics</h1>
+<h1>Numpy statistics</h1>
 
 Statistics is a field of study that uses data to make observations about populations (groups of objects). In statistics textbooks they are often called "distributions" instead of "populations". Probability is integral part of statistics.
 
@@ -482,7 +482,7 @@ Basic statistical operations include:
 | variance |  np.var(arr) |
 | standard deviation | np.std(arr) | |
 
-<h1>Code Samples</h1>
+<h1>Code samples</h1>
 
 * <a href="https://github.com/djeada/Numpy/blob/main/src/1_creating_arrays.py">Creating arrays.</a>
 * <a href="https://github.com/djeada/Numpy/blob/main/src/2_join_split.py">Joining and splitting.</a>
