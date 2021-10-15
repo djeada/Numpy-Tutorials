@@ -16,8 +16,8 @@ Table of Contents
    * [Summary of matrix and vector operations](#Summary-of-matrix-and-vector-operations)
    * [Matrix manipulations](#Matrix-manipulations)
    * [Random numbers](#Random-numbers)
-   * [Numpy Statistics](#Numpy-Statistics)
-   * [Code Samples](#Code-Samples)
+   * [Numpy statistics](#Numpy-statistics)
+   * [Code samples](#Code-samples)
 
 <h1>About NumPy</h1>
 Numpy stands for Numerical Python.
