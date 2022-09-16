@@ -1,7 +1,9 @@
 # NumPy
 NumPy tutorials.
 
-TODO: extracting rows and cols
+TODO: 
+* extracting submatrices, rows and cols
+* replace i'th row or col
 
 Table of Contents
 =================
