@@ -5,7 +5,7 @@ TODO:
 * extracting submatrices, rows and cols
 * replace i'th row or col
 * generally transformations between diffrent shapes
-* ravel, flatten
+* ravel, flatten, shuffle
 
 Table of Contents
 =================
