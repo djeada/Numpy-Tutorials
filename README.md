@@ -497,3 +497,12 @@ Basic statistical operations include:
 * <a href="https://github.com/djeada/Numpy/blob/main/src/7_manipulating_matrices.py">Matrix manipulations.</a>
 * <a href="https://github.com/djeada/Numpy/blob/main/src/8_linear_equations.py">Linear equations</a>
 * <a href="https://github.com/djeada/Numpy/blob/main/src/9_statistics_and_random_numbers.py">Statistics and random numbers</a>
+
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
