@@ -468,19 +468,25 @@ Basic statistical operations include:
 
 1. Mean
 
-![mean](https://github.com/djeada/Numpy/blob/main/resources/mean.png)
+$$\bar{\mu}=\frac{1}{N}\sum_{i=1}^N x_i$$
 
 2. Median
 
-![median](https://github.com/djeada/Numpy/blob/main/resources/median.png)
+Median formula when $N$ is odd:
 
+$$m = x_{\frac{N + 1}{2}} $$
+
+Median formula when $N$ is even:
+
+$$m = \frac{x_{\frac{N}{2}} + x_{\frac{N}{2}+1}}{2}$$
+  
 3. Variance
 
-![variance](https://github.com/djeada/Numpy/blob/main/resources/variance.png)
+$$\sigma^2=\frac{1}{N}\sum_{i=1}^N(x_i-\bar{x})^2$$
 
 4. Standard deviation
 
-![standard deviation](https://github.com/djeada/Numpy/blob/main/resources/std.png)
+$$\sigma=\sqrt{\frac{1}{N}\sum_{i=1}^N(x_i-\bar{x})^2}$$
 
 | Operation | Function |
 | --- | --- |
