@@ -209,7 +209,7 @@ Expected output:
 3) Dot product:
 The sum of pairwise products of respective elements.
 
-$$\vec{v} \cdot \vec{w}=\left | \vec{v} \right |\left | \vec{w} \right |\cos\theta $$
+$$\vec{v} \cdot \vec{w}= |\vec{v}| |\vec{w}| \cos\theta $$
 
 ```Python
 arr_1 = np.array([9, 2, 5])
@@ -244,10 +244,8 @@ Expected output:
 ```
 
 5) The angle between two vectors:
-6) 
-$$\theta = \arcsin{\frac{\vec{v}\times\vec{w}}{|\vec{v}||\vec{w}|}}$$
 
-![dot product](https://github.com/djeada/Numpy/blob/main/resources/dot_product.png)
+$$\theta = \arcsin{\frac{\vec{v}\times\vec{w}}{|\vec{v}||\vec{w}|}}$$
 
 If the angle between the vectors θ=π/2, then the vectors are said to be perpendicular or orthogonal, and the dot product is 0.
 
@@ -267,9 +265,7 @@ Expected output:
 An m×n matrix is a rectangular table of numbers consisting of m rows and n columns. 
 
 Matrix norm is defined as:
-
-![matrix norm](https://github.com/djeada/Numpy/blob/main/resources/matrix_norm.png)
-
+$$ ||\vec{M}||_p = \sqrt[p]{\sum_i^m \sum_j^n M_{ij}^p} $$
 
 Matrix addition and scalar multiplication for matrices work the same way as for vectors. 
 
