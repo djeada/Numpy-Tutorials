@@ -1,51 +1,68 @@
-import numpy as np
 
+<h1>Random numbers</h1>
 
-def main():
+1. Floats between 0 and 1.
 
-    """
-    You can solve linear equations from definition.
-    y = A*x
-    x = A^-1*y
-    or using numpy solve method.
-    """
+```Python
+np.random.rand(d0, d1...)
+```
+  It generate an array with random numbers (float) that are uniformly distributed between 0 and 1.
+  The parameter allows you to specify the shape of the array.
+  
+2. Standard normal distribution.
 
-    array = np.random.random.radn(5)
-    print("Random floats between 0 and 1:")
-    print("Array shape: 5")
-    print(array)
+```Python
+np.random.randn(d0, d1...)
+```
+  It generates an array with random numbers (float) that are normally distrbuted. Mean = 0, Stdev (standard deviation) = 1.
+  
+3. Random integers within range
 
-    array = np.random.rand(6, 3)
-    print("Random floats between 0 and 1:")
-    print("Array shape: 6,3")
-    print(array)
+```Python
+np.random.randint(low, high=None, size=None)
+```
 
-    array = np.random.randn(5)
-    print("Random floats:")
-    print("Array shape: 5")
-    print(array)
+It generates an array with random numbers (integers) that are uniformly distributed between 0 and given number.
 
-    array = np.random.randn(6, 3)
-    print("Random floats:")
-    print("Array shape: 6,3")
-    print(array)
+4. Random floats within range
 
-    print("Single random int between 0 and 9:")
-    print(np.random.randint(10))
+```Python
+np.random.uniform(low=0.0, high=1.0, size=None)
+```
 
-    array = np.random.randint(5, 25, size=(6, 3))
-    print("Random ints between 5 and 25:")
-    print("Array shape: 6,3")
-    print(array)
+It generates an array with random numbers (float) between given numbers.
 
-    print("Single float int between 0 and 9:")
-    print(np.random.unfiorm(10))
+<h1>Numpy statistics</h1>
 
-    array = np.random.uniform(5, 25, size=(6, 3))
-    print("Random floats between 5 and 25:")
-    print("Array shape: 6,3")
-    print(array)
+Statistics is a field of study that uses data to make observations about populations (groups of objects). In statistics textbooks they are often called "distributions" instead of "populations". Probability is integral part of statistics.
 
+Basic statistical operations include:
 
-if __name__ == "__main__":
-    main()
+1. Mean
+
+$$\bar{\mu}=\frac{1}{N}\sum_{i=1}^N x_i$$
+
+2. Median
+
+Median formula when $N$ is odd:
+
+$$m = x_{\frac{N + 1}{2}} $$
+
+Median formula when $N$ is even:
+
+$$m = \frac{x_{\frac{N}{2}} + x_{\frac{N}{2}+1}}{2}$$
+  
+3. Variance
+
+$$\sigma^2=\frac{1}{N}\sum_{i=1}^N(x_i-\bar{x})^2$$
+
+4. Standard deviation
+
+$$\sigma=\sqrt{\frac{1}{N}\sum_{i=1}^N(x_i-\bar{x})^2}$$
+
+| Operation | Function |
+| --- | --- |
+| mean |  np.mean(arr) |
+| median | np.median(arr) | 
+| variance |  np.var(arr) |
+| standard deviation | np.std(arr) | |
