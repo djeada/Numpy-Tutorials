@@ -1,33 +1,30 @@
-import numpy as np
-from numpy.linalg import solve
+<h1>Systems of linear equations</h1>
+A couple of linear equations with the same variables is known as a system of linear equations.
 
+If a system of linear equations in given in a matrix form, Mx=y, where N is an m×n matrix, then there are three possibilites:
 
-def main():
+1. There is no solution for x.
 
-    """
-    You can solve linear equations from definition.
-    y = A*x
-    x = A^-1*y
-    or using numpy solve method.
-    """
+rank([M,y]) = rank(M) + 1
 
-    matrix = np.matrix([[2, 0, 5], [3, 4, 8], [2, 7, 3]])
-    inverse = matrix.I
+2. There is a unique solution for x.
 
-    y = np.matrix([[10], [15], [5]])
+rank([M,y]) = rank(M)
 
-    solution = inverse * y
+3. There is an infinite number of solutions for x
 
-    assert np.allclose(matrix * solution - y, np.array([[0, 0, 0]]))
-    assert np.allclose(solution, solve(matrix, y))
+rank([M,y]) = rank(M) and rank(M) < n
 
-    # Eigenvalues and Eigenvectors
-    A = np.array([[1, 2], [2, 1]])
-    x = np.array([1, 0])
+```Python
+matrix = np.matrix([[2, 0, 5], [3, 4, 8], [2, 7, 3]])
+y = np.matrix([[10], [15], [5]])
+print(np.solve(matrix, y))
+```
 
-    for i in range(10):
-        x = A @ x
+Expected output:
 
-
-if __name__ == "__main__":
-    main()
+```
+[[ 0.65217391]
+ [-0.2173913 ]
+ [ 1.73913043]]
+```
