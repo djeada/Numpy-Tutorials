@@ -96,6 +96,15 @@ Expected output:
 
 In matrices you have to first provide row index and then column index.
 
+$$
+\begin{bmatrix}
+7 \&  1 \& 2 \&  6 \\
+6 \&  4 \& 9 \&  3 \\
+2 \&  1 \& 4 \&  5 \\
+2 \&  7 \& 3 \&  8 \\
+\end{bmatrix}
+$$
+
 ![Matrix](https://github.com/djeada/Numpy/blob/main/resources/matrix.png)
 
 
@@ -166,9 +175,8 @@ A column <b>vector's transpose</b> is a row vector of the same length, and a row
 
 The <b>norm</b> is a way to measure vector's length. Depending on the metric used, there are a variety of ways to define the length of a vector . The most common is L2 norm, which uses the distance formula.
 
-![vector norm](https://github.com/djeada/Numpy/blob/main/resources/vector_norm.png)
-
-
+$$ ||\vec{v}||_p = \sqrt[p]{\sum_i v_i^p} $$
+ 
 Operations:
 
 1) Vector addition: 
@@ -204,8 +212,7 @@ Expected output:
 3) Dot product:
 The sum of pairwise products of respective elements.
 
-![dot product](https://github.com/djeada/Numpy/blob/main/resources/dot_product.png)
-
+$$\vec{v} \cdot \vec{w}=\left | \vec{v} \right |\left | \vec{w} \right |\cos\theta $$
 
 ```Python
 arr_1 = np.array([9, 2, 5])
@@ -222,8 +229,8 @@ Expected output:
 4) The cross product:
 
   The cross product's geometric representation is a vector perpendicular to both v and w, with a length equal to the region enclosed by the parallelogram formed by the two vectors.
-
-![cross product](https://github.com/djeada/Numpy/blob/main/resources/cross_product.png)
+ 
+$$\vec{v}\times\vec{w} =|\vec{v}||\vec{w}|\sin\theta\hat{n}$$
 
   Where <i>n</i> is a unit vector perpendicular to plane.
 
