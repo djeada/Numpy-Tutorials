@@ -105,9 +105,6 @@ $$
 \end{bmatrix}
 $$
 
-![Matrix](https://github.com/djeada/Numpy/blob/main/resources/matrix.png)
-
-
 ```Python
 import numpy as np
 arr = np.array([
@@ -230,7 +227,7 @@ Expected output:
 
   The cross product's geometric representation is a vector perpendicular to both v and w, with a length equal to the region enclosed by the parallelogram formed by the two vectors.
  
-$$\vec{v}\times\vec{w} =|\vec{v}||\vec{w}|\sin\theta\hat{n}$$
+$$\vec{v}\times\vec{w} =|\vec{v}||\vec{w}|\sin\theta$$
 
   Where <i>n</i> is a unit vector perpendicular to plane.
 
@@ -247,6 +244,8 @@ Expected output:
 ```
 
 5) The angle between two vectors:
+6) 
+$$\theta = \arcsin{\frac{\vec{v}\times\vec{w}}{|\vec{v}||\vec{w}|}}$$
 
 ![dot product](https://github.com/djeada/Numpy/blob/main/resources/dot_product.png)
 
