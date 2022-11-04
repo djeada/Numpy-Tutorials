@@ -1,128 +1,99 @@
+
+<h1>About matrices</h1>
+An m×n matrix is a rectangular table of numbers consisting of m rows and n columns. 
+
+Matrix norm is defined as:
+
+$$||\vec{M}||_p = \sqrt[p]{\sum_i^m \sum_j^n (M_{ij})^p}$$
+
+Matrix addition and scalar multiplication for matrices work the same way as for vectors. 
+
+In order for  M⋅N to be defined, the number of rows of  N  has to equal the number of columns of M.
+The product of an m × n matrix and an n × p matrix is an m × p matrix.
+
+$$M_{ij} = \sum_{k=1}^p P_{ik}Q_{kj}$$
+
+
+```Python
+M = np.array([[-4, 5], [1, 7], [8, 3]])
+N = np.array([[3, -5, 2, 7], [-5, 1, -4, -3]])
+print(np.dot(M, N))
+```
+
+Expected output:
+
+```
+[[-37  25 -28 -43]
+ [-32   2 -26 -14]
+ [  9 -37   4  47]
+```
+
+The transpose of a matrix is a reversal of its rows with its columns.
+
+```Python
+M = np.array([[-4, 5], [1, 7], [8, 3]])
+print(np.transpose(M))
+```
+
+Expected output:
+
+```
+[[-4  1  8]
+ [ 5  7  3]]
+```
+
+A matrix with the same number of elements in rows and colums is called a <b>square matrix</b>. 
+Square matrices have determinants.
+
+```Python
+M = np.array([[-4, 5], [1, 7]])
+print(np.linalg.det(M))
+```
+
+Expected output:
+
+```
+-33
+```
+
+The <b>identity matrix</b> is a square matrix with ones on the diagonal and zeros elsewhere.
+The <b>inverse</b> of a square matrix M is a matrix of the same size, N, such that M⋅N=I.
+
+```Python
+M = np.array([[-4, 5], [1, 7]])
+print(np.linalg.inv(M))
+```
+
+Expected output:
+
+```
+[[-0.21212121  0.15151515]
+ [ 0.03030303  0.12121212]]
+```
+
+The number of linearly independent columns or rows of a m x n matrix M is denoted by <b>rank (M)</b>.
+An augmented matrix is a matrix M that has been concatenated with a vector v and written as [M,v]. “M augmented with v,” as it is usually written.
+
+<h1>Summary of matrix and vector operations</h1>
+
+Element wise operations:
+
+| Operation | Function | Operator |
+| --- | --- | --- |
+| addition |  np.add(arr_1, arr_2) | arr_1 + arr_2 |
+| subtraction | np.subtract(arr_1, arr_2) | arr_1 - arr_2 |
+| multiplication |  np.multiply(arr_1, arr_2) | arr_1 * arr_2 |
+| division | np.divide(arr_1, arr_2) | arr_1 / arr_2 |
+
+```Python
 import numpy as np
+arr_1 = np.array([1, 2, 3, 4])
+arr_2 = np.array([1, 2, 3, 4])
+print(arr_1 - arr_2)
+```
 
+Expected output:
 
-def main():
-
-    """
-    There are several methods for regrouping values in arrays.:
-    np.reshape(array, shape) without changing the values, changes the shape of an array.
-    np.transpose(array) permuting all axes. For 2D case exchanging rows and columns.
-    np.swapaxes(array, axis1, axis2) swap any two axes.
-    np.rollaxis(array, axis) "rotate" the axes.
-    np.fliplr(array) flip array in the left/right direction.
-    np.flipud(array) flip array in the up/down direction.
-    np.roll(array, n) shift all elements by n positios.
-    np.rot90(array) rotate array 90 degrees.
-    np.sort(array) sorts the array.
-    """
-
-    matrix_A = np.array([[3, 9], [21, -3]])
-
-    assert (np.reshape(matrix_A, (4,)) == np.array([3, 9, 21, -3])).all()
-    assert (np.reshape(matrix_A, (1, 4)) == np.array([[3, 9, 21, -3]])).all()
-    assert (np.reshape(matrix_A, (4, 1)) == np.array([[3], [9], [21], [-3]])).all()
-    assert (np.reshape(matrix_A, (1, 4, 1)) == np.array([[[3], [9], [21], [-3]]])).all()
-
-    assert (np.transpose(matrix_A) == np.array([[3, 21], [9, -3]])).all()
-
-    tensor_A = np.array([[[1, 0], [2, -1]], [[-3, 2], [7, 5]]])
-
-    assert (np.reshape(matrix_A, (4,)) == np.array([3, 9, 21, -3])).all()
-    assert (np.reshape(matrix_A, (4,)) == np.array([3, 9, 21, -3])).all()
-    assert (np.reshape(matrix_A, (4,)) == np.array([3, 9, 21, -3])).all()
-
-    assert (
-        np.swapaxes(tensor_A, 0, 1) == np.array([[[1, 0], [-3, 2]], [[2, -1], [7, 5]]])
-    ).all()
-
-    assert (
-        np.swapaxes(tensor_A, 0, 2) == np.array([[[1, -3], [2, 7]], [[0, 2], [-1, 5]]])
-    ).all()
-
-    assert (
-        np.swapaxes(tensor_A, 1, 2) == np.array([[[1, 2], [0, -1]], [[-3, 7], [2, 5]]])
-    ).all()
-
-    assert (
-        np.rollaxis(tensor_A, 1) == np.array([[[1, 0], [-3, 2]], [[2, -1], [7, 5]]])
-    ).all()
-
-    assert (
-        np.rollaxis(tensor_A, 2) == np.array([[[1, 2], [-3, 7]], [[0, -1], [2, 5]]])
-    ).all()
-
-    assert (np.fliplr(matrix_A) == np.array([[9, 3], [-3, 21]])).all()
-    assert (np.flipud(matrix_A) == np.array([[21, -3], [3, 9]])).all()
-
-    assert (np.roll(matrix_A, -1) == np.array([[9, 21], [-3, 3]])).all()
-    assert (np.roll(matrix_A, 1) == np.array([[-3, 3], [9, 21]])).all()
-
-    assert (np.rot90(matrix_A) == np.array([[9, -3], [3, 21]])).all()
-
-    array = np.array([8, 28, 17, -8, 0, 11, -38, -92, 1])
-    assert (np.sort(array) == np.array([[-92, -38, -8, 0, 1, 8, 11, 17, 28]])).all()
-
-
-if __name__ == "__main__":
-    main()
-import numpy as np
-
-# from numpy.linalg import det, inv
-
-
-def main():
-
-    """
-    Basic matrix operations are supported by numpy.
-    Addition, subtraction, multiplication, division by:
-    - scalar
-    - vector
-    - matrix
-    """
-
-    matrix_A = np.array([[3, 9], [21, -3]])
-
-    assert (matrix_A + 5 == np.array([[8, 14], [26, 2]])).all()
-    assert (matrix_A - 1 == np.array([[2, 8], [20, -4]])).all()
-    assert (matrix_A * 2 == np.array([[6, 18], [42, -6]])).all()
-    assert (matrix_A / 3 == np.array([[1, 3], [7, -1]])).all()
-
-    vector = [1, 2]
-    assert (matrix_A + vector == np.array([[4, 11], [22, -1]])).all()
-    assert (matrix_A - vector == np.array([[2, 7], [20, -5]])).all()
-    assert (matrix_A * vector == np.array([[3, 18], [21, -6]])).all()
-    assert (matrix_A / vector == np.array([[3, 4.5], [21, -1.5]])).all()
-
-    matrix_B = np.array([[4, 9], [25, 16]])
-
-    assert (np.sqrt(matrix_B) == np.array([[2, 3], [5, 4]])).all()
-
-    assert (matrix_A + matrix_B == np.array([[7, 18], [46, 13]])).all()
-    assert (matrix_A - matrix_B == np.array([[-1, 0], [-4, -19]])).all()
-    assert (matrix_A * matrix_B == np.array([[12, 81], [525, -48]])).all()
-    assert (matrix_B / matrix_A == np.array([[4 / 3, 1], [25 / 21, -16 / 3]])).all()
-
-    """
-    The transpose of a matrix is a reversal of its rows with its columns.
-    Square matrices have determinants.
-    The identity matrix is a square matrix with ones on the diagonal and zeros elsewhere. 
-    The inverse of a square matrix M is a matrix of the same size, N, such that M⋅N=I.
-    """
-    M = np.array([[-4, 5], [1, 7], [8, 3]])
-    N = np.array([[3, -5, 2, 7], [-5, 1, -4, -3]])
-    print(np.dot(M, N))
-
-    assert (np.transpose(matrix_A) == np.array([[3, 21], [9, -3]])).all()
-    assert (np.transpose(matrix_B) == np.array([[4, 25], [9, 16]])).all()
-
-    assert np.linalg.det(matrix_A) == -198
-    assert abs(np.linalg.det(matrix_B) + 161) < 0.001
-
-    identity = np.eye(2)
-    inverse = np.linalg.inv(matrix_A)
-    product = np.dot(matrix_A, inverse)
-    assert (product == identity).all()
-
-
-if __name__ == "__main__":
-    main()
+```
+[0 0 0 0]
+```
