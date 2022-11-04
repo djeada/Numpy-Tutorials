@@ -265,14 +265,15 @@ Expected output:
 An m×n matrix is a rectangular table of numbers consisting of m rows and n columns. 
 
 Matrix norm is defined as:
-$$ ||\vec{M}||_p = \sqrt[p]{\sum_i^m \sum_j^n M_{ij}^p} $$
+
+$$||\vec{M}||_p = \sqrt[p]{\sum_i^m \sum_j^n (M_{ij})^p}$$
 
 Matrix addition and scalar multiplication for matrices work the same way as for vectors. 
 
 In order for  M⋅N to be defined, the number of rows of  N  has to equal the number of columns of M.
 The product of an m × n matrix and an n × p matrix is an m × p matrix.
 
-![matrix mult](https://github.com/djeada/Numpy/blob/main/resources/matrix_mult.png)
+$$M_{ij} = \sum_{k=1}^p P_{ik}Q_{kj}$$
 
 
 ```Python
