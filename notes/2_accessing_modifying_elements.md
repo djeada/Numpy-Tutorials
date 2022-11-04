@@ -1,49 +1,84 @@
+
+<h1>Accessing elements</h1>
+
+NumPy arrays have indices that begin with 0. The first element has an index of 0, the second element has an index of 1, and so on.
+
+```Python
 import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr[1])
+```
 
+Expected output:
 
-# TODO: add slices, also for 2D
-def main():
+```
+2
+```
 
-    """
-    - Elements can be accessed using indices.
-    - You may modify a single element, a group of elements, or all elements in an array at once.
-    - A new element/row may be appended or inserted.
-    - Elements and rows can be deleted as well.
-    - Selecting elements by condition is possible.
-    """
+In matrices you have to first provide row index and then column index.
 
-    array = np.array([0, 1, 2, 3, 4, 5])
+$$
+\begin{bmatrix}
+7 \&  1 \& 2 \&  6 \\
+6 \&  4 \& 9 \&  3 \\
+2 \&  1 \& 4 \&  5 \\
+2 \&  7 \& 3 \&  8 \\
+\end{bmatrix}
+$$
 
-    assert array[0] == 0
-    assert array[-1] == 5
-    assert (array[1:3] == np.array([1, 2])).all()
+```Python
+import numpy as np
+arr = np.array([
+  [7, 1, 2, 6], 
+  [6, 4, 9, 3], 
+  [2, 1, 4, 5], 
+  [2, 7, 3, 8]
+])
+print(arr[1][2])
+print(arr[3][0])
+```
 
-    array = np.append(array, 6)
-    array = np.insert(array, 1, 100)
+Expected output:
 
-    assert array[-1] == 6
-    assert array[1] == 100
+```
+9
+2
+```
 
-    array[1] = 20
+Numpy arrays are mutable. You can change the value under index.
 
-    assert array[1] == 20
+```Python
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+arr[2] = 5
+print(arr)
+```
 
-    array[:5] += 1
+Expected output:
 
-    assert (array == np.array([1, 21, 2, 3, 4, 4, 5, 6])).all()
+```
+[1 2 5 4]
+```
 
-    array = array / 2
+You can access group of elements with slicing.
+You pass slice instead of single index to square brackets. <i>\[start\:end\:step\] </i>
 
-    assert (array == np.array([0.5, 10.5, 1.0, 1.5, 2.0, 2.0, 2.5, 3.0])).all()
+* If you don't specify a value for start, it will default to 0.
+* If you don't specify a value for end, it will default to array's size.
+* If you don't specify a value for step, it will default to 1.
 
-    array = array % 3
+```Python
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr[::2])
+print(arr[1:])
+print(arr[:-3])
+```
 
-    assert (array == np.array([0.5, 1.5, 1.0, 1.5, 2.0, 2.0, 2.5, 0.0])).all()
+Expected output:
 
-    array = np.delete(array, (1, 3))
-
-    assert (array == np.array([0.5, 1.0, 2.0, 2.0, 2.5, 0.0])).all()
-
-
-if __name__ == "__main__":
-    main()
+```
+[1 3]
+[2 3 4]
+[1]
+```
