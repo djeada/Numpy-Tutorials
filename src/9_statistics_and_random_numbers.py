@@ -3,7 +3,7 @@ import numpy as np
 
 def main():
 
-    """ 
+    """
     You can solve linear equations from definition.
     y = A*x
     x = A^-1*y

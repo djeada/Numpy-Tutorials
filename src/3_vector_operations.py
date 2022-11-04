@@ -4,10 +4,10 @@ import math
 
 def main():
 
-    """ 
+    """
     Operations:
     - vector addition
-    - scalar multiplication 
+    - scalar multiplication
     - dot product
     - the cross product
     - the angle between two vectors:

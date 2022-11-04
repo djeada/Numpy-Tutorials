@@ -3,12 +3,12 @@ import numpy as np
 
 def main():
 
-    """ 
+    """
     1. Creating np array from Python data structures: list and tuple
     - list is not equal to tuple with identical elements
     - arrays created from them are equal
     - basic operations (ex. multiplication) have different meaning for python ds and np arrays
-    - you can insert and delete items in a list by assigning a sequence of different length to a slice, 
+    - you can insert and delete items in a list by assigning a sequence of different length to a slice,
     whereas np would raise an error
     - when modifying an array you have to reassign it (like with strings)
     """

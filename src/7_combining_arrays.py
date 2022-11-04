@@ -3,7 +3,7 @@ import numpy as np
 
 def main():
 
-    """ 
+    """
     Common functions used to create arrays from existing arrays:
     - np.concatenate((arr1, arr2, ...), axis=0) connects arrays along axis chosen from existing axis
     - np.stack((arr1, arr2, ...), axis=0) connects arrays along new axis (all inputs must have the same shape)

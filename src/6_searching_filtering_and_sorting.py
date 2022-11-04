@@ -3,7 +3,7 @@ import numpy as np
 
 def main():
 
-    """ 
+    """
     - Find index of a given value.
     - Find indices of all values meeting given condition.
     - Find max and min.

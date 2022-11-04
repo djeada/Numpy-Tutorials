@@ -4,7 +4,7 @@ import numpy as np
 # TODO: add slices, also for 2D
 def main():
 
-    """ 
+    """
     - Elements can be accessed using indices.
     - You may modify a single element, a group of elements, or all elements in an array at once.
     - A new element/row may be appended or inserted.
