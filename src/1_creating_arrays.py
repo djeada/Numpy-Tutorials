@@ -3,39 +3,41 @@ import numpy as np
 
 def main():
 
-    """
-    1. Creating np array from Python data structures: list and tuple
-    - list is not equal to tuple with identical elements
-    - arrays created from them are equal
-    - basic operations (ex. multiplication) have different meaning for python ds and np arrays
-    - you can insert and delete items in a list by assigning a sequence of different length to a slice,
-    whereas np would raise an error
-    - when modifying an array you have to reassign it (like with strings)
-    """
-
+    # creating an array from 1D list
     list_1D = [0, 9, -3, 5, 4]
+    array_a = np.array(list_1D)
+    print(array_a)
+    print()
+
+    # creating an array from 1D tupple
     tuple_1D = (0, 9, -3, 5, 4)
-    array_from_list_1D = np.array(list_1D)
-    array_from_tupple_1D = np.array(tuple_1D)
+    array_b = np.array(tuple_1D)
+    print(array_b)
+    print()
 
-    assert list_1D != tuple_1D
-    assert (array_from_list_1D == array_from_tupple_1D).all()
-    assert list_1D * 3 == [0, 9, -3, 5, 4, 0, 9, -3, 5, 4, 0, 9, -3, 5, 4]
-    assert (array_from_list_1D * 3 == np.array([0, 27, -9, 15, 12])).all()
+    # soruces are not equal to each other
+    # but resulting array are
+    print(list_1D == tuple_1D)
+    print(array_a == array_b)
+    print((array_a == array_b).all())
 
-    assert array_from_list_1D.shape == (5,)
-    assert array_from_list_1D.ndim == 1
-    assert array_from_list_1D.size == 5
-    assert array_from_list_1D.dtype == "int64"
+    # basic info
+    print(array_a.shape)
+    print(array_a.ndim)
+    print(array_a.size)
+    print(array_a.dtype)
 
+    # creating an array from 2D list
     list_2D = [[1, 2, 3], [4, 5, 6]]
+    matrix = np.array(list_2D)
+    print(matrix)
+    print()
 
-    array_from_list_2D = np.array(list_2D)
-
-    assert array_from_list_2D.shape == (2, 3)
-    assert array_from_list_2D.ndim == 2
-    assert array_from_list_2D.size == 6
-    assert array_from_list_2D.dtype == "int64"
+    # basic info
+    print(matrix.shape)
+    print(matrix.ndim)
+    print(matrix.size)
+    print(matrix.dtype)
 
     list_3D = [
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
@@ -43,39 +45,69 @@ def main():
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
     ]
 
-    array_from_list_3D = np.array(list_3D)
+    tensor = np.array(list_3D)
+    print(tensor)
+    print()
 
-    assert array_from_list_3D.shape == (3, 3, 3)
-    assert array_from_list_3D.ndim == 3
-    assert array_from_list_3D.size == 27
-    assert array_from_list_3D.dtype == "int64"
+    # basic info
+    print(tensor.shape)
+    print(tensor.ndim)
+    print(tensor.size)
+    print(tensor.dtype)
 
-    """
-    2. Creating np array from numpy methods
-    - np.arange(start, end, step) creates an array of ints from start to end with step differece between each element
-    - np.linspace(start, end, n) creates an array of doubles from start to end with step differece between each element
-    - np.zeros(shape, dtype=float) creates an array of 0's stored as dtype of specified shape
-    - np.ones(shape, dtype=float) creates an array of 1's stored as dtype of specified shape
-    - np.eye(n, dtype=float) creates an identity matrix of size n x n
-    - np.random.rand(shape) creates an array of 1's stored as floats of specified shape
-    """
+    # np.arange(start, end, step) creates an array of ints from start to end with step differece between each element
+    array = np.arange(3)
+    print(array)
+    print()
+    array = np.arange(3, 6)
+    print(array)
+    print()
+    array = np.arange(0, 9, 3)
+    print(array)
+    print()
 
-    assert (np.arange(3) == np.array([0, 1, 2])).all()
-    assert (np.arange(3, 6) == np.array([3, 4, 5])).all()
-    assert (np.arange(0, 9, 3) == np.array([0, 3, 6])).all()
+    # np.linspace(start, end, n) creates an array of n doubles from start to end
+    array = np.linspace(0, 10, 5)
+    print(array)
+    print()
 
-    assert (np.linspace(0, 10, 5) == [0.0, 2.5, 5.0, 7.5, 10.0]).all()
+    # np.zeros(shape, dtype=float) creates an array of 0's stored as dtype of specified shape
+    array = np.zeros(5)
+    print(array)
+    print()
 
-    assert (np.zeros(5) == np.array([0.0, 0.0, 0.0, 0.0, 0.0])).all()
-    assert (np.zeros((3, 2)) == np.array([[0.0, 0.0], [0.0, 0.0], [0.0, 0.0]])).all()
+    matrix = np.zeros((3, 2))
+    print(matrix)
+    print()
 
-    assert (np.ones(5) == np.array([1.0, 1.0, 1.0, 1.0, 1.0])).all()
-    assert (np.ones((3, 2)) == np.array([[1.0, 1.0], [1.0, 1.0], [1.0, 1.0]])).all()
+    # np.ones(shape, dtype=float) creates an array of 1's stored as dtype of specified shape
+    array = np.ones(5)
+    print(array)
+    print()
 
-    assert (
-        np.eye(3) == np.array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]])
-    ).all()
+    matrix = np.ones((3, 2))
+    print(matrix)
+    print()
 
+    # np.full(n, a) creates an array with number a repeated n times
+    array = np.full(7, 2)
+    print(array)
+    print()
 
+    # np.eye(n, dtype=float) creates an identity matrix of size n x n
+    matrix = np.eye(3)
+    print(matrix)
+    print()
+
+    # np.random.rand(shape) creates an array of random numbers stored as floats of specified shape
+    array = np.random.rand(5)
+    print(array)
+    print()
+
+    matrix = np.random.rand(*(3, 2))
+    print(matrix)
+    print()
+
+    
 if __name__ == "__main__":
     main()
