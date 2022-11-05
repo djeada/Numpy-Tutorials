@@ -1,49 +1,52 @@
 import numpy as np
 
 
-# TODO: add slices, also for 2D
 def main():
 
-    """
-    - Elements can be accessed using indices.
-    - You may modify a single element, a group of elements, or all elements in an array at once.
-    - A new element/row may be appended or inserted.
-    - Elements and rows can be deleted as well.
-    - Selecting elements by condition is possible.
-    """
-
     array = np.array([0, 1, 2, 3, 4, 5])
+    print(f"element at index 0 in array {array} is {array[0]}")
+    print(f"element at the last index in array {array} is {array[-1]}")
+    print(f"elements between indices 1 and 3 in array {array} are {array[1:4]}")
 
-    assert array[0] == 0
-    assert array[-1] == 5
-    assert (array[1:3] == np.array([1, 2])).all()
-
+    # use append to add an element at the end of array
     array = np.append(array, 6)
-    array = np.insert(array, 1, 100)
+    print(array)
+    print()
 
-    assert array[-1] == 6
-    assert array[1] == 100
+    # use insert to insert an element at a given index
+    array = np.insert(array, 3, 8)
+    print(array)
+    print()
 
-    array[1] = 20
+    # modify a single element
+    array[2] = 7
+    print(array)
+    print()
 
-    assert array[1] == 20
+    # modify a number of consecutive elements
+    array[1:4] = [-1, -1, -1]
+    print(array)
+    print()
 
-    array[:5] += 1
+    # apply an operation to all the elements
+    array += 5
+    array //= 2
+    print(array)
+    print()
 
-    assert (array == np.array([1, 21, 2, 3, 4, 4, 5, 6])).all()
+    # apply a function to all elements
+    array = np.sqrt(array)
+    print(array)
+    print()
 
-    array = array / 2
+    array = np.cos(array)
+    print(array)
+    print()
 
-    assert (array == np.array([0.5, 10.5, 1.0, 1.5, 2.0, 2.0, 2.5, 3.0])).all()
-
-    array = array % 3
-
-    assert (array == np.array([0.5, 1.5, 1.0, 1.5, 2.0, 2.0, 2.5, 0.0])).all()
-
+    # remove an element
     array = np.delete(array, (1, 3))
-
-    assert (array == np.array([0.5, 1.0, 2.0, 2.0, 2.5, 0.0])).all()
-
+    print(array)
+    print()
 
 if __name__ == "__main__":
     main()
