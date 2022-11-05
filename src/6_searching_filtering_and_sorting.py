@@ -3,48 +3,70 @@ import numpy as np
 
 def main():
 
-    """
-    - Find index of a given value.
-    - Find indices of all values meeting given condition.
-    - Find max and min.
-    - Unique elements.
-    - Histogram.
-    """
-
     array = np.array([0, 1, 2, 3, 4, 5])
-    number = 2
-    result = np.where(array == 2)
 
-    assert array[result[0]] == number
-    assert array.max() == 5
-    assert array.min() == 0
-    assert array[array.argmax()] == 5
-    assert array[array.argmin()] == 0
+    # find a key in an array
+    key = 2
+    condition = array == key
+    result = np.where(condition)
+    print(result)
+    print()
 
-    for i in np.where((array > 1) & (array < 4))[0]:
-        num = array[i]
-        assert num > 1 and num < 4
+    # max, min and their indices
+    print(array.max())
+    print()
 
-    array_2D = np.array([[0, 1], [1, 1], [5, 9]])
-    number = 1
-    result = np.where(array_2D == number)
+    print(array.min())
+    print()
 
-    for cor in list(zip(result[0], result[1])):
-        assert array_2D[cor[0]][cor[1]] == number
+    indices = array.argmax()
+    print(indices)
+    print(array[indices])
+    print()
 
-    assert array_2D.max() == 9
-    assert array_2D.min() == 0
+    indices = array.argmin()
+    print(indices)
+    print(array[indices])
+    print()
 
-    unique_values = np.unique(array_2D)
+    condition = (array > 1) & (array < 4)
+    indices = np.where(condition)
+    print(indices)
 
-    assert (unique_values == [0, 1, 5, 9]).all()
+    matrix = np.array([[0, 1], [9, 1], [5, 9]])
 
-    unique, freq = np.unique(array_2D, return_counts=True)
+    # find a key in a matrix
+    key = 1
+    condition = matrix == key
+    result = np.transpose(condition.nonzero())
+    print(result)
+    print()
+
+    # max, min and their indices
+    print(matrix.max())
+    print()
+
+    print(matrix.min())
+    print()
+
+    indices = (matrix == matrix.max()).nonzero()
+    print(np.transpose(indices))
+    print(matrix[indices])
+    print()
+
+    indices = (matrix == matrix.min()).nonzero()
+    print(np.transpose(indices))
+    print(matrix[indices])
+    print()
+
+    unique_values = np.unique(matrix)
+    print(unique_values)
+    print()
+
+    unique, freq = np.unique(matrix, return_counts=True)
     histogram = dict(zip(unique, freq))
-    expected_result = {0: 1, 1: 3, 5: 1, 9: 1}
-
-    assert histogram == expected_result
-
+    print(histogram)
+    print()
 
 if __name__ == "__main__":
     main()
