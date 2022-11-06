@@ -2,58 +2,50 @@ import numpy as np
 
 
 def main():
+    
+    array_a = np.array([0, 1, 2])
+    array_b = np.array([4, 5, 6])
 
-    """
-    Common functions used to create arrays from existing arrays:
-    - np.concatenate((arr1, arr2, ...), axis=0) connects arrays along axis chosen from existing axis
-    - np.stack((arr1, arr2, ...), axis=0) connects arrays along new axis (all inputs must have the same shape)
-    - np.split(arr, indices_or_sections, axis=0) splits into sub-arrays along chosen axis
-    """
+    result = np.concatenate((array_a, array_b))
+    print(result)
+    print()
 
-    array_1 = np.array([0, 1, 2, 3])
-    array_2 = np.array([4, 5, 6])
+    result = np.vstack((array_a, array_b))
+    print(result)
+    print()
 
-    result = np.array([0, 1, 2, 3, 4, 5, 6])
-    assert (np.concatenate((array_1, array_2)) == result).all()
+    result = np.hstack((array_a, array_b))
+    print(result)
+    print()
 
-    array_1 = np.array([[0, 1], [2, 3]])
-    array_2 = np.array([[4, 5], [6, 4]])
+    connected = np.concatenate((array_a, array_b))
+    result = np.split(connected, 3)
 
-    result = [[0, 1], [2, 3], [4, 5], [6, 4]]
-    assert (np.concatenate((array_1, array_2)) == result).all()
+    for array in result:
+        print(array)
+        print()
 
-    result = [[0, 1, 4, 5], [2, 3, 6, 4]]
-    assert (np.concatenate((array_1, array_2), axis=1) == result).all()
+    matrix_a = np.array([[0, 1], [2, 3]])
+    matrix_b = np.array([[4, 5], [6, 4]])
 
-    array_1 = np.array([0, 1, 2])
-    array_2 = np.array([3, 4, 5])
+    result = np.concatenate((matrix_a, matrix_b))
+    print(result)
+    print()
 
-    result = np.array([[0, 1, 2], [3, 4, 5]])
-    assert (np.stack((array_1, array_2)) == result).all()
+    result = np.vstack((matrix_a, matrix_b))
+    print(result)
+    print()
 
-    result = np.array([[0, 3], [1, 4], [2, 5]])
-    assert (np.stack((array_1, array_2), axis=1) == result).all()
+    result = np.hstack((matrix_a, matrix_b))
+    print(result)
+    print()
 
-    array_1 = np.array([[0, 1], [2, 3]])
-    array_2 = np.array([[4, 5], [6, 4]])
+    connected = np.concatenate((matrix_a, matrix_b))
+    result = np.split(connected, 4)
 
-    result = [[[0, 1], [2, 3]], [[4, 5], [6, 4]]]
-    assert (np.stack((array_1, array_2)) == result).all()
-
-    result = [[[0, 1], [4, 5]], [[2, 3], [6, 4]]]
-    assert (np.stack((array_1, array_2), axis=1) == result).all()
-
-    result = [[[0, 4], [1, 5]], [[2, 6], [3, 4]]]
-    assert (np.stack((array_1, array_2), axis=2) == result).all()
-
-    array_1 = np.array([0, 1, 2])
-    array_2 = np.array([3, 4, 5])
-
-    connected = np.concatenate((array_1, array_2))
-    splited = np.split(connected, 2)
-
-    assert (splited[0] == array_1).all()
-    assert (splited[1] == array_2).all()
+    for array in result:
+        print(array)
+        print()
 
 
 if __name__ == "__main__":
