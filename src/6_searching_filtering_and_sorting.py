@@ -67,6 +67,30 @@ def main():
     histogram = dict(zip(unique, freq))
     print(histogram)
     print()
+    
+    # sorting
+    array = np.array([2, 1, 4, 3, 5])
+    result = np.sort(array)
+    
+    # to srot inplace
+    array.sort()
+    print(array)
+    
+    #argsort() returns the indices of the sorted elements
+    array = np.array([2, 1, 4, 3, 5])
+    i = np.argsort(array)
+    print(i)
+
+    rand = np.random.RandomState(42)
+    matrix = rand.randint(0, 10, (4, 6))
+    print(matrix)
+    
+    # sort each column of matrix
+    np.sort(matrix, axis=0)
+    
+    # sort each row of matrix
+    np.sort(matrix, axis=1)
+
 
 if __name__ == "__main__":
     main()
