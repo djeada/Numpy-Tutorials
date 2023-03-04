@@ -1,13 +1,12 @@
+# About vectors
 
-<h1>About vectors</h1>
+A vector in $R^n$ is an n-tuple. 
 
-A vector in R^n is an n-tuple. 
+In a `row vector</b>, the elements of the vector are written next to each other, and in a `column vector</b>, the elements of the vector are written on top of each other.
 
-In a <b>row vector</b>, the elements of the vector are written next to each other, and in a <b>column vector</b>, the elements of the vector are written on top of each other.
+A column `vector's transpose</b> is a row vector of the same length, and a row vector's transpose is a column vector.
 
-A column <b>vector's transpose</b> is a row vector of the same length, and a row vector's transpose is a column vector.
-
-The <b>norm</b> is a way to measure vector's length. Depending on the metric used, there are a variety of ways to define the length of a vector . The most common is L2 norm, which uses the distance formula.
+The `norm</b> is a way to measure vector's length. Depending on the metric used, there are a variety of ways to define the length of a vector . The most common is L2 norm, which uses the distance formula.
 
 $$ ||\vec{v}||_p = \sqrt[p]{\sum_i v_i^p} $$
  
