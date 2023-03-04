@@ -1,50 +1,63 @@
+# Searching, Filtering, and Sorting</h1>
+
+NumPy provides several functions to search, filter and sort arrays. These functions allow for quick and efficient manipulation of data within arrays.
+
+## Searching
+
+The `np.where()` function can be used to find the index of a given value or the indices of all values meeting a given condition in an array. For example:
+
+```Python
 import numpy as np
 
+array = np.array([0, 1, 2, 3, 4, 5])
+number = 2
+result = np.where(array == 2)
+print(result[0]) # prints [2]
 
-def main():
+for i in np.where((array > 1) & (array < 4))[0]:
+    num = array[i]
+    print(num) # prints 2, 3
+```
 
-    """
-    - Find index of a given value.
-    - Find indices of all values meeting given condition.
-    - Find max and min.
-    - Unique elements.
-    - Histogram.
-    """
+This function can also be used for 2D arrays:
 
-    array = np.array([0, 1, 2, 3, 4, 5])
-    number = 2
-    result = np.where(array == 2)
+```Python
+array_2D = np.array([[0, 1], [1, 1], [5, 9]])
+number = 1
+result = np.where(array_2D == number)
 
-    assert array[result[0]] == number
-    assert array.max() == 5
-    assert array.min() == 0
-    assert array[array.argmax()] == 5
-    assert array[array.argmin()] == 0
+for cor in list(zip(result[0], result[1])):
+    num = array_2D[cor[0]][cor[1]]
+    print(num) # prints 1, 1
+```
 
-    for i in np.where((array > 1) & (array < 4))[0]:
-        num = array[i]
-        assert num > 1 and num < 4
+## Filtering
 
-    array_2D = np.array([[0, 1], [1, 1], [5, 9]])
-    number = 1
-    result = np.where(array_2D == number)
+Filtering can be done using boolean indexing. The following example filters the values between 1 and 4 from an array:
 
-    for cor in list(zip(result[0], result[1])):
-        assert array_2D[cor[0]][cor[1]] == number
+```Python
+array = np.array([0, 1, 2, 3, 4, 5])
+filtered_array = array[(array > 1) & (array < 4)]
+print(filtered_array) # prints [2, 3]
+```
 
-    assert array_2D.max() == 9
-    assert array_2D.min() == 0
+## Sorting
 
-    unique_values = np.unique(array_2D)
+Sorting arrays can be done using the `np.sort()` function. This function returns a sorted copy of the array, leaving the original array unchanged. For example:
 
-    assert (unique_values == [0, 1, 5, 9]).all()
+```Python
+array = np.array([3, 1, 4, 2, 5])
+sorted_array = np.sort(array)
+print(sorted_array) # prints [1, 2, 3, 4, 5]
+```
 
-    unique, freq = np.unique(array_2D, return_counts=True)
-    histogram = dict(zip(unique, freq))
-    expected_result = {0: 1, 1: 3, 5: 1, 9: 1}
+You can also sort 2D arrays by specifying the axis parameter:
 
-    assert histogram == expected_result
-
-
-if __name__ == "__main__":
-    main()
+```Python
+array_2D = np.array([[3, 1], [4, 2], [5, 0]])
+sorted_array_2D = np.sort(array_2D, axis=0)
+print(sorted_array_2D)
+# prints [[3, 0],
+#         [4, 1],
+#         [5, 2]]
+```
