@@ -1,4 +1,4 @@
-## Matrix manipulations
+## Changing shape of a matrix
 
 The term "reshape" refers to changing the shape of an array. The number of elements in each dimension determines the shape of an array. We may adjust the number of elements in each dimension or add or subtract dimensions.
 
