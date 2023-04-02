@@ -69,6 +69,7 @@ import numpy as np
 rand_integers = np.random.randint(0, 10, size=5)
 print(rand_integers)
 ```
+
 Output:
 
 ```
