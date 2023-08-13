@@ -1,39 +1,64 @@
 ## Systems of Linear Equations
-A couple of linear equations with the same variables is known as a system of linear equations. In linear algebra, we can represent a system of linear equations in matrix form as $Mx = y$, where M is an m × n matrix, x is a column vector of n variables, and y is a column vector of m constants.
 
-If a system of linear equations is given in a matrix form, $Mx = y$, where N is an m×n matrix, then there are three possibilities:
+Systems of linear equations are foundational in linear algebra. They involve multiple linear equations that share common variables. This system can be represented in matrix notation, making matrix operations pivotal for their solutions.
 
-1. There is no solution for x.
+### Matrix Representation
 
-In this case, the rank of the augmented matrix $[M, y]$ is greater than the rank of $M$. This can be represented as:
+A system of linear equations can be represented in matrix form as:
 
-$$rank([M,y]) > rank(M)$$
+$$
+Mx = y 
+$$
 
-2. There is a unique solution for x.
+Here:
+- $M$ is an $m \times n$ matrix containing the coefficients of the variables.
+- $x$ is a column vector of $n$ variables.
+- $y$ is a column vector of $m$ constants.
 
-In this case, the rank of the augmented matrix $[M, y]$ is the same as the rank of $M$. This can be represented as:
+### Possible Solutions
 
-$$rank([M,y]) = rank(M)$$
+For a given matrix equation $Mx = y$ :
 
-3. There is an infinite number of solutions for x.
+1. **No Solution**: 
+ - This situation arises when the rank of the augmented matrix $[M|y]$ exceeds the rank of $M$ .
 
-In this case, the rank of the augmented matrix $[M, y]$ is the same as the rank of $M$, but the rank of M is less than the number of variables n. This can be represented as:
+$$
+rank([M|y]) > rank(M) 
+$$
 
-$$rank([M,y]) = rank(M) < n$$
+ - This means that the system is inconsistent and does not have a solution.
 
-In NumPy, we can use the linalg.solve() function to solve systems of linear equations. The function takes two arguments: the matrix M and the column vector y. Here is an example:
+2. **Unique Solution**:
+ - The system has a single solution if the rank of $M$ is equal to the rank of the augmented matrix and also equals the number of variables $n$ .
+
+$$
+rank([M|y]) = rank(M) = n 
+$$
+
+3. **Infinite Solutions**:
+ - Here, the rank of both $M$ and the augmented matrix is the same, but less than $n$, the number of variables.
+
+$$
+rank([M|y]) = rank(M) < n 
+$$
+
+ - The system has multiple solutions due to the redundant equations.
+
+### Solving with NumPy
+
+NumPy's `linalg.solve()` function provides an easy way to solve these systems. Given a matrix $M$ and column vector $y$ , it returns the vector $x$ that satisfies the equation.
 
 ```Python
 import numpy as np
 
-matrix = np.matrix([[2, 0, 5], [3, 4, 8], [2, 7, 3]])
-y = np.matrix([[10], [15], [5]])
+M = np.array([[2, 0, 5], [3, 4, 8], [2, 7, 3]])
+y = np.array([[10], [15], [5]])
 
-x = np.linalg.solve(matrix, y)
+x = np.linalg.solve(M, y)
 print(x)
 ```
 
-The output will be:
+Output:
 
 ```
 [[ 0.65217391]
@@ -41,8 +66,12 @@ The output will be:
  [ 1.73913043]]
 ```
 
-This means that the solution to the system of linear equations is:
+This indicates that the solutions to the system of equations are:
 
-$x_1 = 0.65217391$
-$x_2 = -0.2173913$
-$x_3 = 1.73913043$
+$x_1=0.65217391x1​=0.65217391$
+
+$x_2=−0.2173913x2​=−0.2173913$
+
+$x_3=1.73913043x3​=1.73913043$
+
+Understanding systems of linear equations and their matrix representations paves the way for various applications in science, engineering, and data science. 
