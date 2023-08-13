@@ -1,21 +1,45 @@
-# About vectors
+# Vectors in Context of Numpy
 
-A vector in $R^n$ is an n-tuple. 
+A vector is a mathematical object with magnitude and direction, and it's a cornerstone of linear algebra and calculus. Here, we'll delve deeper into the specifics of vectors in the context of computer science and their applications.
 
-In a `row vector`, the elements of the vector are written next to each other, and in a `column vector`, the elements of the vector are written on top of each other.
+## Vector Definitions
 
-A column `vector's transpose` is a row vector of the same length, and a row vector's transpose is a column vector.
+- **Vector in \( R^n \)**: A vector in \( R^n \) is an n-tuple of real numbers. Essentially, it's an ordered collection of 'n' numbers.
 
-The `norm` is a way to measure vector's length. Depending on the metric used, there are a variety of ways to define the length of a vector . The most common is L2 norm, which uses the distance formula.
+- **Row vs. Column Vectors**: 
+  - A `row vector` writes the elements of the vector horizontally.
+  - A `column vector` writes the elements vertically.
+  - Example:
+    - Row vector: [1 2 3]
+    - Column vector:
+   
+$$
+\begin{bmatrix}
+1 \\
+2 \\
+3 
+\end{bmatrix}
+$$
 
-$$ ||\vec{v}||_p = \sqrt[p]{\sum_i v_i^p} $$
- 
-Operations:
+- **Transpose**: 
+  - A column vector's `transpose` converts it to a row vector of the same length, and vice-versa.
+  
+- **Norm**: 
+  - A measure of a vector's "length" or magnitude. Depending on the metric used, there are different ways to calculate this length.
+  - The formula you provided is for the p-norm:
+    
+    $$||\vec{v}||_p = \sqrt[p]{\sum_i v_i^p}$$
+    
+  - The most commonly used norm is the L2 norm (or Euclidean norm), where p=2.
 
-1) Vector addition: 
-The pairwise addition of respective elements.
+## Vector Operations
 
-```Python
+### 1) Vector Addition
+
+Vectors can be added together to yield a new vector. The addition is performed element-wise.
+
+```python
+import numpy as np
 arr_1 = np.array([9, 2, 5])
 arr_2 = np.array([-3, 8, 2])
 print(np.add(arr_1, arr_2))
@@ -27,10 +51,11 @@ Expected output:
 [ 6 10  7]
 ```
 
-2) Scalar multiplication:
-The product of each element of the vector by the given scalar.
+### 2) Scalar Multiplication
 
-```Python
+Every element of the vector gets multiplied by the scalar.
+
+```python
 arr = np.array([6, 3, 4])
 scalar = 2
 print(scalar * arr)
@@ -42,12 +67,11 @@ Expected output:
 [12  6  8]
 ```
 
-3) Dot product:
-The sum of pairwise products of respective elements.
+### 3) Dot Product
 
-$$\vec{v} \cdot \vec{w}= |\vec{v}| |\vec{w}| \cos\theta $$
+The dot product of two vectors results in a scalar. It's the sum of the product of the corresponding entries of the two sequences of numbers.
 
-```Python
+```python
 arr_1 = np.array([9, 2, 5])
 arr_2 = np.array([-3, 8, 2])
 print(np.dot(arr_1, arr_2))
@@ -59,15 +83,11 @@ Expected output:
 -1
 ```
 
-4) The cross product:
+### 4) Cross Product
 
-  The cross product's geometric representation is a vector perpendicular to both v and w, with a length equal to the region enclosed by the parallelogram formed by the two vectors.
- 
-$$\vec{v}\times\vec{w} =|\vec{v}||\vec{w}|\sin\theta$$
+This operation is only defined in 3D and 7D. The result is a vector that's perpendicular to both of the original vectors.
 
-  Where <i>n</i> is a unit vector perpendicular to plane.
-
-```Python
+```python
 arr_1 = np.array([9, 2, 5])
 arr_2 = np.array([-3, 8, 2])
 print(np.cross(arr_1, arr_2))
@@ -76,19 +96,18 @@ print(np.cross(arr_1, arr_2))
 Expected output:
 
 ```
-[[-36 -33  78]]
+[-36 -33  78]
 ```
 
-5) The angle between two vectors:
+### 5) Angle between Vectors
 
-$$\theta = \arcsin{\frac{\vec{v}\times\vec{w}}{|\vec{v}||\vec{w}|}}$$
+Using dot product and norms, the cosine of the angle between two vectors can be found. This can be inverted to get the angle itself.
 
-If the angle between the vectors θ=π/2, then the vectors are said to be perpendicular or orthogonal, and the dot product is 0.
-
-```Python
+```python
 arr_1 = np.array([9, 2, 5])
 arr_2 = np.array([-3, 8, 2])
-print(np.arccos(np.dot(arr_1, arr_2)/(np.norm(arr_1)*np.norm(arr_2)))
+angle_rad = np.arccos(np.dot(arr_1, arr_2) / (np.linalg.norm(arr_1) * np.linalg.norm(arr_2)))
+print(angle_rad)
 ```
 
 Expected output:
