@@ -68,10 +68,10 @@ Output:
 
 This indicates that the solutions to the system of equations are:
 
-$x_1=0.65217391x1​=0.65217391$
+$x_1=0.65217391$
 
-$x_2=−0.2173913x2​=−0.2173913$
+$x_2=−0.2173913$
 
-$x_3=1.73913043x3​=1.73913043$
+$x_3=1.73913043$
 
 Understanding systems of linear equations and their matrix representations paves the way for various applications in science, engineering, and data science. 
