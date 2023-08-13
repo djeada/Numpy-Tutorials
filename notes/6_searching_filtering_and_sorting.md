@@ -1,63 +1,75 @@
-# Searching, Filtering, and Sorting</h1>
+# Searching, Filtering, and Sorting with NumPy
 
-NumPy provides several functions to search, filter and sort arrays. These functions allow for quick and efficient manipulation of data within arrays.
+NumPy offers a suite of functions designed for searching within, filtering, and sorting arrays. These capabilities are indispensable when managing and preprocessing datasets, particularly large ones.
 
 ## Searching
 
-The `np.where()` function can be used to find the index of a given value or the indices of all values meeting a given condition in an array. For example:
+To locate the indices of specific values or those that satisfy a particular condition within an array, you can utilize `np.where()`.
+
+### Example with 1D Array:
 
 ```Python
 import numpy as np
 
 array = np.array([0, 1, 2, 3, 4, 5])
-number = 2
-result = np.where(array == 2)
-print(result[0]) # prints [2]
+indices = np.where(array == 2)
+print(indices[0]) # Expected: [2]
 
-for i in np.where((array > 1) & (array < 4))[0]:
-    num = array[i]
-    print(num) # prints 2, 3
+selected_values = array[np.where((array > 1) & (array < 4))]
+for value in selected_values:
+    print(value) # Expected: 2, 3
 ```
 
-This function can also be used for 2D arrays:
+### Example with 2D Array:
 
 ```Python
 array_2D = np.array([[0, 1], [1, 1], [5, 9]])
-number = 1
-result = np.where(array_2D == number)
+indices = np.where(array_2D == 1)
 
-for cor in list(zip(result[0], result[1])):
-    num = array_2D[cor[0]][cor[1]]
-    print(num) # prints 1, 1
+for row, col in zip(indices[0], indices[1]):
+    print(array_2D[row, col]) # Expected: 1, 1, 1
 ```
 
 ## Filtering
 
-Filtering can be done using boolean indexing. The following example filters the values between 1 and 4 from an array:
+Boolean indexing enables the extraction of elements that satisfy specific conditions from an array.
+
+Example:
 
 ```Python
 array = np.array([0, 1, 2, 3, 4, 5])
 filtered_array = array[(array > 1) & (array < 4)]
-print(filtered_array) # prints [2, 3]
+print(filtered_array) # Expected: [2, 3]
 ```
 
 ## Sorting
 
-Sorting arrays can be done using the `np.sort()` function. This function returns a sorted copy of the array, leaving the original array unchanged. For example:
+For sorting arrays, NumPy offers the np.sort() function. It produces a sorted copy of the array while leaving the initial array untouched.
+
+### Example with 1D Array:
 
 ```Python
 array = np.array([3, 1, 4, 2, 5])
 sorted_array = np.sort(array)
-print(sorted_array) # prints [1, 2, 3, 4, 5]
+print(sorted_array) # Expected: [1, 2, 3, 4, 5]
 ```
 
-You can also sort 2D arrays by specifying the axis parameter:
+### Example with 2D Array:
+
+When sorting multidimensional arrays, you can specify the sorting axis using the axis parameter.
 
 ```Python
 array_2D = np.array([[3, 1], [4, 2], [5, 0]])
 sorted_array_2D = np.sort(array_2D, axis=0)
 print(sorted_array_2D)
-# prints [[3, 0],
-#         [4, 1],
-#         [5, 2]]
 ```
+
+Expected output:
+
+```
+[[3, 0],
+ [4, 1],
+ [5, 2]]
+```
+
+These functions significantly streamline tasks associated with searching, filtering, and sorting, making data manipulation in NumPy both efficient and intuitive.
