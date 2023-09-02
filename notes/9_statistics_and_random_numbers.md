@@ -2,7 +2,7 @@
 
 NumPy's random module offers an assortment of functions to generate random numbers from various distributions. Whether you're simulating data or need randomness for an algorithm, this module has you covered.
 
-### 1. Generating Floats Between 0 and 1
+### Generating Floats Between 0 and 1
 
 The function `np.random.rand()` produces an array of random floating-point numbers uniformly distributed over `[0, 1)`.
 
@@ -13,7 +13,7 @@ np.random.rand(d0, d1, ..., dn)
 ```
 
 Parameters:
-- d0, d1,..., dn: Dimensions of the returned array.
+- $d0, d1,..., dn$: Dimensions of the returned array.
 
 Example:
 
@@ -30,7 +30,7 @@ Expected Output:
  [0.62190377 0.40855834 0.89849802]]
 ```
 
-### 2. Generating Numbers from Standard Normal Distribution
+### Generating Numbers from Standard Normal Distribution
 
 `np.random.randn()` returns numbers from the standard normal distribution (mean = 0, standard deviation = 1).
 
@@ -54,7 +54,7 @@ Expected Output:
  [ 0.34275595 -1.37612312  1.23458913]]
 ```
 
-### 3. Generating Random Integers
+### Generating Random Integers
 
 Use `np.random.randint()` to obtain random integers over a specified range.
 
@@ -82,7 +82,7 @@ Expected Output:
 [6 3 8 1 9]
 ```
 
-### 4. Generating Floats Over a Range
+### Generating Floats Over a Range
 
 np.random.uniform() generates random floats over a specified range.
 
@@ -112,7 +112,7 @@ Statistics, at its core, is the science of collecting, analyzing, and interpreti
 
 NumPy provides robust functions for a range of statistical operations, making it indispensable for data analysis in Python. Below, we explore some of these basic statistical operations.
 
-### 1. Mean
+### Mean
 
 The mean or average of a set of values is computed by taking the sum of these values and dividing by the number of values.
 
@@ -124,7 +124,7 @@ Function:
 np.mean(arr)
 ```
 
-### 2. Median
+### Median
 
 The median is the middle value of an ordered set of values. For an odd number of values, it's the central value. For an even number of values, it's the average of the two middle values.
 
@@ -134,7 +134,7 @@ Function:
 np.median(arr)
 ```
 
-### 3. Variance
+### Variance
 
 Variance quantifies the spread or dispersion of a set of values. It's calculated as the average of the squared differences of each value from the mean.
 
@@ -146,7 +146,7 @@ Function:
 np.var(arr)
 ```
 
-### 4. Standard Deviation
+### Standard Deviation
 
 The standard deviation measures the average distance between each data point and the mean. It's essentially the square root of variance.
 
