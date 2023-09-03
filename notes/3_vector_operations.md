@@ -34,7 +34,9 @@ $$
 
 ## Vector Operations
 
-### 1) Vector Addition
+There are number of vector operations supported by numpy.
+
+### Vector Addition
 
 Vectors can be added together to yield a new vector. The addition is performed element-wise.
 
@@ -51,7 +53,7 @@ Expected output:
 [ 6 10  7]
 ```
 
-### 2) Scalar Multiplication
+### Scalar Multiplication
 
 Every element of the vector gets multiplied by the scalar.
 
@@ -67,7 +69,7 @@ Expected output:
 [12  6  8]
 ```
 
-### 3) Dot Product
+### Dot Product
 
 The dot product of two vectors results in a scalar. It's the sum of the product of the corresponding entries of the two sequences of numbers.
 
@@ -83,7 +85,7 @@ Expected output:
 -1
 ```
 
-### 4) Cross Product
+### Cross Product
 
 This operation is only defined in 3D and 7D. The result is a vector that's perpendicular to both of the original vectors.
 
@@ -99,7 +101,7 @@ Expected output:
 [-36 -33  78]
 ```
 
-### 5) Angle between Vectors
+### Angle between Vectors
 
 Using dot product and norms, the cosine of the angle between two vectors can be found. This can be inverted to get the angle itself.
 
