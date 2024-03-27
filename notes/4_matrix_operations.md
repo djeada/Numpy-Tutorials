@@ -6,19 +6,23 @@ A matrix is a systematic arrangement of numbers (or elements) in rows and column
 
 The matrix norm is a function that measures the size or magnitude of a matrix. Just as the absolute value of a number provides its magnitude, the norm gives the magnitude of a matrix. There are various ways to define matrix norms, with each having specific properties and applications.
 
-### Vector Norm
+### Vector Norm and Matrix Norm
 
-A vector norm assigns a non-negative value to a vector in n-dimensional space, symbolizing its "length" or "magnitude". One common vector norm is the Euclidean norm, defined as:
-
-$$
-||x||_2 = \sqrt{\sum_{i=1}^n x_i^2}
-$$
-
-Given a matrix M, its Frobenius norm is:
+A vector norm is a function that assigns a non-negative value to a vector in an n-dimensional space, providing a quantitative measure of the vector's length or magnitude. A commonly used vector norm is the **Euclidean norm**, defined for a vector $\vec{x}$ in $\mathbb{R}^n$ as:
 
 $$
-||\vec{M}||_F = \sqrt{\sum_i^m \sum_j^n (M_{ij})^2}
+||\vec{x}||_2 = \sqrt{\sum_{i=1}^n x_i^2}
 $$
+
+where $x_i$represents the components of the vector $\vec{x}$.
+
+In the context of matrices, the **Frobenius norm** is analogous to the Euclidean norm for vectors, but it applies to matrices. For a matrix $M$with dimensions $m \times n$, the Frobenius norm is defined as:
+
+$$
+||M||_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^n (M_{ij})^2}
+$$
+
+where $M_{ij}$ represents the elements of the matrix $M$. This norm can be seen as the Euclidean norm of the matrix when it is considered as a vector of its elements.
 
 ### Norms in NumPy
 
@@ -61,14 +65,15 @@ d(A,B) = ||A-B||
 $$
 
 ## Matrix Multiplication
-
-Matrix multiplication, unlike element-wise multiplication, requires the number of columns of the first matrix to equal the number of rows of the second. The result is an m × p matrix. It is defined as:
+Matrix multiplication is a fundamental operation in linear algebra where the number of columns in the first matrix must match the number of rows in the second matrix. For matrices $M$ and $N$, where $M$ is an $m \times n$ matrix and $N$ is an $n \times p$ matrix, their product will be an $m \times p$ matrix. The elements of the resulting matrix are computed as follows:
 
 $$ 
 (M \times N)_{ij} = \sum_{k=1}^n M_{ik}N_{kj} 
 $$
 
-Example using NumPy:
+where $(M \times N)_{ij}$ is the element in the $i$-th row and $j$-th column of the resulting matrix, $M_{ik}$ is the element in the $i$-th row and $k$-th column of matrix $M$, and $N_{kj}$ is the element in the $k$-th row and $j$-th column of matrix $N$.
+
+Here's an example of matrix multiplication using NumPy:
 
 ```Python
 M = np.array([[-4, 5], [1, 7], [8, 3]])
@@ -113,7 +118,15 @@ Expected output: `-33.0`
 
 ## Identity and Inverse Matrices
 
-The identity matrix, denoted as I, has ones on the diagonal and zeros everywhere else. If a matrix A has an inverse A^-1, then A×A−1=IA×A−1=I:
+The identity matrix, typically denoted as $I$, plays a crucial role in matrix algebra. It is a square matrix with ones on its main diagonal and zeros in all other positions. The identity matrix acts as the multiplicative identity in matrix operations, similar to the number 1 in scalar multiplication.
+
+When a square matrix $A$ has an inverse, denoted as $A^{-1}$, it means that when $A$ is multiplied by $A^{-1}$, the result is the identity matrix $I$. The relationship is given by:
+
+$$
+A \times A^{-1} = A^{-1} \times A = I
+$$
+
+This property is fundamental in linear algebra, indicating that multiplying a matrix by its inverse yields the identity matrix.
 
 ```Python
 M = np.array([[-4, 5], [1, 7]])
@@ -194,22 +207,18 @@ By understanding the rank, one can determine the properties of a matrix and its 
 
 ## Summary of Matrix and Vector Operations
 
-Matrix and vector arithmetic forms the basis of many computational problems. Both matrices and vectors can undergo a range of basic arithmetic operations. These operations can either act element-wise or involve more complex operations like matrix multiplication.
+In NumPy, element-wise operations are performed on arrays (vectors and matrices) where corresponding elements are processed together. Here are some common element-wise operations:
 
-For two matrices or vectors of the same dimensions, element-wise operations are performed by combining corresponding elements.
+| Operation     | NumPy Function             | Python Operator |
+|---------------|----------------------------|-----------------|
+| Addition      | `np.add(arr_1, arr_2)`     | `arr_1 + arr_2` |
+| Subtraction   | `np.subtract(arr_1, arr_2)`| `arr_1 - arr_2` |
+| Multiplication| `np.multiply(arr_1, arr_2)`| `arr_1 * arr_2` |
+| Division      | `np.divide(arr_1, arr_2)`  | `arr_1 / arr_2` |
 
-- **Matrix Addition**: Each element in one matrix is added to its corresponding element in another matrix.
-  
-- **Scalar Multiplication**: Every element of the matrix or vector is multiplied by a scalar value.
+The Python operators (`+`, `-`, `*`, `/`) can be used for convenience and are equivalent to their respective NumPy functions.
 
-Examples of element-wise operations in NumPy:
-
-| Operation     | Function                  | Operator   |
-|---------------|---------------------------|------------|
-| addition      | `np.add(arr_1, arr_2)`    | `arr_1 + arr_2` |
-| subtraction   | `np.subtract(arr_1, arr_2)`| `arr_1 - arr_2` |
-| multiplication| `np.multiply(arr_1, arr_2)`| `arr_1 * arr_2` |
-| division      | `np.divide(arr_1, arr_2)`  | `arr_1 / arr_2` |
+Here's an example demonstrating these operations using NumPy arrays:
 
 ```Python
 import numpy as np
