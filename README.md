@@ -24,10 +24,16 @@ Number | Notes | Python | Jupyter
 | 08 | <a href="https://github.com/djeada/NumPy-Tutorials/blob/main/notes/8_linear_equations.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | <a href="https://github.com/djeada/NumPy-Tutorials/blob/main/src/8_linear_equations.py" /> <img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | <a href="https://github.com/djeada/NumPy-Tutorials/blob/main/src/8_linear_equations.py"><img src="https://img.icons8.com/fluency/344/jupyter.png" height="50" /> </a> |
 | 09 | <a href="https://github.com/djeada/NumPy-Tutorials/blob/main/notes/9_statistics_and_random_numbers.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | <a href="https://github.com/djeada/NumPy-Tutorials/blob/main/src/9_statistics_and_random_numbers.py" /> <img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | <a href="https://github.com/djeada/NumPy-Tutorials/blob/main/src/9_statistics_and_random_numbers.ipynb"><img src="https://img.icons8.com/fluency/344/jupyter.png" height="50" /> </a> |
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+## How to Contribute
 
-Please make sure to update tests as appropriate.
+We encourage contributions that enhance the repository's value. To contribute:
 
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+   
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+
+This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
