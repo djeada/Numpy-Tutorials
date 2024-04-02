@@ -11,6 +11,7 @@ Mx = y
 $$
 
 Here:
+
 - $M$ is an $m \times n$ matrix containing the coefficients of the variables.
 - $x$ is a column vector of $n$ variables.
 - $y$ is a column vector of $m$ constants.
@@ -19,7 +20,8 @@ Here:
 
 For a given matrix equation $Mx = y$ :
 
-1. **No Solution**: 
+I. **No Solution**
+
  - This situation arises when the rank of the augmented matrix $[M|y]$ exceeds the rank of $M$ .
 
 $$
@@ -28,14 +30,16 @@ $$
 
  - This means that the system is inconsistent and does not have a solution.
 
-2. **Unique Solution**:
+II. **Unique Solution**
+
  - The system has a single solution if the rank of $M$ is equal to the rank of the augmented matrix and also equals the number of variables $n$ .
 
 $$
 rank([M|y]) = rank(M) = n 
 $$
 
-3. **Infinite Solutions**:
+III. **Infinite Solutions**
+
  - Here, the rank of both $M$ and the augmented matrix is the same, but less than $n$, the number of variables.
 
 $$
