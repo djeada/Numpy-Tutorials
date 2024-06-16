@@ -4,18 +4,18 @@ A vector is a mathematical object with both magnitude and direction, essential i
 
 ### Vector Definitions
 
-#### Vector in \( \mathbb{R}^n \)
+#### Vector in $\mathbb{R}^n$
 
-- A vector in \( \mathbb{R}^n \) is an n-tuple of real numbers.
+- A vector in $\mathbb{R}^n$ is an n-tuple of real numbers.
 - It is an ordered collection of 'n' numbers, where each number is a component of the vector.
-- Notation: A vector \( \vec{v} \) in \( \mathbb{R}^n \) is often written as \( \vec{v} = (v_1, v_2, \ldots, v_n) \).
+- Notation: A vector $\vec{v}$ in $\mathbb{R}^n$ is often written as $\vec{v} = (v_1, v_2, \ldots, v_n)$.
 
 #### Row vs. Column Vectors
 
 **Row Vector**:
 
 - Displays the elements of the vector horizontally.
-- Example: \( \vec{v} = [1, 2, 3] \).
+- Example: $\vec{v} = [1, 2, 3]$.
 - Notation: A row vector is written as a 1xN matrix.
 
 **Column Vector**:
@@ -36,8 +36,8 @@ $$
 #### Transpose
 
 - Transposing a vector converts a row vector to a column vector and vice versa.
-- Notation: The transpose of a vector \( \vec{v} \) is denoted \( \vec{v}^T \).
-- Example: If \( \vec{v} = [1, 2, 3] \), then \( \vec{v}^T = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} \).
+- Notation: The transpose of a vector $\vec{v}$ is denoted $\vec{v}^T$.
+- Example: If $\vec{v} = [1, 2, 3]$, then $\vec{v}^T = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$.
 
 #### Norm
 - The norm of a vector measures its "length" or magnitude.
@@ -48,7 +48,7 @@ $$
 ||\vec{v}||_p = \left( \sum_i |v_i|^p \right)^{1/p}
 $$
 
-- The most commonly used norm is the L2 norm (Euclidean norm), where \( p=2 \).
+- The most commonly used norm is the L2 norm (Euclidean norm), where $p=2$.
 
 ### Vector Operations
 
