@@ -205,10 +205,11 @@ Explanation:
 
 | Operation               | Description                               | Example Code                                     | Expected Output                       |
 |-------------------------|-------------------------------------------|-------------------------------------------------|--------------------------------------|
-| **Access 1D**           | Access an element by index.               | `arr[1]`                                        | `2`                                  |
-| **Access 2D**           | Access an element by row and column index.| `arr[1, 2]`                                     | `9`                                  |
-| **Modify Element**      | Change the value of an element.           | `arr[2] = 5`                                    | `[1 2 5 4]`                           |
-| **Slice 1D**            | Slice a 1D array.                         | `arr[::2]`, `arr[1:]`, `arr[:-3]`                | `[1 3]`, `[2 3 4]`, `[1]`            |
-| **Slice 2D**            | Slice a 2D array.                         | `arr[0:2, 1:3]`, `arr[:3, 2:]`                   | `[[1 2] [4 9]]`, `[[2 6] [9 3] [4 5]]` |
-| **Modify Multiple**     | Modify multiple elements.                 | `arr[2:5] = [10, 11, 12]`                        | `[1 2 10 11 12 6 7 8]`               |
-| **Boolean Indexing**    | Access elements based on conditions.      | `arr[arr > 5]`                                  | `[6 7 8]`                            |
+| **Access 1D**           | Access an element by index.               | `arr = np.array([1, 2, 3, 4])`<br>`arr[1]`      | `2`                                  |
+| **Access 2D**           | Access an element by row and column index.| `arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])`<br>`arr[1, 2]` | `6`                                  |
+| **Modify Element**      | Change the value of an element.           | `arr = np.array([1, 2, 3, 4])`<br>`arr[2] = 5`  | `[1, 2, 5, 4]`                       |
+| **Slice 1D**            | Slice a 1D array.                         | `arr = np.array([1, 2, 3, 4])`<br>`arr[::2]`, `arr[1:]`, `arr[:-3]` | `[1, 3]`, `[2, 3, 4]`, `[1]`         |
+| **Slice 2D**            | Slice a 2D array.                         | `arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])`<br>`arr[0:2, 1:3]`, `arr[:3, 2:]` | `[[2, 3], [5, 6]]`, `[[3], [6], [9]]` |
+| **Modify Multiple**     | Modify multiple elements.                 | `arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])`<br>`arr[2:5] = [10, 11, 12]` | `[1, 2, 10, 11, 12, 6, 7, 8]`        |
+| **Boolean Indexing**    | Access elements based on conditions.      | `arr = np.array([1, 2, 3, 6, 7, 8])`<br>`arr[arr > 5]` | `[6, 7, 8]`                           |
+
