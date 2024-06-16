@@ -6,36 +6,36 @@ Systems of linear equations are a cornerstone of linear algebra and play a cruci
 
 A system of linear equations can be succinctly expressed in matrix form. Consider a system of linear equations as follows:
 
-\[
+\n$$
 \begin{cases}
 a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
 a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\
 \vdots \\
 a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m
 \end{cases}
-\]
+$$\n
 
 This system can be represented in matrix form as:
 
-\[
+\n$$
 Mx = y
-\]
+$$\n
 
 where:
-- \( M \) is an \( m \times n \) matrix containing the coefficients of the variables.
-- \( x \) is a column vector of \( n \) variables.
-- \( y \) is a column vector of \( m \) constants.
+- $M$ is an $m \times n$ matrix containing the coefficients of the variables.
+- $x$ is a column vector of $n$ variables.
+- $y$ is a column vector of $m$ constants.
 
 For example, the system:
-\[
+\n$$
 \begin{cases}
 2x_1 + 0x_2 + 5x_3 = 10 \\
 3x_1 + 4x_2 + 8x_3 = 15 \\
 2x_1 + 7x_2 + 3x_3 = 5
 \end{cases}
-\]
+$$\n
 can be written as:
-\[
+\n$$
 \begin{pmatrix}
 2 & 0 & 5 \\
 3 & 4 & 8 \\
@@ -52,45 +52,45 @@ x_3
 15 \\
 5
 \end{pmatrix}
-\]
+$$\n
 
 ### Possible Solutions
 
-For a given matrix equation \( Mx = y \), there are three possible types of solutions:
+For a given matrix equation $Mx = y$, there are three possible types of solutions:
 
 I. **No Solution**
 
-A system has no solution if the rank of the augmented matrix \([M|y]\) is greater than the rank of \(M\):
+A system has no solution if the rank of the augmented matrix $[M|y]$ is greater than the rank of $M$:
 
-\[
+\n$$
 \text{rank}([M|y]) > \text{rank}(M)
-\]
+$$\n
 
 This situation occurs when the system is inconsistent, meaning the equations contradict each other.
 
 II. **Unique Solution**
 
-A system has a unique solution if the rank of \(M\) equals the rank of the augmented matrix and this rank equals the number of variables \(n\):
+A system has a unique solution if the rank of $M$ equals the rank of the augmented matrix and this rank equals the number of variables $n$:
 
-\[
+\n$$
 \text{rank}([M|y]) = \text{rank}(M) = n
-\]
+$$\n
 
 In this case, the system is consistent and the equations are independent, leading to a single solution.
 
 III. **Infinite Solutions**
 
-A system has infinitely many solutions if the rank of both \(M\) and the augmented matrix is the same, but this rank is less than the number of variables \(n\):
+A system has infinitely many solutions if the rank of both $M$ and the augmented matrix is the same, but this rank is less than the number of variables $n$:
 
-\[
+\n$$
 \text{rank}([M|y]) = \text{rank}(M) < n
-\]
+$$\n
 
 This occurs when the system has dependent equations, resulting in multiple solutions.
 
 ### Solving with NumPy
 
-Python's NumPy library provides efficient tools for solving systems of linear equations. The `linalg.solve()` function is particularly useful for finding solutions to these systems. Given a matrix \(M\) and a column vector \(y\), it returns the vector \(x\) that satisfies the equation \(Mx = y\).
+Python's NumPy library provides efficient tools for solving systems of linear equations. The `linalg.solve()` function is particularly useful for finding solutions to these systems. Given a matrix $M$ and a column vector $y$, it returns the vector $x$ that satisfies the equation $Mx = y$.
 
 Here is an example of solving a system of linear equations using NumPy:
 
@@ -116,9 +116,9 @@ Output:
 
 This indicates that the solutions to the system of equations are:
 
-\[
+\n$$
 x_1 = 0.65217391, \quad x_2 = -0.2173913, \quad x_3 = 1.73913043
-\]
+$$\n
 
 ### Advanced Techniques for Solving Systems of Linear Equations with NumPy
 
@@ -126,11 +126,11 @@ While `numpy.linalg.solve()` is a straightforward and efficient method for solvi
 
 #### Using the Matrix Inverse
 
-For square matrices, another way to solve the system \( Mx = y \) is by using the inverse of \( M \). If \( M \) is invertible, the solution can be found as:
+For square matrices, another way to solve the system $Mx = y$ is by using the inverse of $M$. If $M$ is invertible, the solution can be found as:
 
-\[
+\n$$
 x = M^{-1}y
-\]
+$$\n
 
 This method, however, is computationally more expensive and less numerically stable than using `numpy.linalg.solve()`.
 
@@ -161,7 +161,7 @@ Output:
 
 #### QR Decomposition
 
-QR decomposition is useful for solving systems of linear equations, especially when dealing with over-determined systems (more equations than variables). QR decomposition decomposes matrix \( M \) into an orthogonal matrix \( Q \) and an upper triangular matrix \( R \).
+QR decomposition is useful for solving systems of linear equations, especially when dealing with over-determined systems (more equations than variables). QR decomposition decomposes matrix $M$ into an orthogonal matrix $Q$ and an upper triangular matrix $R$.
 
 Example:
 
@@ -190,7 +190,7 @@ Output:
 
 #### Singular Value Decomposition (SVD)
 
-SVD is a powerful method that can handle both over-determined and under-determined systems. It decomposes matrix \( M \) into three matrices \( U \), \( S \), and \( V^T \) such that \( M = U \Sigma V^T \).
+SVD is a powerful method that can handle both over-determined and under-determined systems. It decomposes matrix $M$ into three matrices $U$, $S$, and $V^T$ such that $M = U \Sigma V^T$.
 
 Example:
 

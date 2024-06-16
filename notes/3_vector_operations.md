@@ -4,7 +4,7 @@ A vector is a mathematical object with magnitude and direction, and it's a corne
 
 ## Vector Definitions
 
-- **Vector in \( R^n \)**: A vector in \( R^n \) is an n-tuple of real numbers. Essentially, it's an ordered collection of 'n' numbers.
+- **Vector in $R^n$**: A vector in $R^n$ is an n-tuple of real numbers. Essentially, it's an ordered collection of 'n' numbers.
 
 - **Row vs. Column Vectors**: 
   - A `row vector` writes the elements of the vector horizontally.

@@ -4,7 +4,7 @@ NumPy's random module is a powerful tool for generating random numbers from vari
 
 ### Generating Random Floats Between 0 and 1
 
-The function `np.random.rand()` produces an array of random floating-point numbers uniformly distributed over the interval \([0, 1)\).
+The function `np.random.rand()` produces an array of random floating-point numbers uniformly distributed over the interval $[0, 1)$.
 
 #### Function Signature:
 
@@ -13,7 +13,7 @@ np.random.rand(d0, d1, ..., dn)
 ```
 
 #### Parameters:
-- \( d0, d1, ..., dn \): Dimensions of the returned array.
+- $d0, d1, ..., dn$: Dimensions of the returned array.
 
 #### Example:
 
@@ -85,7 +85,7 @@ print(rand_integers)
 
 ### Generating Random Floats Over a Specified Range
 
-The function `np.random.uniform()` generates random floating-point numbers over a specified range \([low, high)\).
+The function `np.random.uniform()` generates random floating-point numbers over a specified range $[low, high)$.
 
 #### Function Signature:
 
@@ -113,7 +113,7 @@ NumPy also supports generating random numbers from other statistical distributio
 
 #### Binomial Distribution
 
-The function `np.random.binomial()` simulates the outcome of performing \( n \) Bernoulli trials with success probability \( p \).
+The function `np.random.binomial()` simulates the outcome of performing $n$ Bernoulli trials with success probability $p$.
 
 ```Python
 np.random.binomial(n, p, size=None)
@@ -134,7 +134,7 @@ Expected Output:
 
 #### Poisson Distribution
 
-The function `np.random.poisson()` generates random numbers from a Poisson distribution with a given mean \(\lambda\).
+The function `np.random.poisson()` generates random numbers from a Poisson distribution with a given mean $\lambda$.
 
 ```Python
 np.random.poisson(lam, size=None)
@@ -155,7 +155,7 @@ Expected Output:
 
 #### Exponential Distribution
 
-The function `np.random.exponential()` generates random numbers from an exponential distribution with a specified scale parameter \(\beta\).
+The function `np.random.exponential()` generates random numbers from an exponential distribution with a specified scale parameter $\beta$.
 
 ```Python
 np.random.exponential(scale=1.0, size=None)
