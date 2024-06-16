@@ -234,7 +234,8 @@ Where:
 
 ### Properties of Matrix Multiplication
 
-1. **Non-Commutative**: $MN \neq NM$ in general.
+1. **Non-Commutative**: $MN 
+eq NM$ in general.
 2. **Associative**: $(MN)P = M(NP)$.
 3. **Distributive**: $M(N + P) = MN + MP$ and $(M + N)P = MP + NP$.
 4. **Identity Matrix**: Multiplying any matrix $M$ by an identity matrix $I$ (where dimensions are appropriately matched) leaves $M$ unchanged: $MI = IM = M$.
@@ -348,8 +349,10 @@ Consider the matrix $M$:
 import numpy as np
 
 M = np.array([[-4, 5], [1, 7], [8, 3]])
-print("Original Matrix:\n", M)
-print("Transpose of Matrix:\n", M.T)
+print("Original Matrix:
+", M)
+print("Transpose of Matrix:
+", M.T)
 ```
 
 Expected output:
@@ -379,17 +382,21 @@ The determinant is a scalar value that is computed from a square matrix. It has 
 ### Definition
 
 For a square matrix $A$, the determinant is denoted as $\text{det}(A)$ or $|A|$. For a $2 \times 2$ matrix:
-\n$$
+
+$$
 A = \begin{pmatrix} 
 a & b \\ 
 c & d 
 \end{pmatrix}
-$$\n
+$$
+
 
 The determinant is calculated as:
-\n$$
+
+$$
 \text{det}(A) = ad - bc
-$$\n
+$$
+
 
 ### Example
 
@@ -422,14 +429,16 @@ The identity matrix, typically denoted as $I$, is a special square matrix with o
 ### Definition
 
 For an $n \times n$ identity matrix $I$:
-\n$$
+
+$$
 I = \begin{pmatrix} 
 1 & 0 & \cdots & 0 \\ 
 0 & 1 & \cdots & 0 \\ 
 \vdots & \vdots & \ddots & \vdots \\ 
 0 & 0 & \cdots & 1 
 \end{pmatrix}
-$$\n
+$$
+
 
 ### Example
 
@@ -437,7 +446,8 @@ Creating an identity matrix using NumPy:
 
 ```python
 I = np.eye(3)
-print("Identity Matrix I:\n", I)
+print("Identity Matrix I:
+", I)
 ```
 
 Expected output:
@@ -453,9 +463,11 @@ Identity Matrix I:
 
 A square matrix $A$ is said to have an inverse, denoted $A^{-1}$, if:
 
-\n$$
+
+$$
 A \times A^{-1} = A^{-1} \times A = I
-$$\n
+$$
+
 
 The inverse matrix is crucial in solving systems of linear equations and various other applications.
 
@@ -466,7 +478,8 @@ Consider the matrix $M$:
 ```python
 M = np.array([[-4, 5], [1, 7]])
 inv_M = np.linalg.inv(M)
-print("Inverse of M:\n", inv_M)
+print("Inverse of M:
+", inv_M)
 ```
 
 Expected output:
@@ -571,16 +584,20 @@ A = np.array([[1, 2], [3, 4]])
 B = np.array([[5, 6], [7, 8]])
 
 # Dot Product
-print("Dot Product:\n", np.dot(A, B))
+print("Dot Product:
+", np.dot(A, B))
 
 # Matrix Multiplication using @
-print("Matrix Multiplication using @:\n", A @ B)
+print("Matrix Multiplication using @:
+", A @ B)
 
 # Transpose
-print("Transpose of A:\n", A.T)
+print("Transpose of A:
+", A.T)
 
 # Inverse
-print("Inverse of A:\n", np.linalg.inv(A))
+print("Inverse of A:
+", np.linalg.inv(A))
 
 # Determinant
 print("Determinant of A:", np.linalg.det(A))
@@ -588,7 +605,8 @@ print("Determinant of A:", np.linalg.det(A))
 # Eigenvalues and Eigenvectors
 eigenvalues, eigenvectors = np.linalg.eig(A)
 print("Eigenvalues:", eigenvalues)
-print("Eigenvectors:\n", eigenvectors)
+print("Eigenvectors:
+", eigenvectors)
 ```
 
 Expected output:

@@ -6,20 +6,24 @@ Systems of linear equations are a cornerstone of linear algebra and play a cruci
 
 A system of linear equations can be succinctly expressed in matrix form. Consider a system of linear equations as follows:
 
-\n$$
+
+$$
 \begin{cases}
 a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
 a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\
 \vdots \\
 a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m
 \end{cases}
-$$\n
+$$
+
 
 This system can be represented in matrix form as:
 
-\n$$
+
+$$
 Mx = y
-$$\n
+$$
+
 
 where:
 - $M$ is an $m \times n$ matrix containing the coefficients of the variables.
@@ -27,15 +31,18 @@ where:
 - $y$ is a column vector of $m$ constants.
 
 For example, the system:
-\n$$
+
+$$
 \begin{cases}
 2x_1 + 0x_2 + 5x_3 = 10 \\
 3x_1 + 4x_2 + 8x_3 = 15 \\
 2x_1 + 7x_2 + 3x_3 = 5
 \end{cases}
-$$\n
+$$
+
 can be written as:
-\n$$
+
+$$
 \begin{pmatrix}
 2 & 0 & 5 \\
 3 & 4 & 8 \\
@@ -52,7 +59,8 @@ x_3
 15 \\
 5
 \end{pmatrix}
-$$\n
+$$
+
 
 ### Possible Solutions
 
@@ -62,9 +70,11 @@ I. **No Solution**
 
 A system has no solution if the rank of the augmented matrix $[M|y]$ is greater than the rank of $M$:
 
-\n$$
+
+$$
 \text{rank}([M|y]) > \text{rank}(M)
-$$\n
+$$
+
 
 This situation occurs when the system is inconsistent, meaning the equations contradict each other.
 
@@ -72,9 +82,11 @@ II. **Unique Solution**
 
 A system has a unique solution if the rank of $M$ equals the rank of the augmented matrix and this rank equals the number of variables $n$:
 
-\n$$
+
+$$
 \text{rank}([M|y]) = \text{rank}(M) = n
-$$\n
+$$
+
 
 In this case, the system is consistent and the equations are independent, leading to a single solution.
 
@@ -82,9 +94,11 @@ III. **Infinite Solutions**
 
 A system has infinitely many solutions if the rank of both $M$ and the augmented matrix is the same, but this rank is less than the number of variables $n$:
 
-\n$$
+
+$$
 \text{rank}([M|y]) = \text{rank}(M) < n
-$$\n
+$$
+
 
 This occurs when the system has dependent equations, resulting in multiple solutions.
 
@@ -116,9 +130,11 @@ Output:
 
 This indicates that the solutions to the system of equations are:
 
-\n$$
+
+$$
 x_1 = 0.65217391, \quad x_2 = -0.2173913, \quad x_3 = 1.73913043
-$$\n
+$$
+
 
 ### Advanced Techniques for Solving Systems of Linear Equations with NumPy
 
@@ -128,9 +144,11 @@ While `numpy.linalg.solve()` is a straightforward and efficient method for solvi
 
 For square matrices, another way to solve the system $Mx = y$ is by using the inverse of $M$. If $M$ is invertible, the solution can be found as:
 
-\n$$
+
+$$
 x = M^{-1}y
-$$\n
+$$
+
 
 This method, however, is computationally more expensive and less numerically stable than using `numpy.linalg.solve()`.
 

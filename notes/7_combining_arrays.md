@@ -14,11 +14,14 @@ b = np.array([[5, 6], [7, 8]])
 
 # Vertical stacking
 c = np.stack((a, b))
-print("Vertically stacked:\n", c)
+print("Vertically stacked:
+", c)
 
 # Horizontal stacking
 d = np.stack((a, b), axis=1)
-print("\nHorizontally stacked:\n", d)
+print("
+Horizontally stacked:
+", d)
 ```
 
 Expected output:
@@ -49,11 +52,14 @@ b = np.array([[5, 6], [7, 8]])
 
 # Vertical concatenation
 c = np.concatenate((a, b))
-print("Vertically concatenated:\n", c)
+print("Vertically concatenated:
+", c)
 
 # Horizontal concatenation
 d = np.concatenate((a, b), axis=1)
-print("\nHorizontally concatenated:\n", d)
+print("
+Horizontally concatenated:
+", d)
 ```
 
 Expected output:
@@ -81,7 +87,8 @@ b = np.array([4, 5, 6])
 
 # Append b to a
 c = np.append(a, b)
-print("Appended array:\n", c)
+print("Appended array:
+", c)
 ```
 
 Expected output:
@@ -102,11 +109,14 @@ a = np.array([1, 2, 3, 4, 5, 6])
 
 # Split into three equal parts
 b = np.split(a, 3)
-print("Regular split:\n", b)
+print("Regular split:
+", b)
 
 # Split at the 2nd and 4th indices
 c = np.split(a, [2, 4])
-print("\nCustom split:\n", c)
+print("
+Custom split:
+", c)
 ```
 
 Expected output:

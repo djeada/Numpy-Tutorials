@@ -32,11 +32,14 @@ arr = np.array([1, 2, 3, 4, 5, 6])
 
 # Convert to 1x6 row vector
 row_vector = arr.reshape(1, -1)
-print("Row Vector:\n", row_vector)
+print("Row Vector:
+", row_vector)
 
 # Convert to 6x1 column vector
 column_vector = arr.reshape(-1, 1)
-print("\nColumn Vector:\n", column_vector)
+print("
+Column Vector:
+", column_vector)
 ```
 
 Expected output:
@@ -65,11 +68,14 @@ arr = np.array([[1, 2, 3], [4, 5, 6]])
 
 # Using flatten
 flat_arr = arr.flatten()
-print("Using flatten:\n", flat_arr)
+print("Using flatten:
+", flat_arr)
 
 # Using reshape
 one_d_arr = arr.reshape(-1)
-print("\nUsing reshape:\n", one_d_arr)
+print("
+Using reshape:
+", one_d_arr)
 ```
 
 Expected output:
