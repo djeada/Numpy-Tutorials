@@ -230,7 +230,7 @@ Given two matrices $M$ and $N$:
 The product $P = M \times N$ will be an $m \times p$ matrix. The elements of the resulting matrix $P$ are computed as follows:
 
 $$
-(P)_{ij} = \sum_{k=1}^n M_{ik} N_{kj}
+P_{ij} = \sum_{k=1}^n{M_{ik} N_{kj}}
 $$
 
 Where:
@@ -439,12 +439,13 @@ The identity matrix, typically denoted as $I$, is a special square matrix with o
 For an $n \times n$ identity matrix $I$:
 
 $$
-I = \begin{pmatrix} 
+I = 
+\begin{bmatrix} 
 1 & 0 & \cdots & 0 \\ 
 0 & 1 & \cdots & 0 \\ 
 \vdots & \vdots & \ddots & \vdots \\ 
 0 & 0 & \cdots & 1 
-\end{pmatrix}
+\end{bmatrix}
 $$
 
 #### Example
