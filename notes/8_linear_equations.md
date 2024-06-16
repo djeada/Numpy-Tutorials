@@ -26,6 +26,7 @@ $$
 
 
 where:
+
 - $M$ is an $m \times n$ matrix containing the coefficients of the variables.
 - $x$ is a column vector of $n$ variables.
 - $y$ is a column vector of $m$ constants.
