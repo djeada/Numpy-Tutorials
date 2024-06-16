@@ -117,3 +117,27 @@ Expected output:
 ```
 1.582
 ```
+
+### Broadcasting
+
+NumPy's broadcasting feature allows arithmetic operations to be performed on arrays of different shapes, making it possible to vectorize operations and avoid explicit loops. This is particularly useful for operations involving a scalar and a vector, or arrays of compatible shapes.
+
+#### Example:
+
+```python
+import numpy as np
+
+arr = np.array([1, 2, 3, 4])
+scalar = 2
+
+print("Addition with scalar:", arr + scalar)
+print("Multiplication with scalar:", arr * scalar)
+```
+
+Expected output:
+
+```
+Addition with scalar: [3 4 5 6]
+Multiplication with scalar: [2 4 6 8]
+```
+
