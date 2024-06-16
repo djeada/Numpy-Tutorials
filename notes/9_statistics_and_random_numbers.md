@@ -6,16 +6,17 @@ NumPy's random module is a powerful tool for generating random numbers from vari
 
 The function `np.random.rand()` produces an array of random floating-point numbers uniformly distributed over the interval $[0, 1)$.
 
-#### Function Signature:
+Function Signature:
 
 ```Python
 np.random.rand(d0, d1, ..., dn)
 ```
 
-#### Parameters:
+Parameters:
+
 - $d0, d1, ..., dn$: Dimensions of the returned array.
 
-#### Example:
+Example:
 
 ```Python
 import numpy as np
@@ -24,7 +25,7 @@ rand_array = np.random.rand(2, 3)
 print(rand_array)
 ```
 
-#### Expected Output:
+Expected Output:
 
 ```
 [[0.51749304 0.05537001 0.68478923]
@@ -35,20 +36,20 @@ print(rand_array)
 
 The function `np.random.randn()` returns numbers from the standard normal distribution, which has a mean of 0 and a standard deviation of 1.
 
-#### Function Signature:
+Function Signature:
 
 ```Python
 np.random.randn(d0, d1, ..., dn)
 ```
 
-#### Example:
+Example:
 
 ```Python
 rand_norm_array = np.random.randn(2, 3)
 print(rand_norm_array)
 ```
 
-#### Expected Output:
+Expected Output:
 
 ```
 [[-1.20108323  0.45481233 -0.45698344]
@@ -59,25 +60,26 @@ print(rand_norm_array)
 
 The function `np.random.randint()` generates random integers from a specified range.
 
-#### Function Signature:
+Function Signature:
 
 ```Python
 np.random.randint(low, high=None, size=None)
 ```
 
-#### Parameters:
+Parameters:
+
 - **low**: The lowest integer in the range.
 - **high**: One above the largest integer in the range (exclusive).
 - **size**: The shape of the output array (default is a single value).
 
-#### Example:
+Example:
 
 ```Python
 rand_integers = np.random.randint(0, 10, size=5)
 print(rand_integers)
 ```
 
-#### Expected Output:
+Expected Output:
 
 ```
 [6 3 8 1 9]
@@ -87,20 +89,20 @@ print(rand_integers)
 
 The function `np.random.uniform()` generates random floating-point numbers over a specified range $[low, high)$.
 
-#### Function Signature:
+Function Signature:
 
 ```Python
 np.random.uniform(low=0.0, high=1.0, size=None)
 ```
 
-#### Example:
+Example:
 
 ```Python
 rand_uniform_array = np.random.uniform(0.5, 1.5, size=(2, 3))
 print(rand_uniform_array)
 ```
 
-#### Expected Output:
+Expected Output:
 
 ```
 [[1.32149298 0.64893357 1.23158464]
@@ -178,7 +180,7 @@ Expected Output:
 
 To ensure reproducibility of random numbers, you can set the random seed using `np.random.seed()`. This is particularly useful for debugging or sharing code where you want others to generate the same sequence of random numbers.
 
-#### Example:
+Example:
 
 ```Python
 np.random.seed(42)
@@ -193,7 +195,7 @@ rand_array2 = np.random.rand(2, 3)
 print(rand_array2)
 ```
 
-#### Expected Output:
+Expected Output:
 
 Both arrays will be identical because the seed was reset:
 
@@ -350,7 +352,7 @@ print("Covariance matrix:
 
 NumPy allows statistical operations on multidimensional data along specified axes. 
 
-#### Example:
+Example:
 
 ```python
 data = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
@@ -403,10 +405,19 @@ print("Kurtosis:", kurt)
 
 ### Quick Reference Table for Statistical Operations in NumPy
 
-| Operation           | Description                                       | Formula                                                       | NumPy Function     |
-|---------------------|---------------------------------------------------|---------------------------------------------------------------|--------------------|
-| Mean                | Average of values                                 | $\bar{\mu} = \frac{1}{N} \sum_{i=1}^{N} x_i$              | `np.mean(arr)`     |
-| Median              | Middle value in an ordered set                    | -                                                             | `np.median(arr)`   |
-| Variance            | Average of squared differences from the mean      | $\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2$  | `np.var(arr)`      |
-| Standard Deviation  | Average distance of each point from the mean      | $\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2}$ | `np.std(arr)`      |
-
+| Operation           | Description                                       | Formula                                                       | NumPy Function     | Example Code                                      | Expected Output      |
+|---------------------|---------------------------------------------------|---------------------------------------------------------------|--------------------|--------------------------------------------------|----------------------|
+| **Mean**            | Average of values                                 | $\bar{\mu} = \frac{1}{N} \sum_{i=1}^{N} x_i$                  | `np.mean(arr)`     | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.mean(arr)` | `3.0`                |
+| **Median**          | Middle value in an ordered set                    | -                                                             | `np.median(arr)`   | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.median(arr)` | `3.0`                |
+| **Variance**        | Average of squared differences from the mean      | $\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2$     | `np.var(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.var(arr)` | `2.0`                |
+| **Standard Deviation** | Average distance of each point from the mean  | $\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2}$ | `np.std(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.std(arr)` | `1.4142135623730951` |
+| **Min**             | Smallest value                                    | -                                                             | `np.min(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.min(arr)` | `1`                  |
+| **Max**             | Largest value                                     | -                                                             | `np.max(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.max(arr)` | `5`                  |
+| **Range**           | Difference between max and min values             | $\text{range} = \max(x) - \min(x)$                            | `np.ptp(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.ptp(arr)` | `4`                  |
+| **Sum**             | Sum of all values                                 | $\sum_{i=1}^{N} x_i$                                          | `np.sum(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.sum(arr)` | `15`                 |
+| **Product**         | Product of all values                             | $\prod_{i=1}^{N} x_i$                                         | `np.prod(arr)`     | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.prod(arr)` | `120`                |
+| **Cumulative Sum**  | Cumulative sum of all values                      | -                                                             | `np.cumsum(arr)`   | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.cumsum(arr)` | `[ 1,  3,  6, 10, 15]` |
+| **Cumulative Product** | Cumulative product of all values               | -                                                             | `np.cumprod(arr)`  | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.cumprod(arr)` | `[  1,   2,   6,  24, 120]` |
+| **Percentile**      | Value below which a percentage of data falls      | -                                                             | `np.percentile(arr, q)` | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.percentile(arr, 50)` | `3.0`                |
+| **Correlation Coefficient** | Measure of linear relationship between arrays | -                                                         | `np.corrcoef(arr1, arr2)` | `arr1 = np.array([1, 2, 3])`<br>`arr2 = np.array([4, 5, 6])`<br>`np.corrcoef(arr1, arr2)` | `[[1. 1.] [1. 1.]]` |
+| **Covariance**      | Measure of how much two random variables vary together | -                                                      | `np.cov(arr1, arr2)` | `arr1 = np.array([1, 2, 3])`<br>`arr2 = np.array([4, 5, 6])`<br>`np.cov(arr1, arr2)` | `[[1. 1.] [1. 1.]]` |
