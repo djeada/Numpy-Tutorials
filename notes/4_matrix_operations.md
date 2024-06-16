@@ -34,19 +34,27 @@ Several matrix norms are commonly used in practice, each with unique properties 
 
 1. **Frobenius Norm**: Measures the "size" of a matrix in terms of the sum of the squares of its entries.
 
-    $$ ||M||_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^n (M_{ij})^2} $$
+$$
+||M||_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^n (M_{ij})^2}
+$$
 
 2. **Spectral Norm**: Also known as the operator 2-norm or 2-norm, it is the largest singular value of the matrix, which corresponds to the square root of the largest eigenvalue of $M^T M$.
 
-    $$ ||M||_2 = \sigma_{\max}(M) $$
+$$
+||M||_2 = \sigma_{\max}(M)
+$$
 
 3. **1-Norm (Maximum Column Sum Norm)**: The maximum absolute column sum of the matrix.
 
-    $$ ||M||_1 = \max_{1 \leq j \leq n} \sum_{i=1}^m |M_{ij}| $$
+$$
+||M||_1 = \max_{1 \leq j \leq n} \sum_{i=1}^m |M_{ij}|
+$$
 
 4. **Infinity Norm (Maximum Row Sum Norm)**: The maximum absolute row sum of the matrix.
 
-    $$ ||M||_\infty = \max_{1 \leq i \leq m} \sum_{j=1}^n |M_{ij}| $$
+$$
+||M||_\infty = \max_{1 \leq i \leq m} \sum_{j=1}^n |M_{ij}|
+$$
 
 ### Norms in NumPy
 
@@ -157,19 +165,17 @@ The sub-multiplicative property implies that the norm of the product of two matr
 
 #### Implications of the Sub-multiplicative Property
 
-1. **Stability in Numerical Computations:**
-   The sub-multiplicative property is essential for ensuring the stability of numerical algorithms. When dealing with products of matrices, this property helps in controlling the growth of errors.
+1. **Stability in Numerical Computations:** The sub-multiplicative property is essential for ensuring the stability of numerical algorithms. When dealing with products of matrices, this property helps in controlling the growth of errors.
 
-2. **Norm as a Measure of Distance:**
-   Using matrix norms, we can define a distance metric between matrices. This distance metric is useful in various applications such as optimization, approximation, and machine learning.
+2. **Norm as a Measure of Distance:** Using matrix norms, we can define a distance metric between matrices. This distance metric is useful in various applications such as optimization, approximation, and machine learning.
 
-   The distance between two matrices $A$ and $B$ can be defined as:
+The distance between two matrices $A$ and $B$ can be defined as:
 
-   $$
-   d(A, B) = ||A - B||
-   $$
+$$
+d(A, B) = ||A - B||
+$$
 
-   This metric measures how "far apart" two matrices are, which is particularly useful in iterative methods where convergence to a particular matrix is desired.
+This metric measures how "far apart" two matrices are, which is particularly useful in iterative methods where convergence to a particular matrix is desired.
 
 #### Example: Verifying the Sub-multiplicative Property
 
@@ -228,6 +234,7 @@ $$
 $$
 
 Where:
+
 - $(P)_{ij}$ is the element in the $i$-th row and $j$-th column of the resulting matrix $P$.
 - $M_{ik}$ is the element in the $i$-th row and $k$-th column of matrix $M$.
 - $N_{kj}$ is the element in the $k$-th row and $j$-th column of matrix $N$.
@@ -240,7 +247,7 @@ eq NM$ in general.
 3. **Distributive**: $M(N + P) = MN + MP$ and $(M + N)P = MP + NP$.
 4. **Identity Matrix**: Multiplying any matrix $M$ by an identity matrix $I$ (where dimensions are appropriately matched) leaves $M$ unchanged: $MI = IM = M$.
 
-### Matrix Multiplication in NumPy
+### Matrix Multiplication
 
 NumPy provides several methods to perform matrix multiplication:
 
@@ -333,15 +340,15 @@ Expected Output:
 
 For extremely large matrices, Strassen's algorithm can be used to reduce the computational complexity. Although NumPy does not implement Strassen's algorithm directly, understanding it can be beneficial for theoretical insights.
 
-## Matrix Transpose
+### Matrix Transpose
 
 Transposing a matrix involves interchanging its rows and columns. The transpose of an $m \times n$ matrix results in an $n \times m$ matrix. This operation is fundamental in various applications, including solving linear equations, optimization problems, and transforming data.
 
-### Definition
+#### Definition
 
 For an $m \times n$ matrix $M$, the transpose of $M$, denoted as $M^T$, is an $n \times m$ matrix where the element at the $i$-th row and $j$-th column of $M$ becomes the element at the $j$-th row and $i$-th column of $M^T$.
 
-### Example
+#### Example
 
 Consider the matrix $M$:
 
@@ -368,18 +375,18 @@ Transpose of Matrix:
  [ 5  7  3]]
 ```
 
-### Properties of Transpose
+#### Properties of Transpose
 
 1. **Double Transpose**: The transpose of the transpose of a matrix is the original matrix: $(M^T)^T = M$.
 2. **Sum**: The transpose of a sum is the sum of the transposes: $(A + B)^T = A^T + B^T$.
 3. **Scalar Multiplication**: The transpose of a scalar multiple is the scalar multiple of the transpose: $(cA)^T = cA^T$.
 4. **Product**: The transpose of a product of two matrices is the product of the transposes in reverse order: $(AB)^T = B^T A^T$.
 
-## Determinants
+### Determinants
 
 The determinant is a scalar value that is computed from a square matrix. It has significant applications in linear algebra, including solving systems of linear equations, computing inverses of matrices, and determining whether a matrix is invertible.
 
-### Definition
+#### Definition
 
 For a square matrix $A$, the determinant is denoted as $\text{det}(A)$ or $|A|$. For a $2 \times 2$ matrix:
 
@@ -410,23 +417,24 @@ print("Determinant of M:", det_M)
 
 Expected output: `-33.0`
 
-### Properties of Determinants
+#### Properties of Determinants
 
 1. **Multiplicative Property**: For any two square matrices $A$ and $B$ of the same size, $\text{det}(AB) = \text{det}(A) \cdot \text{det}(B)$.
 2. **Transpose**: The determinant of a matrix is equal to the determinant of its transpose: $\text{det}(A) = \text{det}(A^T)$.
 3. **Inverse**: If $A$ is invertible, $\text{det}(A^{-1}) = \frac{1}{\text{det}(A)}$.
-4. **Row Operations**: 
-    - Swapping two rows multiplies the determinant by $-1$.
-    - Multiplying a row by a scalar $k$ multiplies the determinant by $k$.
-    - Adding a multiple of one row to another row does not change the determinant.
+4. **Row Operations**:
+   
+- Swapping two rows multiplies the determinant by $-1$.
+- Multiplying a row by a scalar $k$ multiplies the determinant by $k$.
+- Adding a multiple of one row to another row does not change the determinant.
 
-## Identity and Inverse Matrices
+### Identity and Inverse Matrices
 
-### Identity Matrix
+#### Identity Matrix
 
 The identity matrix, typically denoted as $I$, is a special square matrix with ones on its main diagonal and zeros in all other positions. It serves as the multiplicative identity in matrix operations, meaning any matrix multiplied by the identity matrix remains unchanged.
 
-### Definition
+#### Definition
 
 For an $n \times n$ identity matrix $I$:
 
@@ -439,8 +447,7 @@ I = \begin{pmatrix}
 \end{pmatrix}
 $$
 
-
-### Example
+#### Example
 
 Creating an identity matrix using NumPy:
 
@@ -459,19 +466,17 @@ Identity Matrix I:
  [0. 0. 1.]]
 ```
 
-### Inverse Matrix
+#### Inverse Matrix
 
 A square matrix $A$ is said to have an inverse, denoted $A^{-1}$, if:
-
 
 $$
 A \times A^{-1} = A^{-1} \times A = I
 $$
 
-
 The inverse matrix is crucial in solving systems of linear equations and various other applications.
 
-### Example
+#### Example
 
 Consider the matrix $M$:
 
@@ -489,17 +494,17 @@ Expected output:
  [ 0.03030303  0.12121212]]
 ```
 
-### Properties of Inverse Matrices
+#### Properties of Inverse Matrices
 
 1. **Uniqueness**: If $A$ has an inverse, it is unique.
 2. **Product**: The inverse of a product of matrices is the product of their inverses in reverse order: $(AB)^{-1} = B^{-1} A^{-1}$.
 3. **Transpose**: The inverse of the transpose is the transpose of the inverse: $(A^T)^{-1} = (A^{-1})^T$.
 
-## Rank of a Matrix
+### Rank of a Matrix
 
 The rank of a matrix provides insight into its structure and properties. Essentially, it is the number of linearly independent rows or columns present in the matrix. The rank can reveal information about the solutions of linear systems or the invertibility of a matrix.
 
-### Understanding Matrix Rank
+#### Understanding Matrix Rank
 
 - **Linear Independence**: Rows (or columns) are linearly independent if no row (or column) can be expressed as a linear combination of others.
   
@@ -531,7 +536,7 @@ Rank of A: 2
 
 In this instance, the rank of matrix A is 2, suggesting that only 2 of its rows (or columns) are linearly independent.
 
-### Singular Matrices and Rank
+#### Singular Matrices and Rank
 
 A matrix's rank can indicate whether it's singular (non-invertible). A square matrix is singular if its rank is less than its size (number of rows or columns). Singular matrices don't possess unique inverses.
 
@@ -562,7 +567,7 @@ By understanding the rank, one can determine the properties of a matrix and its 
 
 Certainly! Here's a more comprehensive table that covers a wider range of matrix and vector operations in NumPy, along with examples for each operation.
 
-## Summary of Matrix Operations
+### Summary of Matrix Operations
 
 | Operation          | Description                              | NumPy Function             | Python Operator |
 |--------------------|------------------------------------------|----------------------------|-----------------|
@@ -634,27 +639,4 @@ Eigenvalues: [-0.37228132  5.37228132]
 Eigenvectors:
 [[-0.82456484 -0.41597356]
  [ 0.56576746 -0.90937671]]
-```
-
-### Broadcasting in NumPy
-
-NumPy's broadcasting feature allows arithmetic operations to be performed on arrays of different shapes, making it possible to vectorize operations and avoid explicit loops. This is particularly useful for operations involving a scalar and a vector, or arrays of compatible shapes.
-
-#### Example:
-
-```python
-import numpy as np
-
-arr = np.array([1, 2, 3, 4])
-scalar = 2
-
-print("Addition with scalar:", arr + scalar)
-print("Multiplication with scalar:", arr * scalar)
-```
-
-Expected output:
-
-```
-Addition with scalar: [3 4 5 6]
-Multiplication with scalar: [2 4 6 8]
 ```
