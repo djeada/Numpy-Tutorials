@@ -22,6 +22,7 @@ print(selected_values)  # Expected: [2, 3]
 ```
 
 Explanation:
+
 - `np.where(array == 2)`: Finds the indices where the value is 2.
 - `np.where((array > 1) & (array < 4))`: Finds the indices where values are greater than 1 and less than 4.
 
@@ -37,6 +38,7 @@ for row, col in zip(indices[0], indices[1]):
 ```
 
 Explanation:
+
 - `np.where(array_2D == 1)`: Finds the indices where the value is 1 in a 2D array.
 - `zip(indices[0], indices[1])`: Pairs the row and column indices to iterate over and access the elements.
 
@@ -54,6 +56,7 @@ print(filtered_array)  # Expected: [2, 3]
 ```
 
 Explanation:
+
 - `(array > 1) & (array < 4)`: Creates a boolean mask where the condition is true.
 - `array[boolean_mask]`: Filters the array based on the boolean mask.
 
@@ -71,6 +74,7 @@ print(sorted_array)  # Expected: [1, 2, 3, 4, 5]
 ```
 
 Explanation:
+
 - `np.sort(array)`: Returns a sorted copy of the array.
 
 #### Example with 2D Array:
@@ -93,6 +97,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.sort(array_2D, axis=0)`: Sorts the array along the specified axis. Here, it sorts each column independently.
 
 ### Advanced Examples and Techniques
@@ -148,13 +153,25 @@ print(complex_filtered_array)  # Expected: [2]
 ```
 
 ### Practical Applications
-
 Understanding how to search, filter, and sort arrays is crucial for various data manipulation tasks, including:
 
-1. **Data Cleaning**: Filtering out invalid or unwanted data points.
-2. **Feature Selection**: Sorting and selecting important features based on statistical criteria.
-3. **Data Analysis**: Extracting subsets of data that meet specific conditions for deeper analysis.
-4. **Optimized Searching**: Quickly locating data points or patterns within large datasets.
+- **Data cleaning** is essential for filtering out invalid or unwanted data points.
+- **Feature selection** involves sorting and selecting important features based on statistical criteria.
+- Data analysis benefits greatly from extracting subsets of data that meet specific **conditions** for deeper insights.
+- Optimized searching allows for quickly locating **data points** or patterns within large datasets.
+- Efficient data processing relies on the ability to search through arrays to find **relevant information**.
+- **Sorting arrays** helps in organizing data in a meaningful order, making it easier to read and interpret.
+- Filtering arrays enables the **isolation** of specific data points that match given criteria, improving data relevance.
+- Large-scale data manipulation often requires robust methods for searching, filtering, and sorting to handle the **volume** effectively.
+- Developing **algorithms** for array manipulation can enhance performance in data-intensive applications.
+- Understanding different **search algorithms**, such as linear and binary search, helps in selecting the most appropriate method for the task.
+- Various **filtering techniques**, including range checks and conditional filtering, can be applied to refine data sets.
+- **Sorting algorithms**, such as quicksort and mergesort, play a significant role in data organization and retrieval speed.
+- Combining search, filter, and sort functions can streamline complex **data processing** workflows.
+- Array manipulation skills are fundamental for implementing **machine learning** models and preparing data for training.
+- Advanced data analysis tasks, such as **time series analysis**, often depend on precise filtering and sorting of data.
+- Optimizing search and sort operations can significantly reduce **computational costs** and improve application performance.
+- Search and filter capabilities are critical for **real-time data processing** and analytics in various industries.
 
 ### Summary Table
 
