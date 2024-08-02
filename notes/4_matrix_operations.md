@@ -401,7 +401,7 @@ $$
 \text{det}(A) = ad - bc
 $$
 
-### Example
+#### Example
 
 Consider the matrix $M$:
 
