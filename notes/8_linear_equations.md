@@ -6,7 +6,6 @@ Systems of linear equations are a cornerstone of linear algebra and play a cruci
 
 A system of linear equations can be succinctly expressed in matrix form. Consider a system of linear equations as follows:
 
-
 $$
 \begin{cases}
 a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
@@ -16,9 +15,7 @@ a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m
 \end{cases}
 $$
 
-
 This system can be represented in matrix form as:
-
 
 $$
 Mx = y
@@ -44,22 +41,21 @@ $$
 can be written as:
 
 $$
-\begin{pmatrix}
+\begin{bmatrix}
 2 & 0 & 5 \\
 3 & 4 & 8 \\
 2 & 7 & 3
-\end{pmatrix}
-\begin{pmatrix}
+\end{bmatrix}
+\begin{bmatrix}
 x_1 \\
 x_2 \\
 x_3
-\end{pmatrix}
-=
-\begin{pmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
 10 \\
 15 \\
 5
-\end{pmatrix}
+\end{bmatrix}
 $$
 
 
@@ -105,7 +101,7 @@ This occurs when the system has dependent equations, resulting in multiple solut
 
 ### Solving with NumPy
 
-Python's NumPy library provides efficient tools for solving systems of linear equations. The `linalg.solve()` function is particularly useful for finding solutions to these systems. Given a matrix $M$ and a column vector $y$, it returns the vector $x$ that satisfies the equation $Mx = y$.
+NumPy provides efficient tools for solving systems of linear equations. The `linalg.solve()` function is particularly useful for finding solutions to these systems. Given a matrix $M$ and a column vector $y$, it returns the vector $x$ that satisfies the equation $Mx = y$.
 
 Here is an example of solving a system of linear equations using NumPy:
 
