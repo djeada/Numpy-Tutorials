@@ -1,4 +1,4 @@
-## Vectors in Context of NumPy
+## Vectors
 
 A vector is a mathematical object with both magnitude and direction, essential in linear algebra and calculus. In computer science, vectors are used for various operations in data analysis, machine learning, and scientific computing. This guide explores vectors in the context of NumPy, providing definitions, operations, and practical examples.
 
