@@ -1,4 +1,4 @@
-## Random Numbers with NumPy
+## Random Numbers
 
 NumPy's random module is a powerful tool for generating random numbers from various distributions. Whether you are simulating data, implementing algorithms that require randomness, or performing statistical analysis, NumPy's random module has extensive capabilities to suit your needs.
 
@@ -403,7 +403,7 @@ kurt = kurtosis(data)
 print("Kurtosis:", kurt)
 ```
 
-### Quick Reference Table for Statistical Operations in NumPy
+### Reference Table for Statistical Operations
 
 | Operation           | Description                                       | Formula                                                       | NumPy Function     | Example Code                                      | Expected Output      |
 |---------------------|---------------------------------------------------|---------------------------------------------------------------|--------------------|--------------------------------------------------|----------------------|
