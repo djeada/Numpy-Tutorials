@@ -1,4 +1,4 @@
-# Matrices in Context of Numpy
+# Matrices
 
 A matrix is a systematic arrangement of numbers (or elements) in rows and columns. An m × n matrix has `m` rows and `n` columns. The dimensions of the matrix are represented as m × n.
 
@@ -127,10 +127,10 @@ Infinity Norm: 7.0
 
 Matrix norms are used in a variety of applications, including:
 
-1. **Error Analysis**: Norms are used to quantify the error in numerical solutions of matrix equations.
-2. **Stability Analysis**: The norms help in understanding the stability of algorithms and the conditioning of matrices.
-3. **Optimization**: Many optimization problems involve minimizing matrix norms.
-4. **Machine Learning**: Norms are used in regularization techniques to prevent overfitting by penalizing large coefficients.
+- In the field of **Error Analysis**, norms serve as a tool to quantify errors, offering a measure of the discrepancy between the computed and exact solutions in numerical methods.
+- When conducting **Stability Analysis**, norms provide insight into how perturbations in the data or initial conditions can affect the results, thereby helping to assess the robustness of algorithms and the conditioning of matrices.
+- In **Optimization**, the minimization of matrix norms often plays a crucial role, as many such problems involve constraints or objectives that can be expressed in terms of norms, allowing for the selection of optimal solutions.
+- In **Machine Learning**, regularization techniques utilize norms to penalize large coefficients, thereby preventing overfitting and encouraging simpler models that generalize better to new data.
 
 ### Example: Using Matrix Norms in Optimization
 
@@ -165,9 +165,8 @@ The sub-multiplicative property implies that the norm of the product of two matr
 
 #### Implications of the Sub-multiplicative Property
 
-1. **Stability in Numerical Computations:** The sub-multiplicative property is essential for ensuring the stability of numerical algorithms. When dealing with products of matrices, this property helps in controlling the growth of errors.
-
-2. **Norm as a Measure of Distance:** Using matrix norms, we can define a distance metric between matrices. This distance metric is useful in various applications such as optimization, approximation, and machine learning.
+- The sub-multiplicative property is essential for ensuring the **Stability in Numerical Computations**. When dealing with products of matrices, this property helps in controlling the growth of errors.
+- Using matrix norms, we can define a distance metric between matrices. This **Norm as a Measure of Distance** is useful in various applications such as optimization, approximation, and machine learning.
 
 The distance between two matrices $A$ and $B$ can be defined as:
 
@@ -241,11 +240,10 @@ Where:
 
 ### Properties of Matrix Multiplication
 
-1. **Non-Commutative**: $MN 
-eq NM$ in general.
-2. **Associative**: $(MN)P = M(NP)$.
-3. **Distributive**: $M(N + P) = MN + MP$ and $(M + N)P = MP + NP$.
-4. **Identity Matrix**: Multiplying any matrix $M$ by an identity matrix $I$ (where dimensions are appropriately matched) leaves $M$ unchanged: $MI = IM = M$.
+- The property of being **non-commutative** indicates that, in general, $MN \neq NM$ for matrices.
+- Matrix multiplication is **associative**, meaning that $(MN)P = M(NP)$.
+- The **distributive** property states that $M(N + P) = MN + MP$ and $(M + N)P = MP + NP$.
+- The **identity matrix** property ensures that multiplying any matrix $M$ by an identity matrix $I$ (with appropriately matched dimensions) leaves $M$ unchanged, such that $MI = IM = M$.
 
 ### Matrix Multiplication
 
@@ -308,9 +306,9 @@ Expected Output:
 
 ### Examples of Applications
 
-1. **Computer Graphics**: Transformations such as rotation, scaling, and translation can be represented as matrix multiplications.
-2. **Machine Learning**: Operations on data, such as transforming features and weights, are performed using matrix multiplications.
-3. **Scientific Simulations**: Systems of linear equations, which often arise in simulations, are solved using matrix multiplication.
+- In **computer graphics**, transformations like rotation, scaling, and translation are represented through matrix multiplications.
+- **Machine learning** frequently involves matrix multiplications for operations such as transforming features and applying weights to data.
+- **Scientific simulations** often require solving systems of linear equations, a task commonly handled using matrix multiplication.
 
 ### Performance Considerations
 
@@ -377,10 +375,10 @@ Transpose of Matrix:
 
 #### Properties of Transpose
 
-1. **Double Transpose**: The transpose of the transpose of a matrix is the original matrix: $(M^T)^T = M$.
-2. **Sum**: The transpose of a sum is the sum of the transposes: $(A + B)^T = A^T + B^T$.
-3. **Scalar Multiplication**: The transpose of a scalar multiple is the scalar multiple of the transpose: $(cA)^T = cA^T$.
-4. **Product**: The transpose of a product of two matrices is the product of the transposes in reverse order: $(AB)^T = B^T A^T$.
+- The property of **double transpose** states that the transpose of the transpose of a matrix is the original matrix, expressed as $(M^T)^T = M$.
+- For the **sum** of matrices, the transpose of the sum is equal to the sum of the transposes, denoted by $(A + B)^T = A^T + B^T$.
+- In **scalar multiplication**, the transpose of a scalar multiple is the scalar multiple of the transpose, which is written as $(cA)^T = cA^T$.
+- The **product** rule for transposes indicates that the transpose of a product of two matrices is the product of the transposes in reverse order, given by $(AB)^T = B^T A^T$.
 
 ### Determinants
 
@@ -397,13 +395,11 @@ c & d
 \end{pmatrix}
 $$
 
-
 The determinant is calculated as:
 
 $$
 \text{det}(A) = ad - bc
 $$
-
 
 ### Example
 
@@ -419,14 +415,17 @@ Expected output: `-33.0`
 
 #### Properties of Determinants
 
-1. **Multiplicative Property**: For any two square matrices $A$ and $B$ of the same size, $\text{det}(AB) = \text{det}(A) \cdot \text{det}(B)$.
-2. **Transpose**: The determinant of a matrix is equal to the determinant of its transpose: $\text{det}(A) = \text{det}(A^T)$.
-3. **Inverse**: If $A$ is invertible, $\text{det}(A^{-1}) = \frac{1}{\text{det}(A)}$.
-4. **Row Operations**:
-   
-- Swapping two rows multiplies the determinant by $-1$.
-- Multiplying a row by a scalar $k$ multiplies the determinant by $k$.
-- Adding a multiple of one row to another row does not change the determinant.
+I. The **multiplicative property** of determinants states that for any two square matrices $A$ and $B$ of the same size, the determinant of their product is equal to the product of their determinants: $\text{det}(AB) = \text{det}(A) \cdot \text{det}(B)$.
+
+II. According to the **transpose** property, the determinant of a matrix is the same as the determinant of its transpose, represented as $\text{det}(A) = \text{det}(A^T)$.
+
+III. The **inverse** property indicates that if $A$ is invertible, then the determinant of the inverse is the reciprocal of the determinant of the matrix, expressed as $\text{det}(A^{-1}) = \frac{1}{\text{det}(A)}$.
+
+IV. For **row operations** on a matrix:
+
+- Swapping two rows results in the determinant being multiplied by $-1$.
+- Multiplying a row by a scalar $k$ causes the determinant to be multiplied by $k$.
+- Adding a multiple of one row to another row does not affect the determinant.
 
 ### Identity and Inverse Matrices
 
@@ -447,6 +446,7 @@ I =
 0 & 0 & \cdots & 1 
 \end{bmatrix}
 $$
+
 
 #### Example
 
@@ -484,8 +484,7 @@ Consider the matrix $M$:
 ```python
 M = np.array([[-4, 5], [1, 7]])
 inv_M = np.linalg.inv(M)
-print("Inverse of M:
-", inv_M)
+print("Inverse of M:", inv_M)
 ```
 
 Expected output:
@@ -497,9 +496,9 @@ Expected output:
 
 #### Properties of Inverse Matrices
 
-1. **Uniqueness**: If $A$ has an inverse, it is unique.
-2. **Product**: The inverse of a product of matrices is the product of their inverses in reverse order: $(AB)^{-1} = B^{-1} A^{-1}$.
-3. **Transpose**: The inverse of the transpose is the transpose of the inverse: $(A^T)^{-1} = (A^{-1})^T$.
+- The property of **uniqueness** states that if a matrix $A$ has an inverse, then the inverse is unique.
+- According to the **product** property, the inverse of a product of matrices is the product of their inverses in reverse order, expressed as $(AB)^{-1} = B^{-1}A^{-1}$.
+- The **transpose** property indicates that the inverse of the transpose of a matrix is the transpose of the inverse, denoted as $(A^T)^{-1} = (A^{-1})^T$.
 
 ### Rank of a Matrix
 
@@ -508,7 +507,6 @@ The rank of a matrix provides insight into its structure and properties. Essenti
 #### Understanding Matrix Rank
 
 - **Linear Independence**: Rows (or columns) are linearly independent if no row (or column) can be expressed as a linear combination of others.
-  
 - **Full Rank**: A matrix is considered to have full rank if its rank is equal to the lesser of its number of rows and columns. A matrix with full rank has the maximum possible rank given its dimensions.
 
 ### Determining the Rank with NumPy
@@ -566,8 +564,6 @@ Matrix A is singular.
 
 By understanding the rank, one can determine the properties of a matrix and its ability to be inverted, which is crucial in numerous linear algebra applications.
 
-Certainly! Here's a more comprehensive table that covers a wider range of matrix and vector operations in NumPy, along with examples for each operation.
-
 ### Summary of Matrix Operations
 
 | Operation          | Description                              | NumPy Function             | Python Operator |
@@ -579,6 +575,7 @@ Certainly! Here's a more comprehensive table that covers a wider range of matrix
 | Determinant        | Computes the determinant of a matrix     | `np.linalg.det(A)`         | N/A             |
 | Eigenvalues        | Computes the eigenvalues of a matrix     | `np.linalg.eigvals(A)`     | N/A             |
 | Eigenvectors       | Computes the eigenvectors of a matrix    | `np.linalg.eig(A)`         | N/A            
+
 ### Example of Matrix Operations
 
 Here's an example demonstrating various matrix operations using NumPy arrays:
