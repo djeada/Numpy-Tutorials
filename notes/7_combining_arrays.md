@@ -1,4 +1,4 @@
-## Joining and Splitting Arrays with NumPy
+## Joining and Splitting Arrays
 
 In NumPy, manipulating the structure of arrays is a common operation. Whether combining multiple arrays into one or splitting a single array into several parts, NumPy provides a set of intuitive functions to achieve these tasks efficiently. This guide will cover various methods to join and split arrays, providing detailed explanations and practical examples.
 
