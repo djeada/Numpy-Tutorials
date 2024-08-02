@@ -509,7 +509,7 @@ The rank of a matrix provides insight into its structure and properties. Essenti
 - **Linear Independence**: Rows (or columns) are linearly independent if no row (or column) can be expressed as a linear combination of others.
 - **Full Rank**: A matrix is considered to have full rank if its rank is equal to the lesser of its number of rows and columns. A matrix with full rank has the maximum possible rank given its dimensions.
 
-### Determining the Rank with NumPy
+#### Determining the Rank
 
 Python's NumPy library offers a convenient function to compute the rank: `np.linalg.matrix_rank`.
 
