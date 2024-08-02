@@ -1,4 +1,4 @@
-## Searching, Filtering, and Sorting with NumPy
+## Searching, Filtering and Sorting
 
 NumPy offers a suite of functions designed for searching within, filtering, and sorting arrays. These capabilities are indispensable when managing and preprocessing datasets, particularly large ones. This guide will cover the essential functions and provide detailed explanations and practical examples to help you utilize these tools effectively.
 
