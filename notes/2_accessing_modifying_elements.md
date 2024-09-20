@@ -21,6 +21,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `arr[1]` retrieves the element at index 1 of the array `arr`, which is 2.
 
 ### Accessing 2-D Array Elements
@@ -59,6 +60,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `arr[1, 2]` retrieves the element at the second row and third column of the array `arr`, which is 9.
 
 ### Modifying Array Elements
@@ -80,6 +82,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `arr[2] = 5` changes the value of the element at index 2 to 5.
 
 ### Slicing Arrays
@@ -108,6 +111,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `arr[::2]` retrieves every second element.
 - `arr[1:]` retrieves elements from the second to the end.
 - `arr[:-3]` retrieves elements from the start up to but not including the third-last element.
@@ -136,6 +140,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `arr[0:2, 1:3]` retrieves the subarray containing the first two rows and the second and third columns.
 
 #### More Slicing Examples
@@ -154,6 +159,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `arr[:3, 2:]` retrieves the subarray containing the first three rows and all columns from the third onwards.
 
 ### Practical Applications
@@ -177,6 +183,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `arr[2:5] = [10, 11, 12]` changes the values of elements at indices 2, 3, and 4.
 
 #### Boolean Indexing
@@ -198,6 +205,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `arr > 5` creates a boolean array where elements greater than 5 are marked as `True`.
 - `arr[bool_idx]` retrieves elements where the condition is `True`.
 
