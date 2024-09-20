@@ -76,6 +76,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.add(arr_1, arr_2)` performs element-wise addition.
 
 #### Scalar Multiplication
@@ -98,6 +99,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `scalar * arr` multiplies each element by 2.
 
 #### Dot Product
@@ -120,6 +122,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.dot(arr_1, arr_2)` computes the dot product.
 
 #### Cross Product
@@ -142,6 +145,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.cross(arr_1, arr_2)` computes the cross product of the two vectors.
 
 #### Angle Between Vectors
@@ -190,6 +194,7 @@ Multiplication with scalar: [2 4 6 8]
 ```
 
 Explanation:
+
 - `arr + scalar` and `arr * scalar` apply the scalar to each element of the array.
 
 ### Summary Table
