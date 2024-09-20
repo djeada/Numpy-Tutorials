@@ -68,9 +68,9 @@ np.random.randint(low, high=None, size=None)
 
 Parameters:
 
-- **low**: The lowest integer in the range.
-- **high**: One above the largest integer in the range (exclusive).
-- **size**: The shape of the output array (default is a single value).
+- **low** is the parameter that represents the smallest integer in the range.
+- **high** is the parameter that defines the upper bound of the range, but it is exclusive, meaning the value is one above the largest possible integer.
+- **size** is the parameter that determines the shape of the output array, with the default being a single value.
 
 Example:
 
