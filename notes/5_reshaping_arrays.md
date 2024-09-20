@@ -119,10 +119,10 @@ While both methods achieve the same outcome, `flatten()` returns a copy of the o
 
 Reshaping is a powerful tool in data science and machine learning. Here are some practical applications and considerations:
 
-1. **Data Preparation**: Reshape data to fit the input requirements of machine learning models, such as converting 2D image data into a single vector.
-2. **Batch Processing**: Organize data into batches for efficient processing and training.
-3. **Data Augmentation**: Transform images and other data formats for augmentation techniques.
-4. **Memory Management**: Be mindful of how reshaping impacts memory usage, especially when dealing with large datasets. Using views (like `reshape`) can be more memory-efficient compared to creating copies (like `flatten`).
+1. **Data Preparation** involves reshaping data to meet the input requirements of machine learning models, such as converting 2D image data into a single vector.
+2. **Batch Processing** organizes data into batches to enable efficient processing and training in machine learning tasks.
+3. **Data Augmentation** entails transforming images or other data formats to apply augmentation techniques, enhancing the dataset.
+4. **Memory Management** requires attention to how reshaping affects memory usage, particularly with large datasets. Using views (like `reshape`) can be more memory-efficient compared to creating copies (like `flatten`).
 
 ### Reshape Examples and Edge Cases
 
