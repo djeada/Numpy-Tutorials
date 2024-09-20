@@ -45,6 +45,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.array((5, 6, 7, 8))` converts a Python tuple to a NumPy array.
 - The `type()` function confirms the type of the array.
 
@@ -68,6 +69,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.zeros((2, 3))` creates a 2x3 array filled with zeros.
 - Useful for creating arrays where the initial value of each element should be zero.
 
@@ -87,6 +89,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.ones((2, 3))` creates a 2x3 array filled with ones.
 - Useful for creating arrays where the initial value of each element should be one.
 
@@ -108,6 +111,7 @@ Expected output (values will vary):
 ```
 
 Explanation:
+
 - `np.random.rand(2, 3)` creates a 2x3 array with random values uniformly distributed between 0 and 1.
 - Useful for simulations, random sampling, and initializing weights in neural networks.
 
@@ -130,6 +134,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.linspace(1, 5, 9)` generates 9 evenly spaced numbers between 1 and 5.
 - Useful for creating sequences of numbers for plotting graphs or for numerical analysis.
 
@@ -154,6 +159,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.eye(3)` creates a 3x3 identity matrix.
 - Useful in matrix operations where the identity matrix is required.
 
@@ -174,6 +180,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.arange(0, 10, 2)` generates an array with values starting from 0 up to (but not including) 10, with a step of 2.
 - Useful for creating ranges of numbers for iterations or plotting.
 
