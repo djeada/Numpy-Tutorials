@@ -169,6 +169,7 @@ Expected output:
 ```
 
 Explanation:
+
 - `np.arccos(np.dot(arr_1, arr_2) / (np.linalg.norm(arr_1) * np.linalg.norm(arr_2)))` calculates the angle in radians.
 
 ### Broadcasting
