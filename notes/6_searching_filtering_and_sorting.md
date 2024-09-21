@@ -6,7 +6,7 @@ NumPy offers a suite of functions designed for searching within, filtering, and 
 
 To locate the indices of specific values or those that satisfy a particular condition within an array, you can utilize `np.where()`.
 
-#### Example with 1D Array:
+#### Example with 1D Array
 
 ```Python
 import numpy as np
@@ -26,7 +26,7 @@ Explanation:
 - `np.where(array == 2)`: Finds the indices where the value is 2.
 - `np.where((array > 1) & (array < 4))`: Finds the indices where values are greater than 1 and less than 4.
 
-#### Example with 2D Array:
+#### Example with 2D Array
 
 ```Python
 array_2D = np.array([[0, 1], [1, 1], [5, 9]])
@@ -46,7 +46,7 @@ Explanation:
 
 Boolean indexing enables the extraction of elements that satisfy specific conditions from an array.
 
-#### Example:
+#### Example
 
 ```Python
 array = np.array([0, 1, 2, 3, 4, 5])
@@ -64,7 +64,7 @@ Explanation:
 
 For sorting arrays, NumPy offers the `np.sort()` function. It produces a sorted copy of the array while leaving the initial array untouched.
 
-#### Example with 1D Array:
+#### Example with 1D Array
 
 ```Python
 array = np.array([3, 1, 4, 2, 5])
@@ -77,7 +77,7 @@ Explanation:
 
 - `np.sort(array)`: Returns a sorted copy of the array.
 
-#### Example with 2D Array:
+#### Example with 2D Array
 
 When sorting multidimensional arrays, you can specify the sorting axis using the `axis` parameter.
 
