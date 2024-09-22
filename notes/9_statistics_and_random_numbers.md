@@ -332,8 +332,7 @@ x = np.array([1, 2, 3, 4, 5])
 y = np.array([5, 4, 3, 2, 1])
 
 correlation_matrix = np.corrcoef(x, y)
-print("Correlation matrix:
-", correlation_matrix)
+print("Correlation matrix:", correlation_matrix)
 ```
 
 ### Covariance
@@ -344,8 +343,7 @@ Function:
 
 ```python
 covariance_matrix = np.cov(x, y)
-print("Covariance matrix:
-", covariance_matrix)
+print("Covariance matrix:", covariance_matrix)
 ```
 
 ### Applying Statistics to Multidimensional Data
