@@ -380,33 +380,87 @@ print(θ_deg)   # → 90.62 °
 
 ### Broadcasting
 
-Broadcasting is a powerful feature in NumPy that allows arithmetic operations on arrays of different shapes and sizes without explicit replication of data. It simplifies code and enhances performance by enabling vectorized operations.
+#### What broadcasting means—formally
 
-#### Example of Broadcasting
+For any binary **ufunc** $f$ (e.g., `+`, `*`, `np.maximum`), NumPy will try to apply
 
-Broadcasting automatically expands the smaller array to match the shape of the larger array during arithmetic operations. This feature eliminates the need for manual looping and ensures efficient computation.
+$$
+C = f(A, B)
+$$
 
-```arr = np.array([1, 2, 3, 4])
-scalar = 2
+element-wise **if and only if** the two input shapes are *broadcast-compatible*.  Compatibility is checked **right-to-left** over the axes:
 
-# Broadcasting operations
-print("Addition with scalar:", arr + scalar)
-print("Multiplication with scalar:", arr * scalar)
+**Equal length rule.**
+
+Pad the shorter shape on the left with 1’s so both shapes have the same rank.
+
+**Axis match rule.**
+
+For every axis $k$ from the *last* to the *first*
+
+* either $A_k = B_k$, or
+* one of them equals 1 (that axis will be *stretched*).
+
+When axis $k$ is stretched, NumPy does **not** copy data; it creates a *strided view* that repeats the existing bytes in memory—so the cost is $O(1)$ extra space.
+
+> **Tip.** Think of a dimension of length 1 as a *wildcard* that can masquerade as any size.
+
+#### Scalar broadcasting
+
+```python
+import numpy as np
+
+arr    = np.array([1, 2, 3, 4])   # shape (4,)
+alpha  = 2                        # shape () — rank-0
+
+print("arr + alpha:", arr + alpha)   # [3 4 5 6]
+print("arr * alpha:", arr * alpha)   # [2 4 6 8]
 ```
 
-Expected output:
+*The scalar behaves like an invisible array of shape `(4,)` here.*
 
+Common uses:
+
+* **Feature scaling / centering:** `X -= X.mean(axis=0)` subtracts the *row-vector* of feature means from every sample at once.
+* **Softmax trick:** `logits - logits.max(axis=1, keepdims=True)` prevents overflow by broadcasting a column vector of maxima.
+
+#### Vector–matrix examples
+
+```python
+M = np.arange(12).reshape(3, 4)      # shape (3,4)
+col = np.array([10, 20, 30])[:,None] # shape (3,1)
+row = np.array([1, 2, 3, 4])         # shape (4,)
+
+print("M + col  →\n", M + col)   # each row shifted by its col entry
+print("M + row  →\n", M + row)   # each column shifted by row entry
 ```
-Addition with scalar: [3 4 5 6]
-Multiplication with scalar: [2 4 6 8]
+
+Shape algebra (after left-padding):
+
+| Operand | Raw shape | Padded to (3, 4) | Compatible?       |
+| ------- | --------- | ---------------- | ----------------- |
+| `M`     | (3, 4)    | (3, 4)           | —                 |
+| `col`   | (3, 1)    | (3, 1)           | ✓ (second axis 1) |
+| `row`   | (4,)      | (1, 4)           | ✓ (first axis 1)  |
+
+The result is shape `(3, 4)` in both cases—no materialised tile of `col` or `row`.
+
+#### When broadcasting fails
+
+```python
+a = np.empty((5, 4))
+b = np.empty((3, 1, 4))
+
+# a + b  -> ValueError: operands could not be broadcast together ...
 ```
 
-Explanation:
+Reason: after padding, shapes are `(1,5,4)` and `(3,1,4)`; axis 0 demands 1 vs 3 (neither is 1), so rule 2 fails.
 
-- `arr + scalar` adds `2` to each element of `arr`, resulting in `[3, 4, 5, 6]`.
-- `arr * scalar` multiplies each element of `arr` by `2`, resulting in `[2, 4, 6, 8]`.
-- NumPy automatically broadcasts the scalar to match the shape of the array for element-wise operations.
-- Broadcasting is used in data normalization, where a mean vector is subtracted from a dataset, and in scaling features by multiplying with a scalar value to adjust their range.
+#### Performance notes
+
+* **Aliasing hazards.** `out[:] += x` is safe; `out = out + x` makes a *new* array instead of updating in-place.
+* **Cache friendliness.** Broadcasting keeps the contiguous memory layout of the larger operand; explicit `np.tile` often degrades performance **and** uses $O(nm)$ extra RAM.
+* **Higher-order views.** Use `np.expand_dims` or `None` (`[:, None]`) to add axes consciously and avoid accidental shape mismatches.
 
 ### Practical Applications
 
@@ -416,7 +470,8 @@ Vectors and their operations are integral to numerous practical applications acr
 
 Beyond single-element access, vectors allow for the manipulation of multiple elements simultaneously using slicing or advanced indexing. This capability is essential for batch processing and data transformation tasks.
 
-```# Creating a 1D array
+```python
+# Creating a 1D array
 arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
 
 # Modifying multiple elements
@@ -438,7 +493,8 @@ Expected output:
 
 Boolean indexing enables the selection of elements based on conditional statements, allowing for dynamic and flexible data selection without the need for explicit loops. This technique is highly efficient and widely used in data analysis.
 
-```# Creating a 1D array
+```python
+# Creating a 1D array
 arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
 # Boolean indexing
 bool_idx = arr > 5
