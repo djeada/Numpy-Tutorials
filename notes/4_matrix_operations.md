@@ -566,75 +566,24 @@ By understanding the rank, one can determine the properties of a matrix and its 
 
 ### Summary of Matrix Operations
 
-| Operation          | Description                              | NumPy Function             | Python Operator |
-|--------------------|------------------------------------------|----------------------------|-----------------|
-| Dot Product        | Computes the dot product of two arrays   | `np.dot(A, B)`             | `A @ B`         |
-| Matrix Multiplication | Multiplies two matrices               | `np.matmul(A, B)`          | `A @ B`         |
-| Transpose          | Transposes a matrix                      | `np.transpose(A)` or `A.T` | N/A             |
-| Inverse            | Computes the inverse of a matrix         | `np.linalg.inv(A)`         | N/A             |
-| Determinant        | Computes the determinant of a matrix     | `np.linalg.det(A)`         | N/A             |
-| Eigenvalues        | Computes the eigenvalues of a matrix     | `np.linalg.eigvals(A)`     | N/A             |
-| Eigenvectors       | Computes the eigenvectors of a matrix    | `np.linalg.eig(A)`         | N/A            
+| Operation                 | Purpose                                                                | Primary NumPy Call              | Python Shorthand | Shape Rules                                 |     |        |
+| ------------------------- | ---------------------------------------------------------------------- | ------------------------------- | ---------------- | ------------------------------------------------------ | --- | ------ |
+| **Dot / Inner product**   | • 1-D arrays → scalar (inner product)<br>• 2-D arrays → matrix product | `np.dot(a, b)`                  | `a @ b`          | Last dim of *a* = last-1 dim of *b*                    |     |        |
+| **Matrix product**        | General (broadcast-aware) matrix multiplication                        | `np.matmul(a, b)`               | `a @ b`          | Handles `(..., m, k) @ (..., k, n)` batched shapes     |     |        |
+| **Element-wise multiply** | Hadamard product (same shape)                                          | `a * b`                         | `*`              | Needs broadcasting-compatible shapes                   |     |        |
+| **Transpose**             | Swap axes 0 and 1 (or any via `axes=`)                                 | `a.T` or `np.transpose(a)`      | —                | For higher-rank arrays use `np.swapaxes`/`np.moveaxis` |     |        |
+| **Inverse**               | Matrix inverse (square, non-singular)                                  | `np.linalg.inv(a)`              | —                | Prefer `np.linalg.solve(a, b)` for linear systems      |     |        |
+| **Determinant**           | Scalar determinant of square matrix                                    | `np.linalg.det(a)`              | —                | ⁑ Ill-conditioned if \`                                | det | \` ≈ 0 |
+| **Rank**                  | Numerical rank (≈ # of linearly independent rows)                      | `np.linalg.matrix_rank(a)`      | —                | Uses SVD under the hood                                |     |        |
+| **Trace**                 | Sum of diagonal elements                                               | `np.trace(a)`                   | —                | Works on last two axes by default                      |     |        |
+| **Eigenvalues / vectors** | Spectral decomposition (square)                                        | `vals, vecs = np.linalg.eig(a)` | —                | `np.linalg.eigvals(a)` for values only                 |     |        |
+| **SVD**                   | Singular-value decomposition                                           | `u, s, vh = np.linalg.svd(a)`   | —                | Robust for rectangular / rank-deficient matrices       |     |        |
+| **Matrix power**          | Integer power *k* (square)                                             | `np.linalg.matrix_power(a, k)`  | —                | `k<0` gives inverse powers                             |     |        |
 
-### Example of Matrix Operations
+Tips & Best Practices:
 
-Here's an example demonstrating various matrix operations using NumPy arrays:
-
-```python
-import numpy as np
-
-A = np.array([[1, 2], [3, 4]])
-B = np.array([[5, 6], [7, 8]])
-
-# Dot Product
-print("Dot Product:
-", np.dot(A, B))
-
-# Matrix Multiplication using @
-print("Matrix Multiplication using @:
-", A @ B)
-
-# Transpose
-print("Transpose of A:
-", A.T)
-
-# Inverse
-print("Inverse of A:
-", np.linalg.inv(A))
-
-# Determinant
-print("Determinant of A:", np.linalg.det(A))
-
-# Eigenvalues and Eigenvectors
-eigenvalues, eigenvectors = np.linalg.eig(A)
-print("Eigenvalues:", eigenvalues)
-print("Eigenvectors:
-", eigenvectors)
-```
-
-Expected output:
-
-```
-Dot Product:
-[[19 22]
- [43 50]]
-
-Matrix Multiplication using @:
-[[19 22]
- [43 50]]
-
-Transpose of A:
-[[1 3]
- [2 4]]
-
-Inverse of A:
-[[-2.   1. ]
- [ 1.5 -0.5]]
-
-Determinant of A: -2.0000000000000004
-
-Eigenvalues: [-0.37228132  5.37228132]
-Eigenvectors:
-[[-0.82456484 -0.41597356]
- [ 0.56576746 -0.90937671]]
-```
+* **Prefer `@`** for readability and automatic broadcasting; it resolves to `np.matmul` for ≥2-D inputs and to `np.dot` for 1-D.
+* **Use `solve` not `inv`**: to compute $x$ in $Ax=b$, `x = np.linalg.solve(A, b)` is faster and stabler than `np.linalg.inv(A) @ b`.
+* **Check conditioning** with `np.linalg.cond(a)` before inverting or solving.
+* For **large sparse matrices**, switch to `scipy.sparse.linalg` counterparts to avoid excessive memory use.
+* When experimenting, inspect shapes with `a.shape`—most dimension-mismatch bugs arise from overlooked trailing axes.
