@@ -45,7 +45,7 @@ $$
 * Often used to represent a single data sample with $n$ features (e.g., one row of a dataset).
 * Can multiply on the right by an $n \times m$ matrix $A$, yielding another row vector of shape $(1, m)$:
 
-$$\vec v_{\text{row}}\,A \in \mathbb{R}^{1 \times m}$$
+$$\vec v_{\text{row}}A \in \mathbb{R}^{1 \times m}$$
 
 **Example:**
 
@@ -73,7 +73,7 @@ $$
 * *Central to linear transformations; matrices act on column vectors from the left.
 * Multiplying an $m \times n$ matrix $A$ by a column vector yields another column vector of shape $(m,1)$:
 
-$$A\,\vec v_{\text{col}} \in \mathbb{R}^{m \times 1}$$
+$$A\vec v_{\text{col}} \in \mathbb{R}^{m \times 1}$$
 
 **Example:**
 
@@ -112,7 +112,7 @@ $$v^T_{ij} = v_{ji}$$
 * In more advanced settings (e.g., covariance matrices, orthogonal matrices), transpose plays a key role in defining symmetric and orthogonal properties.
 * Dot Product:
 
-$$\vec u \cdot \vec v = \vec u_{\text{row}}\,\vec v_{\text{col}} = \sum_i u_i\,v_i$$
+$$\vec u \cdot \vec v = \vec u_{\text{row}}\vec v_{\text{col}} = \sum_i u_iv_i$$
 
 Example of Transpose:
 
@@ -145,7 +145,7 @@ if and only if $\vec v$ is the zero vector.
 
 **Homogeneity (Scalability)**:
 
-$$||\alpha \vec v|| = |\alpha|\,||\vec v||$$ 
+$$||\alpha \vec v|| = |\alpha|||\vec v||$$ 
 
 for any scalar $\alpha$.
 
@@ -295,7 +295,7 @@ $$
 **Geometry.**
 
 $$
-\mathbf{u}\cdot\mathbf{v}=\lVert\mathbf{u}\rVert_2\,\lVert\mathbf{v}\rVert_2 \,\cos\theta,
+\mathbf{u}\cdot\mathbf{v}=\lVert\mathbf{u}\rVert_2\lVert\mathbf{v}\rVert_2 \cos\theta,
 $$
 
 so it captures both magnitudes and their relative orientation $\theta$.
@@ -316,7 +316,7 @@ Negative values imply an angle greater than 90°, explaining the $-1$ above (≈
 * Work done by a force along a displacement ($W=\mathbf{F}\cdot\mathbf{s}$)
 * Projection of one vector onto another:
 
-$$\displaystyle \mathrm{proj}_{\mathbf{v}}(\mathbf{u}) = \frac{\mathbf{u}\cdot\mathbf{v}}{\lVert\mathbf{v}\rVert_2^2}\,\mathbf{v}$$
+$$\displaystyle \mathrm{proj}_{\mathbf{v}}(\mathbf{u}) = \frac{\mathbf{u}\cdot\mathbf{v}}{\lVert\mathbf{v}\rVert_2^2}\mathbf{v}$$
 
 #### Cross product
 
