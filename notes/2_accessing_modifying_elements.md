@@ -20,11 +20,9 @@ Expected output:
 2
 ```
 
-Explanation:
-
 - `arr[1]` accesses the element at index 1 of the array `arr`, which is the second element, `2`.
 - NumPy's indexing starts at 0, so `arr[0]` would return `1`.
-- **Practical Use Case:** Accessing specific elements is useful when you need to retrieve data points for calculations, such as fetching a particular measurement from a dataset for analysis.
+- Accessing specific elements is useful when you need to retrieve data points for calculations, such as fetching a particular measurement from a dataset for analysis.
 
 ### Accessing 2-D Array Elements
 
@@ -60,11 +58,9 @@ Expected output:
 9
 ```
 
-Explanation:
-
 - `arr[1, 2]` accesses the element at the second row (`index 1`) and third column (`index 2`), which is `9`.
 - In 2-D arrays, the first index corresponds to the row, and the second index corresponds to the column.
-- **Practical Use Case:** Retrieving specific elements from a matrix is essential in applications like image processing, where you might need to access pixel values, or in linear algebra operations where specific matrix elements are manipulated.
+- Retrieving specific elements from a matrix is essential in applications like image processing, where you might need to access pixel values, or in linear algebra operations where specific matrix elements are manipulated.
 
 ### Modifying Array Elements
 
@@ -83,12 +79,9 @@ Expected output:
 [1 2 5 4]
 ```
 
-Explanation:
-
-
 - `arr[2] = 5` assigns the value `5` to the element at index `2`, changing the third element from `3` to `5`.
 - The array `arr` is updated in place, reflecting the change immediately.
-- **Practical Use Case:** Modifying array elements is useful in scenarios where data needs to be updated based on computations or user input, such as adjusting sensor readings in real-time or correcting data anomalies in a dataset.
+- Modifying array elements is useful in scenarios where data needs to be updated based on computations or user input, such as adjusting sensor readings in real-time or correcting data anomalies in a dataset.
 
 ### Slicing Arrays
 
@@ -119,12 +112,10 @@ Expected output:
 [1]
 ```
 
-Explanation:
-
 - `arr[::2]` retrieves every second element, resulting in `[1, 3]`.
 - `arr[1:]` retrieves elements from the second element to the end, resulting in `[2, 3, 4]`.
 - `arr[:-3]` retrieves elements from the start up to but not including the third-last element, resulting in `[1]`.
-- **Practical Use Case:** Slicing is commonly used for tasks like selecting specific data ranges for analysis, creating training and testing datasets in machine learning, or extracting features from a dataset for further processing.
+- Slicing is commonly used for tasks like selecting specific data ranges for analysis, creating training and testing datasets in machine learning, or extracting features from a dataset for further processing.
 
 #### 2-D Array Slicing
 
@@ -149,9 +140,6 @@ Expected output:
  [4 9]]
 ```
 
-Explanation:
-
-
 - `arr[0:2, 1:3]` slices the array to include rows with indices `0` and `1` (the first two rows) and columns with indices `1` and `2` (the second and third columns).
 - The resulting subarray is:
 
@@ -160,7 +148,7 @@ Explanation:
  [4 9]]
 ```
 
-- **Practical Use Case:** Slicing 2-D arrays is useful in image processing for selecting specific regions of an image, in data analysis for extracting particular features, or in machine learning for selecting subsets of a feature matrix.
+- Slicing 2-D arrays is useful in image processing for selecting specific regions of an image, in data analysis for extracting particular features, or in machine learning for selecting subsets of a feature matrix.
 
 #### More Slicing Examples
 
@@ -179,8 +167,6 @@ Expected output:
  [4 5]]
 ```
 
-Explanation:
-
 - `arr[:3, 2:]` slices the array to include rows with indices `0`, `1`, and `2` (the first three rows) and columns starting from index `2` to the end (the third and fourth columns).
 - The resulting subarray is:
 
@@ -190,7 +176,7 @@ Explanation:
  [4 5]]
 ```
 
-- **Practical Use Case:** This type of slicing is beneficial when you need to separate data into different sections for analysis, such as dividing a dataset into training and validation sets or isolating specific features for feature engineering.
+- This type of slicing is beneficial when you need to separate data into different sections for analysis, such as dividing a dataset into training and validation sets or isolating specific features for feature engineering.
 
 ### Practical Applications
 
@@ -214,12 +200,9 @@ Expected output:
 [ 1  2 10 11 12  6  7  8]
 ```
 
-Explanation:
-
-
 - `arr[2:5] = [10, 11, 12]` assigns the values `10`, `11`, and `12` to the elements at indices `2`, `3`, and `4`, respectively.
 - The original array `[1, 2, 3, 4, 5, 6, 7, 8]` is updated to `[1, 2, 10, 11, 12, 6, 7, 8]`.
-- **Practical Use Case:** Batch updating elements is useful in data cleaning processes where multiple data points need correction or transformation, such as replacing outliers or applying scaling factors to specific sections of a dataset.
+- Batch updating elements is useful in data cleaning processes where multiple data points need correction or transformation, such as replacing outliers or applying scaling factors to specific sections of a dataset.
 
 #### Boolean Indexing
 
@@ -239,11 +222,9 @@ Expected output:
 [6 7 8]
 ```
 
-Explanation:
-
 - `arr > 5` creates a boolean array `[False, False, False, False, False, True, True, True]`.
 - `arr[bool_idx]` uses this boolean array to filter and retrieve elements where the condition `arr > 5` is `True`, resulting in `[6, 7, 8]`.
-- **Practical Use Case:** Boolean indexing is widely used in data analysis for filtering datasets based on specific criteria, such as selecting all records where a sales figure exceeds a certain threshold or extracting all entries that meet particular quality standards.
+- Boolean indexing is widely used in data analysis for filtering datasets based on specific criteria, such as selecting all records where a sales figure exceeds a certain threshold or extracting all entries that meet particular quality standards.
 
 ### Summary Table
 
