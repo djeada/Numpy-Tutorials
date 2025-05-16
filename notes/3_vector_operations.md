@@ -26,233 +26,357 @@ v = np.array([4, -2, 7])  # element of R^3
 type(v), v.shape          # (numpy.ndarray, (3,))
 ```
 
-#### Row vs Column Representation
+#### Row vs Column Representation
 
-Vectors can be represented in two distinct forms: row vectors and column vectors. The orientation of a vector affects how it interacts with matrices and other vectors during mathematical operations.
+Vectors can be written in two orientations — **row vectors** and **column vectors**—each serving different roles in computations. The choice of orientation determines how vectors interact with matrices and with each other.
 
-**Row Vector:**
+##### Row Vector
 
-A row vector displays its elements horizontally and is represented as a $1 \times n$ matrix.
-A row vector is written as a $1 \times n$ matrix, such as $\begin{bmatrix} 1 & 2 & 3 \end{bmatrix}$.
-
-**Example:**
-
-$\vec{v} = [1, 2, 3]$ is a row vector in $\mathbb{R}^3$.
-
-Row vectors are commonly used to represent individual data samples in a dataset, where each element corresponds to a feature value.
-
-**Column Vector:**
-
-A column vector displays its elements vertically and is represented as an $n \times 1$ matrix.
-
-A column vector is written as an $n \times 1$ matrix, such as:
+A **row vector** is a $1 \times n$ matrix, meaning it has one row and $n$ columns. Its elements are laid out horizontally:
 
 $$
+v = 
 \begin{bmatrix}
-1 \\
-2 \\
-3 
+v_1 & v_2 & \cdots & v_n
 \end{bmatrix}
 $$
 
-Column vectors are used in linear transformations and matrix operations, where they can be multiplied by matrices to perform operations like rotations and scaling.
+* It has shape $(1, n)$.
+* Often used to represent a single data sample with $n$ features (e.g., one row of a dataset).
+* Can multiply on the right by an $n \times m$ matrix $A$, yielding another row vector of shape $(1, m)$:
+
+$$\vec v_{\text{row}}\,A \in \mathbb{R}^{1 \times m}$$
+
+**Example:**
+
+$$
+\vec v_{\text{row}}
+= [1,2,3]
+\quad\text{is a }1\times3\text{ row vector in }\mathbb{R}^3.
+$$
+
+##### Column Vector
+
+A **column vector** is an $n \times 1$ matrix, with elements displayed vertically:
+
+$$
+v =
+\begin{bmatrix}
+v_1\\
+v_2\\
+\vdots\\
+v_n
+\end{bmatrix}
+$$
+
+* It has shape $(n,1)$.
+* *Central to linear transformations; matrices act on column vectors from the left.
+* Multiplying an $m \times n$ matrix $A$ by a column vector yields another column vector of shape $(m,1)$:
+
+$$A\,\vec v_{\text{col}} \in \mathbb{R}^{m \times 1}$$
+
+**Example:**
+
+$$
+v =
+\begin{bmatrix}
+1\\
+2\\
+3
+\end{bmatrix}
+$$
+
+$$
+\text{is a }3\times1\text{ column vector in }\mathbb{R}^3.
+$$
 
 #### Transpose
 
-The transpose of a vector changes its orientation from a row vector to a column vector or vice versa. Transposing is a fundamental operation in linear algebra, facilitating various matrix and vector computations.
+The **transpose** operation switches between row and column orientation:
 
-- Transposing a vector converts a row vector to a column vector and a column vector to a row vector.
-- The transpose of a vector $\vec{v}$ is denoted as $\vec{v}^T$.
-- If $\vec{v} = [1, 2, 3]$ (a row vector), then $\vec{v}^T$ is:
+Denoted by a superscript “$^T$”:
+
+$$\vec v_{\text{row}}^T = \vec v_{\text{col}}$$
+
+and 
+
+$$\vec v_{\text{col}}^T = \vec v_{\text{row}}$$
+
+If $v$ is a matrix (or vector) with entries $v_{ij}$, then
+
+$$v^T_{ij} = v_{ji}$$
+
+**Why Transpose Matters:**
+
+* Ensures dimensions match: you can only multiply a $(1,n)$ by an $(n,1)$ or an $(n,1)$ by a $(1,n)$, etc.
+* In more advanced settings (e.g., covariance matrices, orthogonal matrices), transpose plays a key role in defining symmetric and orthogonal properties.
+* Dot Product:
+
+$$\vec u \cdot \vec v = \vec u_{\text{row}}\,\vec v_{\text{col}} = \sum_i u_i\,v_i$$
+
+Example of Transpose:
 
 $$
-\vec{v}^T = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}
+v = \begin{bmatrix} 1 & 2 & 3 \end{bmatrix}
 $$
 
-- Transposing vectors is essential when performing dot products between row and column vectors or when aligning data structures for matrix multiplication.
+$$
+v^T = 
+\begin{bmatrix}
+1\\
+2\\
+3
+\end{bmatrix}
+$$
 
 #### Norms and Length
 
-A **norm** $||·||$ assigns a non‑negative length to every vector and obeys positivity, scalability, and the triangle inequality.
+A **norm** $||\cdot||$ is a function that assigns a non-negative “length” or “size” to each vector in a vector space, satisfying three core properties:
 
-**p-Norm:**
+**Positivity**:
+
+$$||\vec v|| \ge 0$$ 
+
+for all $\vec v$, and 
+
+$$||\vec v|| = 0$$ 
+
+if and only if $\vec v$ is the zero vector.
+
+**Homogeneity (Scalability)**:
+
+$$||\alpha \vec v|| = |\alpha|\,||\vec v||$$ 
+
+for any scalar $\alpha$.
+
+**Triangle Inequality**:
+
+$$||\vec u + \vec v|| \le ||\vec u|| + ||\vec v||$$ 
+
+for any vectors 
+
+$$\vec u, \vec v$$
+
+The **p-norm** (or $L^p$ norm) is a family of norms parameterized by $p \ge 1$, defined for a vector 
+
+$$\vec v = (v_1, v_2, \ldots, v_n)$$ 
+
+as
 
 $$
-||\vec{v}||_p = \left( \sum_{i=1}^{n} |v_i|^p \right)^{1/p}
+\lVert \vec v \rVert_p 
+= \left( \sum_{i=1}^{n} \lvert v_i \rvert^p \right)^{1/p}
 $$
 
-- The $p$-norm generalizes different measures of vector length.
-- The most commonly used norm is the L2 norm (Euclidean norm), where $p=2$:
+* When $p=1$, this reduces to the **L1 norm**, the sum of absolute values.
+* When $p=2$, it gives the familiar **Euclidean norm**.
+* As $p \to \infty$, it approaches the maximum absolute component.
 
-$$
-||\vec{v}||_2 = \sqrt{v_1^2 + v_2^2 + \ldots + v_n^2}
-$$
+**Why the p-Norm Matters**
 
-Special cases:
+* By tuning $p$, you emphasize different aspects of the data (e.g., outliers vs.\ aggregate magnitude).
+* In machine learning, different norms encourage different solution structures (e.g., sparsity with L1, smoothness with L2).
+* The shape of the “ball” $\{\vec v : ||\vec v||_p \le 1\}$ changes with $p$, affecting feasible regions in optimization.
 
-| p | Common name | Unit ball in $\mathbb{R}^2$ |
-| - | ----------- | --------------------------- |
-| 1 | Manhattan   | diamond ‑◆‑                 |
-| 2 | Euclidean   | circle ‑◎‑                  |
-| ∞ | Chebyshev   | square  ▢                   |
+Common Special Cases:
 
-Sketches (unit radius):
+|    $p$   | Name          | Unit-Ball in $\mathbb{R}^2$         | Geometric Intuition                              |
+| :------: | ------------- | ----------------------------------- | ------------------------------------------------ |
+|     1    | **Manhattan** | Diamond (rotated square) $\diamond$ | Distance measured along axes (like city blocks)  |
+|     2    | **Euclidean** | Circle $\bigcirc$                   | “Straight-line” distance in the plane            |
+| $\infty$ | **Chebyshev** | Axis-aligned square $\square$       | Maximum coordinate difference (chess-king moves) |
 
-![image](https://github.com/user-attachments/assets/ed74c48f-7af6-47d7-988e-5c6fae7788fd)
+*Unit-radius sketches:*
 
-NumPy examples:
+![Unit balls for p=1,2,∞, showing diamond, circle, and square shapes](https://github.com/user-attachments/assets/ed74c48f-7af6-47d7-988e-5c6fae7788fd)
+
+NumPy’s **`linalg.norm`** function makes it easy:
 
 ```python
+import numpy as np
 from numpy.linalg import norm
-norm(v, ord=1)   # L1
-norm(v)          # default ord=2
-norm(v, ord=np.inf)
+
+v = np.array([v1, v2, ..., vn])
+
+# L1 norm: sum of absolute values
+l1 = norm(v, ord=1)
+
+# L2 norm: Euclidean length (default)
+l2 = norm(v)           # same as norm(v, ord=2)
+
+# Infinity norm: maximum absolute component
+linf = norm(v, ord=np.inf)
+
+print(f"L1: {l1}, L2: {l2}, L∞: {linf}")
 ```
 
-*Why it matters.*  In machine‑learning metrics (e.g. k‑NN), the norm defines "closeness"; in optimization, the choice of norm shapes the feasible region and affects sparsity.
+* **`ord=1`** computes $\sum_i |v_i|$.
+* **`ord=2`** (or default) computes $\sqrt{\sum_i v_i^2}$.
+* **`ord=np.inf`** computes $\max_i |v_i|$.
+
+Why Norms Matter in Practice:
+
+**Similarity and Distance**
+
+In algorithms like **k-Nearest Neighbors (k-NN)**, the choice of norm directly affects which points are deemed “closest,” altering classification or regression results.
+
+**Optimization and Regularization**
+
+* **L1 regularization** ($\ell_1$ penalty) tends to produce sparse solutions (many zero coefficients).
+* **L2 regularization** ($\ell_2$ penalty) tends to spread error evenly among parameters, leading to smaller overall weights.
+
+**Feasible Regions**
+
+When you enforce a norm constraint (e.g., $||x||_p \le 1$), the shape of that feasible set changes with $p$, influencing which solutions are accessible in constrained optimization.
 
 ### Vector Operations
 
-NumPy provides a comprehensive suite of functions to perform various vector operations efficiently. These operations are essential for tasks in data analysis, machine learning, physics simulations, and more.
+#### Vector addition
 
-#### Vector Addition
+For $\mathbf{u},\mathbf{v}\in\mathbb{R}^n$ the sum is
 
-Vector addition combines two vectors by adding their corresponding elements, resulting in a new vector. This operation is fundamental in many applications, including physics for calculating resultant forces.
+$$
+\mathbf{u}+\mathbf{v}= \bigl(u_1+v_1,u_2+v_2,\dots,u_n+v_n\bigr).
+$$
+
+* Commutative $\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}$
+* Associative $(\mathbf{u}+\mathbf{v})+\mathbf{w}=\mathbf{u}+(\mathbf{v}+\mathbf{w})$
+* Identity element $\mathbf{0}$ (all zeros)
 
 ```python
 import numpy as np
 
-arr_1 = np.array([9, 2, 5])
-arr_2 = np.array([-3, 8, 2])
+a = np.array([9, 2, 5])
+b = np.array([-3, 8, 2])
 
-# Element-wise addition
-result = np.add(arr_1, arr_2)
-print(result)
+res = np.add(a, b)          # or simply a + b
+print(res)                  # → [ 6 10  7]
 ```
 
-Expected output:
+**Complexity.** $O(n)$ arithmetic operations; NumPy runs this in native C, so it is *vectorised* and avoids Python loops.
 
-```
-[ 6 10  7]
-```
+**Typical uses.**
 
-- `np.add(arr_1, arr_2)` performs element-wise addition of `arr_1` and `arr_2`.
-- The resulting vector `[6, 10, 7]` is obtained by adding each corresponding pair of elements: $9 + (-3) = 6$, $2 + 8 = 10$, and $5 + 2 = 7$.
-- Vector addition is used in aggregating multiple data sources, such as combining different feature sets in data preprocessing.
+* Merging feature vectors from multiple sensors or modalities
+* Displacement composition in kinematics
+* Gradient accumulation in machine-learning optimisers
 
-#### Scalar Multiplication
+#### Scalar (outer) multiplication
 
-Scalar multiplication involves multiplying each element of a vector by a scalar (a single numerical value), effectively scaling the vector's magnitude without altering its direction.
+Given a scalar $\alpha\in\mathbb{R}$ and $\mathbf{u}\in\mathbb{R}^n$,
+
+$$
+\alpha\mathbf{u}= \bigl(\alpha u_1,\alpha u_2,\dots,\alpha u_n\bigr).
+$$
+
+Multiplies the magnitude by $|\alpha|$; for negative $\alpha$ the direction is flipped (180° rotation).
 
 ```python
-arr = np.array([6, 3, 4])
-scalar = 2
-
-# Scalar multiplication
-result = scalar * arr
-print(result)
+v      = np.array([6, 3, 4])
+alpha  = 2
+scaled = alpha * v          # element-wise; same as np.multiply(alpha, v)
+print(scaled)               # → [12  6  8]
 ```
 
-Expected output:
+**Distributive law.** 
 
-```
-[12  6  8]
-```
+$$\alpha(\mathbf{u}+\mathbf{v})=\alpha\mathbf{u}+\alpha\mathbf{v}$$
 
-- `scalar * arr` multiplies each element of `arr` by `2`.
-- The resulting vector `[12, 6, 8]` reflects the scaled values.
-- Scalar multiplication is used in normalization processes, where feature values are scaled to a specific range to ensure uniformity.
+Useful for normalising vectors to unit length: `u / np.linalg.norm(u)`.
 
-#### Dot Product
+#### Dot (inner) product
 
-The dot product of two vectors yields a scalar value and is calculated as the sum of the products of their corresponding elements. It measures the cosine of the angle between two vectors and is widely used in various applications, including calculating projections and in machine learning algorithms.
+**Definition.**
+
+$$
+\mathbf{u}\cdot\mathbf{v}= \sum_{i=1}^{n}u_i v_i.
+$$
+
+**Geometry.**
+
+$$
+\mathbf{u}\cdot\mathbf{v}=\lVert\mathbf{u}\rVert_2\,\lVert\mathbf{v}\rVert_2 \,\cos\theta,
+$$
+
+so it captures both magnitudes and their relative orientation $\theta$.
 
 ```python
-arr_1 = np.array([9, 2, 5])
-arr_2 = np.array([-3, 8, 2])
+u  = np.array([9, 2, 5])
+v  = np.array([-3, 8, 2])
 
-# Dot product
-result = np.dot(arr_1, arr_2)
-print(result)
+dp = np.dot(u, v)           # or u @ v  in NumPy ≥1.10
+print(dp)                   # → -1
 ```
 
-Expected output:
+An output of **zero** indicates *orthogonality*.
 
-```
--1
-```
+Negative values imply an angle greater than 90°, explaining the $-1$ above (≈90.6°).
 
-- `np.dot(arr_1, arr_2)` computes the dot product: $9*(-3) + 2*8 + 5*2 = -27 + 16 + 10 = -1$.
-- The result `-1` is a scalar indicating the degree of similarity between the two vectors.
-- Dot products are used in calculating the similarity between two data points in recommendation systems and in determining the direction of force vectors in physics.
+* Cosine-similarity search in recommender systems
+* Work done by a force along a displacement ($W=\mathbf{F}\cdot\mathbf{s}$)
+* Projection of one vector onto another:
 
-#### Cross Product
+$$\displaystyle \mathrm{proj}_{\mathbf{v}}(\mathbf{u}) = \frac{\mathbf{u}\cdot\mathbf{v}}{\lVert\mathbf{v}\rVert_2^2}\,\mathbf{v}$$
 
-The cross product is defined for three-dimensional vectors and results in a new vector that is perpendicular to both input vectors. It is particularly useful in physics and engineering for finding torque or rotational forces.
+#### Cross product
+
+For $\mathbf{u},\mathbf{v}\in\mathbb{R}^3$,
+
+$$
+\mathbf{u}\times\mathbf{v} = \begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k}\\
+u_1 & u_2 & u_3\\
+v_1 & v_2 & v_3
+\end{vmatrix} =
+\bigl(u_2v_3-u_3v_2,
+      u_3v_1-u_1v_3,
+      u_1v_2-u_2v_1\bigr).
+$$
+
+The resulting vector is perpendicular to the input pair; its magnitude equals the *area* of the parallelogram spanned by $\mathbf{u}$ and $\mathbf{v}$.
 
 ```python
-arr_1 = np.array([9, 2, 5])
-arr_2 = np.array([-3, 8, 2])
+u = np.array([9, 2, 5])
+v = np.array([-3, 8, 2])
 
-# Cross product
-result = np.cross(arr_1, arr_2)
-print(result)
+c = np.cross(u, v)
+print(c)                    # → [-36 -33  78]
 ```
 
-Expected output:
+Use the right-hand rule to fix the orientation: curling your fingers from **u** to **v**, your thumb points along **u × v**.
 
-```
-[-36 -33  78]
-```
+* Surface normals in graphics shaders (lighting)
+* Torque $\boldsymbol{\tau} = \mathbf{r}\times\mathbf{F}$
+* Angular momentum  $\mathbf{L} = \mathbf{r}\times m\mathbf{v}$
 
-Explanation:
+#### Angle between two vectors
 
-- `np.cross(arr_1, arr_2)` calculates the cross product using the formula:
+From the dot-product identity above:
 
-$$\vec{v} \times \vec{w} = \begin{bmatrix}
-v_2w_3 - v_3w_2 \\
-v_3w_1 - v_1w_3 \\
-v_1w_2 - v_2w_1 
-\end{bmatrix}$$
+$$
+\theta = \arccos\!\Bigl(\frac{\mathbf{u}\cdot\mathbf{v}}
+                              {\lVert\mathbf{u}\rVert_2\lVert\mathbf{v}\rVert_2}\Bigr),
+\qquad
+0\le\theta\le\pi.
+$$
 
-- For the given vectors:
+```python
+u = np.array([9, 2, 5])
+v = np.array([-3, 8, 2])
 
-$$\begin{aligned}
-x &= 2*2 - 5*8 = 4 - 40 = -36 \\
-y &= 5*(-3) - 9*2 = -15 - 18 = -33 \\
-z &= 9*8 - 2*(-3) = 72 + 6 = 78 
-\end{aligned}$$
+cosθ  = np.dot(u, v) / (np.linalg.norm(u) * np.linalg.norm(v))
+cosθ  = np.clip(cosθ, -1.0, 1.0)   # guards against tiny FP overshoots
+θ_rad = np.arccos(cosθ)
+θ_deg = np.degrees(θ_rad)
 
-- The resulting vector `[-36, -33, 78]` is perpendicular to both `arr_1` and `arr_2`.
-- Cross products are used in computer graphics to calculate surface normals, which are essential for rendering lighting and shading effects.
-
-#### Angle Between Vectors
-
-The angle between two vectors can be determined using the dot product and the vectors' norms. This angle provides insight into the relationship between the vectors, such as their alignment or orthogonality.
-
-```arr_1 = np.array([9, 2, 5])
-arr_2 = np.array([-3, 8, 2])
-
-# Angle between vectors
-cos_angle = np.dot(arr_1, arr_2) / (np.linalg.norm(arr_1) * np.linalg.norm(arr_2))
-angle_rad = np.arccos(cos_angle)
-print(angle_rad)
+print(θ_rad)   # → 1.5817 rad
+print(θ_deg)   # → 90.62 °
 ```
 
-Expected output:
+**Edge cases to watch.**
 
-```
-1.582
-```
-
-Explanation:
-
-- `np.dot(arr_1, arr_2)` calculates the dot product of the two vectors.
-- `np.linalg.norm(arr_1)` and `np.linalg.norm(arr_2)` compute the L2 norms (Euclidean lengths) of the vectors.
-- The cosine of the angle is obtained by dividing the dot product by the product of the norms.
-- `np.arccos(cos_angle)` computes the angle in radians.
-- The resulting angle `1.582` radians indicates the measure between the two vectors.
-- Calculating angles between vectors is essential in machine learning for determining feature importance and in physics for understanding force directions.
+* If either vector is the zero vector, the angle is undefined (division-by-zero).
+* Numerical rounding can nudge the cosine slightly outside $[-1,1]$; `np.clip` prevents `nan`.
 
 ### Broadcasting
 
