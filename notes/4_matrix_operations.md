@@ -1,19 +1,15 @@
-# Matrices
+## Matrices
 
 A matrix is a systematic arrangement of numbers (or elements) in rows and columns. An m × n matrix has `m` rows and `n` columns. The dimensions of the matrix are represented as m × n.
-
-## Matrix Norms
-
-Matrix norms are fundamental tools in linear algebra that measure the size or magnitude of a matrix. Similar to how the absolute value measures the magnitude of a scalar, matrix norms provide a quantitative measure of the magnitude of a matrix. There are various ways to define matrix norms, each with specific properties and applications, making them essential in numerical analysis, optimization, and many other fields.
 
 ### Vector Norms and Matrix Norms
 
 #### Vector Norms
 
-A vector norm is a function that assigns a non-negative value to a vector in an $n$-dimensional space, providing a quantitative measure of the vector's length or magnitude. One commonly used vector norm is the **Euclidean norm**, also known as the $L^2$ norm, defined for a vector $\vec{x}$ in $\mathbb{R}^n$ as:
+A vector norm is a function that assigns a non-negative value to a vector in an $n$-dimensional space, providing a quantitative measure of the vector’s length or magnitude. One commonly used vector norm is the **Euclidean norm**, also known as the $L^2$ norm, defined for a vector $\vec{x}$ in $\mathbb{R}^n$ as:
 
 $$
-||\vec{x}||_2 = \sqrt{\sum_{i=1}^n x_i^2}
+\lVert \vec{x} \rVert_2 = \sqrt{\sum_{i=1}^n x_i^2}
 $$
 
 where $x_i$ represents the components of the vector $\vec{x}$.
@@ -23,44 +19,52 @@ where $x_i$ represents the components of the vector $\vec{x}$.
 Matrix norms extend the concept of vector norms to matrices. A widely used matrix norm is the **Frobenius norm**, analogous to the Euclidean norm for vectors. For a matrix $M$ with dimensions $m \times n$, the Frobenius norm is defined as:
 
 $$
-||M||_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^n (M_{ij})^2}
+\lVert M \rVert_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^n (M_{ij})^2}
 $$
 
-where $M_{ij}$ represents the elements of the matrix $M$. This norm can be seen as the Euclidean norm of the matrix when it is considered as a vector formed by stacking its entries.
+where $M_{ij}$ represents the elements of the matrix $M$.
 
-### Types of Matrix Norms
+#### Types of Matrix Norms
 
 Several matrix norms are commonly used in practice, each with unique properties and applications:
 
-1. **Frobenius Norm**: Measures the "size" of a matrix in terms of the sum of the squares of its entries.
+I. **Frobenius Norm**  
+
+Measures the “size” of a matrix in terms of the sum of the squares of its entries.  
 
 $$
-||M||_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^n (M_{ij})^2}
+\lVert M \rVert_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^n (M_{ij})^2}
 $$
 
-2. **Spectral Norm**: Also known as the operator 2-norm or 2-norm, it is the largest singular value of the matrix, which corresponds to the square root of the largest eigenvalue of $M^T M$.
+II. **Spectral Norm**  
+
+Also known as the operator 2-norm, it is the largest singular value of the matrix, which corresponds to the square root of the largest eigenvalue of $M^T M$.  
 
 $$
-||M||_2 = \sigma_{\max}(M)
+\lVert M \rVert_2 = \sigma_{\max}(M)
 $$
 
-3. **1-Norm (Maximum Column Sum Norm)**: The maximum absolute column sum of the matrix.
+III. **1-Norm (Maximum Column Sum Norm)**  
+
+The maximum absolute column sum of the matrix.  
 
 $$
-||M||_1 = \max_{1 \leq j \leq n} \sum_{i=1}^m |M_{ij}|
+\lVert M \rVert_1 = \max_{1 \le j \le n} \sum_{i=1}^m \lvert M_{ij} \rvert
 $$
 
-4. **Infinity Norm (Maximum Row Sum Norm)**: The maximum absolute row sum of the matrix.
+IV. **Infinity Norm (Maximum Row Sum Norm)**  
+
+The maximum absolute row sum of the matrix.  
 
 $$
-||M||_\infty = \max_{1 \leq i \leq m} \sum_{j=1}^n |M_{ij}|
+\lVert M \rVert_\infty = \max_{1 \le i \le m} \sum_{j=1}^n \lvert M_{ij} \rvert
 $$
 
-### Norms in NumPy
+#### Norms in NumPy
 
 NumPy provides functions to compute various matrix norms, making it easy to work with these concepts in Python.
 
-#### Frobenius Norm
+##### Frobenius Norm
 
 The Frobenius norm can be computed using the `numpy.linalg.norm` function with the `'fro'` argument:
 
@@ -78,7 +82,7 @@ Expected Output:
 Frobenius Norm: 5.477225575051661
 ```
 
-#### Spectral Norm
+##### Spectral Norm
 
 The spectral norm, or 2-norm, can be computed using the `numpy.linalg.norm` function with the `2` argument:
 
@@ -93,7 +97,7 @@ Expected Output:
 Spectral Norm: 5.464985704219043
 ```
 
-#### 1-Norm
+##### 1-Norm
 
 The 1-norm can be computed by specifying the `1` argument in the `numpy.linalg.norm` function:
 
@@ -108,7 +112,7 @@ Expected Output:
 1-Norm: 6.0
 ```
 
-#### Infinity Norm
+##### Infinity Norm
 
 The infinity norm can be computed using the `np.inf` argument in the `numpy.linalg.norm` function:
 
@@ -566,19 +570,19 @@ By understanding the rank, one can determine the properties of a matrix and its 
 
 ### Summary of Matrix Operations
 
-| Operation                 | Purpose                                                                | Primary NumPy Call              | Python Shorthand | Shape Rules                                 |     |        |
-| ------------------------- | ---------------------------------------------------------------------- | ------------------------------- | ---------------- | ------------------------------------------------------ | --- | ------ |
-| **Dot / Inner product**   | • 1-D arrays → scalar (inner product)<br>• 2-D arrays → matrix product | `np.dot(a, b)`                  | `a @ b`          | Last dim of *a* = last-1 dim of *b*                    |     |        |
-| **Matrix product**        | General (broadcast-aware) matrix multiplication                        | `np.matmul(a, b)`               | `a @ b`          | Handles `(..., m, k) @ (..., k, n)` batched shapes     |     |        |
-| **Element-wise multiply** | Hadamard product (same shape)                                          | `a * b`                         | `*`              | Needs broadcasting-compatible shapes                   |     |        |
-| **Transpose**             | Swap axes 0 and 1 (or any via `axes=`)                                 | `a.T` or `np.transpose(a)`      | —                | For higher-rank arrays use `np.swapaxes`/`np.moveaxis` |     |        |
-| **Inverse**               | Matrix inverse (square, non-singular)                                  | `np.linalg.inv(a)`              | —                | Prefer `np.linalg.solve(a, b)` for linear systems      |     |        |
-| **Determinant**           | Scalar determinant of square matrix                                    | `np.linalg.det(a)`              | —                | ⁑ Ill-conditioned if \`                                | det | \` ≈ 0 |
-| **Rank**                  | Numerical rank (≈ # of linearly independent rows)                      | `np.linalg.matrix_rank(a)`      | —                | Uses SVD under the hood                                |     |        |
-| **Trace**                 | Sum of diagonal elements                                               | `np.trace(a)`                   | —                | Works on last two axes by default                      |     |        |
-| **Eigenvalues / vectors** | Spectral decomposition (square)                                        | `vals, vecs = np.linalg.eig(a)` | —                | `np.linalg.eigvals(a)` for values only                 |     |        |
-| **SVD**                   | Singular-value decomposition                                           | `u, s, vh = np.linalg.svd(a)`   | —                | Robust for rectangular / rank-deficient matrices       |     |        |
-| **Matrix power**          | Integer power *k* (square)                                             | `np.linalg.matrix_power(a, k)`  | —                | `k<0` gives inverse powers                             |     |        |
+| Operation                 | Purpose                                                                | Primary NumPy Call             | Python Shorthand | Shape Rules                                    |
+| ------------------------- | ---------------------------------------------------------------------- | ------------------------------ | ---------------- | ----------------------------------------------- |
+| **Dot / Inner product**   | • 1-D arrays → scalar (inner product)<br>• 2-D arrays → matrix product | `np.dot(a, b)`                 | `a @ b`          | Last dim of *a* = second-to-last dim of *b*     |
+| **Matrix product**        | General (broadcast-aware) matrix multiplication                        | `np.matmul(a, b)`              | `a @ b`          | Handles `(..., m, k) @ (..., k, n)` batched      |
+| **Element-wise multiply** | Hadamard product (same shape)                                          | `a * b`                        | `*`              | Broadcasting-compatible shapes                  |
+| **Transpose**             | Swap axes 0 and 1 (or any via `axes=`)                                 | `a.T` or `np.transpose(a)`     | —                | For >2D use `np.swapaxes`/`np.moveaxis`         |
+| **Inverse**               | Matrix inverse (square, non-singular)                                  | `np.linalg.inv(a)`             | —                | Prefer `np.linalg.solve(a, b)` for systems      |
+| **Determinant**           | Scalar determinant of square matrix                                    | `np.linalg.det(a)`             | —                | Ill-conditioned if `det(a) ≈ 0`                  |
+| **Rank**                  | Numerical rank (≈ # of linearly independent rows)                      | `np.linalg.matrix_rank(a)`     | —                | Uses SVD under the hood                         |
+| **Trace**                 | Sum of diagonal elements                                               | `np.trace(a)`                  | —                | Works on the last two axes by default           |
+| **Eigenvalues / vectors** | Spectral decomposition (square)                                        | `vals, vecs = np.linalg.eig(a)`| —                | Use `np.linalg.eigvals(a)` for values only      |
+| **SVD**                   | Singular-value decomposition                                           | `u, s, vh = np.linalg.svd(a)`  | —                | Robust for rectangular or rank-deficient mats   |
+| **Matrix power**          | Integer power *k* (square)                                             | `np.linalg.matrix_power(a, k)` | —                | `k < 0` gives inverse powers                    |
 
 Tips & Best Practices:
 
