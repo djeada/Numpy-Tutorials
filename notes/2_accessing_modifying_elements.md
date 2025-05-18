@@ -1,6 +1,64 @@
 ## Accessing and Modifying Array Elements
 
-In NumPy, arrays are fundamental data structures that store elements in a grid-like fashion. Understanding how to access and modify these elements is crucial for efficient data manipulation and analysis. NumPy arrays are 0-indexed, meaning the first element is accessed with index 0, the second with index 1, and so forth. Mastering indexing and slicing techniques allows you to retrieve, update, and manipulate specific parts of an array with ease.
+In NumPy, arrays are data structures that store elements in a grid-like fashion. Understanding how to access and modify these elements is helpful for efficient data manipulation and analysis. NumPy arrays are 0-indexed, meaning the first element is accessed with index 0, the second with index 1, and so forth. Mastering indexing and slicing techniques allows you to retrieve, update, and manipulate specific parts of an array with ease.
+
+### Mathematical Background
+
+Arrays in NumPy are best formalized as **discrete tensor-valued functions**
+
+First let's introduce the shorthand
+
+$$
+[n_k]=\{0,1,\dots,n_k-1\}
+$$
+
+Then you can simply say
+
+$$
+A\colon\prod_{k=1}^d[n_k]\longrightarrow\mathbb F,
+\qquad
+(i_1,\dots,i_d) A_{i_1\cdots i_d}
+$$
+
+Equivalently, one often abbreviates
+
+$$
+A = \bigl(A_{i_1\cdots i_d}\bigr)_{0\le i_k < n_k}
+\in
+\mathbb F^{n_1\times\cdots\times n_d}
+$$
+
+where $\mathbb F=\mathbb R$ or $\mathbb C$.  *Indexing* a single element is the evaluation $A(i_1,\dots ,i_d)=A_{i_1,\dots ,i_d}$; a *slice* such as
+
+$$
+A_{[r_1:r_2,c_1:c_2]}
+= \{A_{i,j}\mid r_1 \le i < r_2,c_1 \le j < c_2\}
+$$
+
+
+is the restriction of $A$ to the Cartesian sub-domain $[r_1,r_2)\times[c_1,c_2)$, while *assignment* $A_{i_1,\dots ,i_d}\leftarrow \alpha$ re-defines the function at the chosen point(s).  Because the domain is a regular grid that NumPy stores in row-major (C-order) or column-major (Fortran-order) contiguous memory, these operations reduce to constant-time pointer arithmetic, giving mathematically natural vector– and matrix-manipulations the computational efficiency of low-level loops without writing any Python loops at all.
+
+```
+# 1-D array (vector) layout and indexing
+Index →   0    1    2    3
+Value   [ a0 ][ a1 ][ a2 ][ a3 ]
+               ↑
+           A[1] = a1
+```
+
+```
+# 3 × 4 matrix A and a 2 × 2 slice A[0:2,1:3]
+            columns →
+          0      1      2      3
+row 0  [ a00 |  a01 |  a02 |  a03 ]
+row 1  [ a10 |  a11 |  a12 |  a13 ]
+row 2  [ a20 |  a21 |  a22 |  a23 ]
+
+Slice A[0:2,1:3] (rows 0–1, cols 1–2)
+          1      2
+row 0  [ a01 |  a02 ]
+row 1  [ a11 |  a12 ]
+```
 
 ### Accessing 1-D Array Elements
 
