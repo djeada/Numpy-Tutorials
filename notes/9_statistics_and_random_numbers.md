@@ -1,6 +1,6 @@
-## Random Numbers
+## Random Numbers and Statistics
 
-NumPy's random module is a powerful tool for generating random numbers from various distributions. Whether you are simulating data, implementing algorithms that require randomness, or performing statistical analysis, NumPy's random module has extensive capabilities to suit your needs.
+Statistics, at its core, is the science of collecting, analyzing, and interpreting data. It serves as a foundational pillar for fields such as data science, economics, and social sciences. An important component of statistics is understanding various distributions or, as some textbooks refer to them, populations. Central to this understanding is the idea of probability.
 
 ### Generating Random Floats Between 0 and 1
 
@@ -207,19 +207,17 @@ Both arrays will be identical because the seed was reset:
  [0.59865848 0.15601864 0.15599452]]
 ```
 
-## Statistics with NumPy
-
-Statistics, at its core, is the science of collecting, analyzing, and interpreting data. It serves as a foundational pillar for fields such as data science, economics, and social sciences. A key component of statistics is understanding various distributions or, as some textbooks refer to them, populations. Central to this understanding is the idea of probability.
-
-NumPy provides robust functions for a range of statistical operations, making it indispensable for data analysis in Python. Below, we explore some of these basic and advanced statistical operations.
-
 ### Basic Statistical Measures
+
+The basic statistical measures provide insights into the central tendency and variability of a dataset. These metrics form the foundation for more advanced analyses and are crucial for summarizing data.
 
 #### Mean
 
-The mean or average of a set of values is computed by taking the sum of these values and dividing by the number of values.
+The mean or arithmetic average of a dataset represents its central point. It is defined as the sum of all observations divided by the number of observations. This measure is widely used due to its simplicity, but it can be influenced by extreme values.
 
-$$ \bar{\mu} = \frac{1}{N} \sum_{i=1}^{N} x_i $$
+$$
+\mu = \frac{1}{N} \sum_{i=1}^{N} x_i
+$$
 
 Function:
 
@@ -231,9 +229,19 @@ mean_value = np.mean(arr)
 print("Mean:", mean_value)
 ```
 
+Expected output:
+
+```
+Mean: 3.0
+```
+
+* `arr`: Defines a NumPy array with values 1 through 5.
+* `np.mean(arr)`: Computes the arithmetic mean of the array.
+* `print(...)`: Displays the result.
+
 #### Median
 
-The median is the middle value of an ordered set of values. For an odd number of values, it's the central value. For an even number of values, it's the average of the two middle values.
+The median is the middle value of an ordered dataset, providing a robust measure of central tendency that is less sensitive to outliers.
 
 Function:
 
@@ -242,11 +250,22 @@ median_value = np.median(arr)
 print("Median:", median_value)
 ```
 
+Expected output:
+
+```
+Median: 3.0
+```
+
+* `np.median(arr)`: Calculates the median value.
+* The median splits the dataset into two equal halves.
+
 #### Variance
 
-Variance quantifies the spread or dispersion of a set of values. It's calculated as the average of the squared differences of each value from the mean.
+Variance quantifies the spread of data points around the mean. It is the average of the squared deviations from the mean.
 
-$$\sigma^2 = \frac{1}{N}\sum_{i=1}^N(x_i - \bar{x})^2$$
+$$
+\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i - \mu)^2
+$$
 
 Function:
 
@@ -255,11 +274,22 @@ variance_value = np.var(arr)
 print("Variance:", variance_value)
 ```
 
+Expected output:
+
+```
+Variance: 2.0
+```
+
+* `np.var(arr)`: Computes the population variance.
+* Squared deviations amplify the effect of larger differences.
+
 #### Standard Deviation
 
-The standard deviation measures the average distance between each data point and the mean. It's essentially the square root of variance.
+Standard deviation is the square root of the variance and expresses dispersion in the same units as the data.
 
-$$\sigma = \sqrt{\frac{1}{N}\sum_{i=1}^N(x_i - \bar{x})^2}$$
+$$
+\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (x_i - \mu)^2}
+$$
 
 Function:
 
@@ -268,11 +298,22 @@ std_deviation = np.std(arr)
 print("Standard Deviation:", std_deviation)
 ```
 
+Expected output:
+
+```
+Standard Deviation: 1.4142135623730951
+```
+
+* `np.std(arr)`: Calculates the population standard deviation.
+* The result indicates average distance from the mean.
+
 ### Advanced Statistical Measures
+
+Advanced measures provide deeper insights into distribution shape and position relative to other data.
 
 #### Percentile
 
-The percentile rank of a score is the percentage of scores in its frequency distribution that are equal to or lower than it. 
+A percentile indicates the value below which a given percentage of observations fall. The 50th percentile is the median.
 
 Function:
 
@@ -284,9 +325,19 @@ percentile_90 = np.percentile(arr, 90)
 print("90th Percentile:", percentile_90)
 ```
 
+Expected output:
+
+```
+50th Percentile (Median): 3.0
+90th Percentile: 5.0
+```
+
+* `np.percentile(arr, p)`: Computes the p-th percentile.
+* 90th percentile shows the value below which 90% of data lie.
+
 #### Quantile
 
-Quantiles are values that divide a set of observations into equal parts. The 0.25 quantile is equivalent to the 25th percentile.
+Quantiles divide data into equal-sized, contiguous intervals. The p-th quantile corresponds to the (p\*100)th percentile.
 
 Function:
 
@@ -295,9 +346,18 @@ quantile_value = np.quantile(arr, 0.25)
 print("25th Quantile:", quantile_value)
 ```
 
+Expected output:
+
+```
+25th Quantile: 2.0
+```
+
+* `np.quantile(arr, q)`: Finds the q-th quantile.
+* 0.25 quantile marks the first quartile.
+
 #### Skewness
 
-Skewness measures the asymmetry of the probability distribution of a real-valued random variable about its mean. 
+Skewness measures asymmetry of the distribution. Positive skew indicates a longer right tail.
 
 Function:
 
@@ -308,9 +368,18 @@ skewness_value = skew(arr)
 print("Skewness:", skewness_value)
 ```
 
+Expected output:
+
+```
+Skewness: 0.0
+```
+
+* `skew(arr)`: Calculates sample skewness.
+* A zero skewness denotes a symmetric distribution.
+
 #### Kurtosis
 
-Kurtosis measures the "tailedness" of the probability distribution of a real-valued random variable. 
+Kurtosis reflects the 'tailedness' of a distribution. Higher values indicate heavier tails.
 
 Function:
 
@@ -321,9 +390,18 @@ kurtosis_value = kurtosis(arr)
 print("Kurtosis:", kurtosis_value)
 ```
 
+Expected output:
+
+```
+Kurtosis: -1.2
+```
+
+* `kurtosis(arr)`: Computes excess kurtosis.
+* Negative kurtosis shows lighter tails than a normal distribution.
+
 ### Correlation
 
-Correlation measures the relationship between two variables and ranges from -1 to 1.
+Correlation quantifies linear relationship strength between two variables, ranging from -1 to 1.
 
 Function:
 
@@ -335,9 +413,20 @@ correlation_matrix = np.corrcoef(x, y)
 print("Correlation matrix:", correlation_matrix)
 ```
 
+Expected output:
+
+```
+Correlation matrix:
+[[ 1.  -1. ]
+ [ -1.   1. ]]
+```
+
+* `np.corrcoef(x, y)`: Returns the correlation matrix.
+* Values of -1 indicate a perfect negative correlation.
+
 ### Covariance
 
-Covariance indicates the direction of the linear relationship between variables.
+Covariance indicates the direction of linear relationship; positive values show same direction movement.
 
 Function:
 
@@ -346,14 +435,27 @@ covariance_matrix = np.cov(x, y)
 print("Covariance matrix:", covariance_matrix)
 ```
 
+Expected output:
+
+```
+Covariance matrix:
+[[ 2.5 -2.5]
+ [-2.5  2.5]]
+```
+
+* `np.cov(x, y)`: Computes covariance matrix.
+* Off-diagonal elements represent covariance between x and y.
+
 ### Applying Statistics to Multidimensional Data
 
-NumPy allows statistical operations on multidimensional data along specified axes. 
+NumPy extends statistical operations along specified axes for matrices and higher-dimensional arrays.
 
 Example:
 
 ```python
-data = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+data = np.array([[1, 2, 3],
+                 [4, 5, 6],
+                 [7, 8, 9]])
 
 mean_rows = np.mean(data, axis=1)
 print("Mean of each row:", mean_rows)
@@ -362,12 +464,25 @@ mean_columns = np.mean(data, axis=0)
 print("Mean of each column:", mean_columns)
 ```
 
+Expected output:
+
+```
+Mean of each row: [2. 5. 8.]
+Mean of each column: [4. 5. 6.]
+```
+
+* `axis=1`: Computes mean across columns for each row.
+* `axis=0`: Computes mean across rows for each column.
+
 ### Example Application: Descriptive Statistics
 
-To showcase how these statistical functions can be applied in practice, let’s calculate various descriptive statistics for a given dataset.
+Below is a practical application computing descriptive statistics for a normally distributed sample.
 
 ```python
-# Sample dataset
+import numpy as np
+from scipy.stats import skew, kurtosis
+
+# Sample dataset: 1000 points from a N(0,1)
 data = np.random.normal(0, 1, 1000)
 
 # Mean
@@ -401,21 +516,40 @@ kurt = kurtosis(data)
 print("Kurtosis:", kurt)
 ```
 
-### Reference Table for Statistical Operations
+Expected output (values will vary):
 
-| Operation           | Description                                       | Formula                                                       | NumPy Function     | Example Code                                      | Expected Output      |
-|---------------------|---------------------------------------------------|---------------------------------------------------------------|--------------------|--------------------------------------------------|----------------------|
-| **Mean**            | Average of values                                 | $\bar{\mu} = \frac{1}{N} \sum_{i=1}^{N} x_i$                  | `np.mean(arr)`     | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.mean(arr)` | `3.0`                |
-| **Median**          | Middle value in an ordered set                    | -                                                             | `np.median(arr)`   | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.median(arr)` | `3.0`                |
-| **Variance**        | Average of squared differences from the mean      | $\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2$     | `np.var(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.var(arr)` | `2.0`                |
-| **Standard Deviation** | Average distance of each point from the mean  | $\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2}$ | `np.std(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.std(arr)` | `1.4142135623730951` |
-| **Min**             | Smallest value                                    | -                                                             | `np.min(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.min(arr)` | `1`                  |
-| **Max**             | Largest value                                     | -                                                             | `np.max(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.max(arr)` | `5`                  |
-| **Range**           | Difference between max and min values             | $\text{range} = \max(x) - \min(x)$                            | `np.ptp(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.ptp(arr)` | `4`                  |
-| **Sum**             | Sum of all values                                 | $\sum_{i=1}^{N} x_i$                                          | `np.sum(arr)`      | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.sum(arr)` | `15`                 |
-| **Product**         | Product of all values                             | $\prod_{i=1}^{N} x_i$                                         | `np.prod(arr)`     | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.prod(arr)` | `120`                |
-| **Cumulative Sum**  | Cumulative sum of all values                      | -                                                             | `np.cumsum(arr)`   | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.cumsum(arr)` | `[ 1,  3,  6, 10, 15]` |
-| **Cumulative Product** | Cumulative product of all values               | -                                                             | `np.cumprod(arr)`  | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.cumprod(arr)` | `[  1,   2,   6,  24, 120]` |
-| **Percentile**      | Value below which a percentage of data falls      | -                                                             | `np.percentile(arr, q)` | `arr = np.array([1, 2, 3, 4, 5])`<br>`np.percentile(arr, 50)` | `3.0`                |
-| **Correlation Coefficient** | Measure of linear relationship between arrays | -                                                         | `np.corrcoef(arr1, arr2)` | `arr1 = np.array([1, 2, 3])`<br>`arr2 = np.array([4, 5, 6])`<br>`np.corrcoef(arr1, arr2)` | `[[1. 1.] [1. 1.]]` |
-| **Covariance**      | Measure of how much two random variables vary together | -                                                      | `np.cov(arr1, arr2)` | `arr1 = np.array([1, 2, 3])`<br>`arr2 = np.array([4, 5, 6])`<br>`np.cov(arr1, arr2)` | `[[1. 1.] [1. 1.]]` |
+```
+Mean: ~0.0
+Median: ~0.0
+Variance: ~1.0
+Standard Deviation: ~1.0
+25th Percentile: ~-0.674
+75th Percentile: ~0.674
+Skewness: ~0.0
+Kurtosis: ~0.0
+```
+
+* `np.random.normal(0, 1, 1000)`: Generates random sample from standard normal distribution.
+* Subsequent functions compute descriptive metrics.
+* Tilde (\~) indicates approximate values due to randomness.
+  
+### Reference Table
+
+| Operation                  | Description                                                                                                                                                                     | Formula†                                                  | NumPy Call                    | Example                                                                           | Expected Output    |
+|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|-------------------------------|-----------------------------------------------------------------------------------|--------------------|
+| **Mean**                   | Arithmetic average                                                                                                                                                              | $\displaystyle \bar x = \frac{1}{N}\sum_{i=1}^N x_i$       | `np.mean(a)`                  | <code>import numpy as np<br>a = np.array([1,2,3,4,5])<br>np.mean(a)</code>        | `3.0`              |
+| **Median**                 | Middle value (50th percentile)                                                                                                                                                  | $\displaystyle x_{(0.5)}$                                 | `np.median(a)`                | `np.median(a)`                                                                   | `3.0`              |
+| **Variance**               | Avg. squared deviation<br>• *Pop.* (`ddof=0`): $\displaystyle \sigma^2=\frac{1}{N}\sum(x_i-\bar x)^2$ <br>• *Sample* (`ddof=1`): $\displaystyle s^2=\frac{1}{n-1}\sum(x_i-\bar x)^2$ | `np.var(a,ddof=0)`<br>`np.var(a,ddof=1)`                  | `np.var(a)`                   | `2.0`                                                                            |                    |
+| **Std. deviation**         | Square-root of variance                                                                                                                                                         | $\displaystyle \sigma=\sqrt{\sigma^2}$ (or $s$)           | `np.std(a,ddof=0)`             | `np.std(a)`                                                                      | `1.414213562…`     |
+| **Minimum / Maximum**      | Smallest / largest element                                                                                                                                                      | $\displaystyle \min(x)$ / $\max(x)$                       | `np.min(a)` / `np.max(a)`     | `np.min(a)`                                                                      | `1`                |
+| **Range (ptp)**            | Peak-to-peak span                                                                                                                                                               | $\displaystyle \max(x) - \min(x)$                         | `np.ptp(a)`                   | `np.ptp(a)`                                                                      | `4`                |
+| **Sum / Product**          | Add / multiply all values                                                                                                                                                       | $\displaystyle \sum_i x_i$ / $\displaystyle \prod_i x_i$ | `np.sum(a)` / `np.prod(a)`    | `np.sum(a)`                                                                      | `15`               |
+| **Cumulative Sum / Prod.** | Running total / product                                                                                                                                                         | $S_k=\sum_{i\le k}x_i$<br>$P_k=\prod_{i\le k}x_i$          | `np.cumsum(a)` / `np.cumprod(a)` | `np.cumsum(a)`                                                                  | `[ 1  3  6 10 15]` |
+| **Percentile**             | Value below which *q* % of data lie                                                                                                                                             | $\displaystyle x_{(q/100)}$                                | `np.percentile(a,q)`          | `np.percentile(a,50)`                                                            | `3.0`              |
+| **Correlation** $\rho$     | Linear relationship (–1 … 1)                                                                                                                                                    | $\displaystyle \rho_{xy}=\frac{\mathrm{cov}(x,y)}{\sigma_x\,\sigma_y}$ | `np.corrcoef(x,y)`            | <code>import numpy as np<br>x = np.array([1,2,3])<br>y = np.array([4,5,6])<br>np.corrcoef(x,y)</code> | `[[1. 1.]\n [1. 1.]]` |
+| **Covariance**             | Co-variation of two variables                                                                                                                                                    | $\displaystyle \mathrm{cov}(x,y)=\frac{1}{n-1}\sum(x_i-\bar x)(y_i-\bar y)$ | `np.cov(x,y)`                 | `np.cov(x,y)`                                                                   | `[[1. 1.]\n [1. 1.]]` |
+
+
+<sup>† Formulas assume a one-dimensional population of size `N` (or sample of size `n`). NumPy’s `ddof` handles population vs sample.</sup>
+
+*Matrix note:* `np.corrcoef` and `np.cov` return a 2×2 matrix when given two 1-D arrays: row/column 0 is `x`, row/column 1 is `y` (diagonals = self-correlation/variance).
