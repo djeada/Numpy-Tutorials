@@ -444,13 +444,12 @@ For an $n \times n$ identity matrix $I$:
 $$
 I = 
 \begin{bmatrix} 
-1 & 0 & \cdots & 0 \\ 
-0 & 1 & \cdots & 0 \\ 
-\vdots & \vdots & \ddots & \vdots \\ 
-0 & 0 & \cdots & 1 
+1      & 0      & \cdots & 0      \\
+0      & 1      & \cdots & 0      \\
+\vdots & \vdots & \ddots & \vdots \\
+0      & 0      & \cdots & 1
 \end{bmatrix}
 $$
-
 
 #### Example
 
@@ -458,8 +457,7 @@ Creating an identity matrix using NumPy:
 
 ```python
 I = np.eye(3)
-print("Identity Matrix I:
-", I)
+print("Identity Matrix I:", I)
 ```
 
 Expected output:
