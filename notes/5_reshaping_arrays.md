@@ -10,13 +10,13 @@ If
 $$
 \mathbf{A}=\bigl(a_{i_1,i_2,\dots ,i_k}\bigr)
 \quad\text{with}\quad  
-1\le i_j\le n_j,\; j=1,\dots ,k,
+1\le i_j\le n_j,\; j=1,\dots ,k
 $$
 
 we say that $shape(\mathbf{A})=(n\_1,n\_2,\dots ,n\_k)$ and that the array lives in the vector space
 
 $$
-\mathbb{R}^{n_1\times n_2\times\!\cdots\!\times n_k}.
+\mathbb{R}^{n_1\times n_2\times\!\cdots\!\times n_k} 
 $$
 
 #### Total size is invariant
@@ -55,9 +55,11 @@ depending on what a downstream algorithm expects.
 Because reshaping is a bijection of index sets, it yields a linear isomorphism of vector spaces:
 
 $$
-\mathcal{R}:\mathbb{R}^{n_1\times\!\cdots\!\times n_k}\;\overset{\cong}{\longrightarrow}\;\mathbb{R}^{m_1\times\!\cdots\!\times m_\ell},
-\qquad 
-\mathcal{R}\bigl(a_{i_1,\dots ,i_k}\bigr)=a_{\varphi^{-1}(j_1,\dots ,j_\ell)}.
+\mathcal{R}:\mathbb{R}^{n_1\times\!\cdots\!\times n_k}\;\overset{\cong}{\longrightarrow}\;\mathbb{R}^{m_1\times\!\cdots\!\times m_\ell}
+$$
+
+$$
+\mathcal{R}\bigl(a_{i_1,\dots ,i_k}\bigr)=a_{\varphi^{-1}(j_1,\dots ,j_\ell)}
 $$
 
 Hence **no numerical information is lost or gained**—only the *interpretation* of the indices changes.
