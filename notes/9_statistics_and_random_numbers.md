@@ -2,7 +2,11 @@
 
 Statistics, at its core, is the science of collecting, analyzing, and interpreting data. It serves as a foundational pillar for fields such as data science, economics, and social sciences. An important component of statistics is understanding various distributions or, as some textbooks refer to them, populations. Central to this understanding is the idea of probability.
 
-### Generating Random Floats Between 0 and 1
+### Random Number Generation
+
+NumPy’s random module offers a comprehensive suite of functions for generating pseudorandom numbers across a variety of distributions and data types. Whether you need uniformly distributed floats in $[0, 1)$, samples from a standard normal distribution, random integers within a specified range, or values drawn from binomial, Poisson, exponential, and many other statistical distributions, NumPy provides intuitive, high-performance methods to meet your needs. Additionally, setting a seed via `np.random.seed()` ensures that your experiments and simulations are reproducible, making it easy to debug and share your work. With simple, consistent function signatures and flexible array-shaping capabilities, NumPy allows you to incorporate randomness into machine learning initializations, Monte Carlo simulations, synthetic data generation, and beyond.
+
+#### Generating Random Floats Between 0 and 1
 
 The function `np.random.rand()` produces an array of random floating-point numbers uniformly distributed over the interval $[0, 1)$.
 
@@ -32,19 +36,33 @@ Expected Output:
  [0.62190377 0.40855834 0.89849802]]
 ```
 
-### Generating Random Numbers from a Standard Normal Distribution
+#### Generating Random Numbers from a Standard Normal Distribution
 
-The function `np.random.randn()` returns numbers from the standard normal distribution, which has a mean of 0 and a standard deviation of 1.
+The **normal distribution** (or Gaussian distribution) is a continuous probability distribution for a real-valued random variable \$X\$, whose probability density function is
+
+$$
+f(x; \mu, \sigma) \;=\; \frac{1}{\sigma\sqrt{2\pi}}
+\exp\!\Bigl(-\frac{(x - \mu)^2}{2\sigma^2}\Bigr)
+$$
+
+where \$\mu\$ is the mean and \$\sigma\$ the standard deviation.  A **standard normal distribution** is the special case with \$\mu = 0\$ and \$\sigma = 1\$, often denoted \$N(0,1)\$.
+
+In this context, **generation** means **sampling**—i.e.\ drawing independent random values whose statistical behavior matches that of the target distribution.  NumPy’s `np.random.randn()` does exactly that for the standard normal.
 
 Function Signature:
 
-```Python
+```python
 np.random.randn(d0, d1, ..., dn)
 ```
 
+* **d0, d1, …, dn**: dimensions of the returned array of samples.
+
 Example:
 
-```Python
+```python
+import numpy as np
+
+# Draw 2×3 independent samples from a standard normal
 rand_norm_array = np.random.randn(2, 3)
 print(rand_norm_array)
 ```
@@ -56,7 +74,8 @@ Expected Output:
  [ 0.34275595 -1.37612312  1.23458913]]
 ```
 
-### Generating Random Integers
+
+#### Generating Random Integers
 
 The function `np.random.randint()` generates random integers from a specified range.
 
@@ -85,7 +104,7 @@ Expected Output:
 [6 3 8 1 9]
 ```
 
-### Generating Random Floats Over a Specified Range
+#### Generating Random Floats Over a Specified Range
 
 The function `np.random.uniform()` generates random floating-point numbers over a specified range $[low, high)$.
 
@@ -109,42 +128,62 @@ Expected Output:
  [1.10294322 0.95623745 1.48312411]]
 ```
 
-### Generating Random Numbers from Other Distributions
-
-NumPy also supports generating random numbers from other statistical distributions, such as binomial, Poisson, exponential, and many more.
-
 #### Binomial Distribution
 
-The function `np.random.binomial()` simulates the outcome of performing $n$ Bernoulli trials with success probability $p$.
+The **binomial distribution** describes the probability of obtaining exactly $k$ successes in $n$ independent Bernoulli trials (each trial with success probability $p$).  Its probability mass function is
 
-```Python
+$$
+P(X = k) \;=\; \binom{n}{k} p^k (1 - p)^{\,n - k},
+$$
+
+for $k = 0, 1, \dots, n$.  **Generation** here means **sampling** a collection of independent draws $X_1, X_2, \dots$ from this distribution.
+
+```python
 np.random.binomial(n, p, size=None)
 ```
 
+* **n**: number of trials
+* **p**: success probability per trial
+* **size**: shape of the output array of independent samples
+
 Example:
 
-```Python
+```python
+import numpy as np
+
+# Simulate 5 independent draws of the number of successes in 10 trials with p=0.5
 rand_binomial = np.random.binomial(10, 0.5, size=5)
 print(rand_binomial)
 ```
 
-Expected Output:
+Expected Output (your values will vary):
 
 ```
 [4 5 6 7 5]
 ```
 
+---
+
 #### Poisson Distribution
 
-The function `np.random.poisson()` generates random numbers from a Poisson distribution with a given mean $\lambda$.
+The **Poisson distribution** models the count of events occurring in a fixed interval of time or space when these events happen with a known constant rate $\lambda$ and independently of the time since the last event.  Its probability mass function is
 
-```Python
+$$
+P(X = k) \;=\; \frac{\lambda^k e^{-\lambda}}{k!},
+$$
+
+for $k = 0, 1, 2, \dots$.  **Generation** means drawing samples whose frequencies of occurrence match this distribution.
+
+```python
 np.random.poisson(lam, size=None)
 ```
 
+* **lam**: the expected number of events (rate $\lambda$)
+* **size**: shape of the output array of independent samples
+
 Example:
 
-```Python
+```python
 rand_poisson = np.random.poisson(5, size=5)
 print(rand_poisson)
 ```
@@ -155,17 +194,28 @@ Expected Output:
 [3 4 7 2 6]
 ```
 
+---
+
 #### Exponential Distribution
 
-The function `np.random.exponential()` generates random numbers from an exponential distribution with a specified scale parameter $\beta$.
+The **exponential distribution** is a continuous distribution often used to model waiting times between independent events that occur at a constant average rate.  Its probability density function is
 
-```Python
+$$
+f(x; \beta) \;=\; \frac{1}{\beta} \exp\!\biggl(-\frac{x}{\beta}\biggr),
+$$
+
+for $x \ge 0$ and scale parameter $\beta > 0$.  **Generation** refers to sampling real values whose distribution of inter-arrival times follows this law.
+
+```python
 np.random.exponential(scale=1.0, size=None)
 ```
 
+* **scale** ($\beta$): the mean waiting time
+* **size**: shape of the output array of independent samples
+
 Example:
 
-```Python
+```python
 rand_exponential = np.random.exponential(1.5, size=5)
 print(rand_exponential)
 ```
@@ -173,39 +223,53 @@ print(rand_exponential)
 Expected Output:
 
 ```
-[0.35298273 1.8726912  0.73239216 2.51090448 1.2078675 ]
+[0.35298273 1.87269120 0.73239216 2.51090448 1.20786750]
 ```
 
-### Setting the Random Seed
+#### Setting the Random Seed
 
-To ensure reproducibility of random numbers, you can set the random seed using `np.random.seed()`. This is particularly useful for debugging or sharing code where you want others to generate the same sequence of random numbers.
+A pseudorandom number generator (PRNG) in NumPy uses an internal **state vector** and a deterministic algorithm (by default, the Mersenne Twister) to produce a sequence of values.  **Seeding** means initializing that state vector from a single integer $s$, so that all subsequent “random” outputs are **fully determined** by $s$.  Mathematically, if you denote the PRNG’s state-update and output function as
 
-Example:
+$$
+\text{state}_{i+1},\,x_i \;=\; F(\text{state}_i),
+$$
 
-```Python
-np.random.seed(42)
+then setting $\text{state}_0 = \text{Init}(s)$ ensures the sequence $\{x_0, x_1, \dots\}$ is reproducible.
 
-# Generate random numbers
-rand_array1 = np.random.rand(2, 3)
-print(rand_array1)
+```python
+np.random.seed(seed)
+```
 
-# Reset seed and generate again
-np.random.seed(42)
-rand_array2 = np.random.rand(2, 3)
-print(rand_array2)
+* **seed**: any nonnegative integer used to initialize the PRNG’s state.
+
+Example: Deterministic Uniform Floats
+
+```python
+import numpy as np
+
+# Initialize the PRNG with seed=123
+np.random.seed(123)
+
+# Generate two uniform [0,1) samples
+a = np.random.rand(2)
+print(a)
+
+# Re-seed and generate again
+np.random.seed(123)
+b = np.random.rand(2)
+print(b)
 ```
 
 Expected Output:
 
-Both arrays will be identical because the seed was reset:
-
 ```
-[[0.37454012 0.95071431 0.73199394]
- [0.59865848 0.15601864 0.15599452]]
-
-[[0.37454012 0.95071431 0.73199394]
- [0.59865848 0.15601864 0.15599452]]
+[0.69646919 0.28613933]
+[0.69646919 0.28613933]
 ```
+
+Here, both `a` and `b` are identical because the same seed leads to the same initial state and thus the same outputs.
+
+You can apply the same principle to any other NumPy random function—be it `randn()`, `randint()`, `binomial()`, etc.—to obtain reproducible sequences in simulations, experiments, or unit tests.
 
 ### Basic Statistical Measures
 
