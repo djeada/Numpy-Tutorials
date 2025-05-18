@@ -2,7 +2,7 @@
 
 In data manipulation and analysis, adjusting the shape or dimensionality of arrays and matrices is a common task. Reshaping allows you to reorganize data without altering its underlying values, making it suitable for various applications such as data preprocessing, machine learning model input preparation, and visualization. Understanding how to effectively reshape arrays using NumPy's versatile functions is crucial for efficient data handling and computational performance.
 
-### A Mathematical Prelude
+### Mathematical Intro
 
 In linear-algebra terms, an **\$k\$-dimensional array** (or *tensor*) is just an ordered collection of scalars indexed by a Cartesian product of finite sets.
 If
