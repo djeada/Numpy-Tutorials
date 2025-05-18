@@ -111,64 +111,161 @@ print(filtered_array)  # Expected: [2, 3]
 
 ### Sorting
 
-Sorting arrays arranges the elements in a specified order, either ascending or descending. NumPy's `np.sort()` function sorts the array and returns a new sorted array, leaving the original array unchanged. Sorting is fundamental for organizing data, preparing it for search algorithms, and enhancing the readability of datasets.
+Sorting arrays arranges the elements in a specified order, either ascending or descending. NumPy's `np.sort()` function sorts the array and returns a new sorted array, leaving the original array unchanged. Sorting is important for organizing data, preparing it for search algorithms, and enhancing the readability of datasets.
 
 #### Example with 1D Array
 
+Before diving into multi-dimensional sorting, it helps to see how NumPy handles the simplest case: a one-dimensional sequence of values. Here, we’ll demonstrate how `np.sort` reorders the elements of a 1D array in ascending order.
+
 ```python
+import numpy as np
+
 array = np.array([3, 1, 4, 2, 5])
 # Sort the array
 sorted_array = np.sort(array)
-print(sorted_array)  # Expected: [1, 2, 3, 4, 5]
+print(sorted_array)  # Expected: [1 2 3 4 5]
 ```
 
-- `np.sort(array)`: This function sorts the elements of the array in ascending order and returns a new sorted array.
-- Sorting is useful when preparing data for binary search operations, generating ordered lists for reporting, or organizing data for visualization purposes.
+* **`np.sort(array)`**: This function sorts the elements of the array in ascending order and returns a new sorted array.
+* Sorting is useful when preparing data for binary search operations, generating ordered lists for reporting, or organizing data for visualization purposes.
 
-#### Example with 2D Array
+#### Refresher: what the axes mean
+
+Understanding “axes” is key when moving beyond 1D arrays. This refresher clarifies how NumPy labels each dimension in 2D and 3D arrays, so you know exactly which direction you’re sorting along.
+
+2-D array (shape = (rows, cols))
+
+```
+   axis-1  →
+axis-0 ↓   [[a00  a01  a02]
+            [a10  a11  a12]
+            [a20  a21  a22]]
+```
+
+* **axis 0**: runs **down** the rows.
+* **axis 1**: runs **across** the columns.
+
+For a **3-D** array with shape (depth, rows, cols), you have a third direction:
+
+```
+depth (axis-0)
+
+ index 0           index 1
+┌────────────┐ ┌────────────┐
+│ a000 a001  │ │ a100 a101  │  ← axis-2 →
+│ a010 a011  │ │ a110 a111  │
+└────────────┘ └────────────┘
+        ↑
+     axis-1
+```
+
+Think “a stack of 2-D pages”; **axis 0** flips through pages, **axis 1** moves down inside a page, **axis 2** moves right.
+
+##### Sorting a 2-D array
+
+When you have tabular data (rows as records, columns as variables), you may want to sort either within each row or down each column. Here’s how NumPy lets you choose.
 
 ```python
-array_2D = np.array([[3, 1], [4, 2], [5, 0]])
-# Sort the array along the first axis (columns)
-sorted_array_2D = np.sort(array_2D, axis=0)
-print(sorted_array_2D)
+import numpy as np
+
+A = np.array([[3, 1],
+              [4, 2],
+              [5, 0]])
+print(A)
+# [[3 1]
+#  [4 2]
+#  [5 0]]
 ```
 
-Expected output:
-```
-[[3 0]
- [4 1]
- [5 2]]
-```
-
-- `np.sort(array_2D, axis=0)`: The `axis=0` parameter specifies that the sort should be performed along the first axis (i.e., down each column). Each column is sorted independently.
-- Sorting along specific axes is useful in scenarios where you need to order data within rows or columns, such as organizing features in a dataset or preparing data matrices for statistical analysis.
-
-### Advanced Examples and Techniques
-
-Beyond basic searching, filtering, and sorting, NumPy offers more advanced techniques to handle complex data manipulation tasks efficiently.
-
-#### Sorting Along Different Axes
-
-Sorting in multi-dimensional arrays can be performed along different axes to achieve varied ordering based on rows or columns.
+**Sort along axis 1** (within each row):
 
 ```python
-array_2D = np.array([[3, 1], [4, 2], [5, 0]])
-# Sort the array along the second axis (rows)
-sorted_array_2D_axis1 = np.sort(array_2D, axis=1)
-print("Sorted along axis 1:\n", sorted_array_2D_axis1)
+np.sort(A, axis=1)
+# → [[1 3]   # 3 1 → 1 3
+#    [2 4]   # 4 2 → 2 4
+#    [0 5]]  # 5 0 → 0 5
 ```
 
-Expected output:
-```
-Sorted along axis 1:
-[[1 3]
- [2 4]
- [0 5]]
+Each arrow shows a **single row** being rearranged. Useful when every row is an independent record (e.g. each row = one student).
+
+**Sort along axis 0** (within each column):
+
+```python
+np.sort(A, axis=0)
+# → [[3 0]   # column-0: 3 4 5 → 3 4 5  (unchanged)
+#    [4 1]   # column-1: 1 2 0 → 0 1 2  (sorted ↓)
+#    [5 2]]
 ```
 
-- `np.sort(array_2D, axis=1)`: The `axis=1` parameter specifies that the sort should be performed along the second axis (i.e., across each row). Each row is sorted independently.
-- Sorting rows can be useful when each row represents a separate entity, and you need to order elements within each entity, such as sorting scores for different students.
+Arrows run **down** the columns. Handy when every column is an independent variable (e.g. all exam-1 scores, all exam-2 scores, …).
+
+##### Sorting a 3-D array
+
+With three dimensions (“depth, rows, cols”), you can similarly pick which axis to sort along. Imagine each 2D slice as a “page” in a book.
+
+```python
+import numpy as np
+
+B = np.array([[[4, 2],    # depth-0
+               [3, 1]],
+
+              [[7, 5],    # depth-1
+               [6, 0]]])
+print("shape:", B.shape)
+# shape: (2, 2, 2)
+```
+
+We’ll label each element **a_drc** (d = depth, r = row, c = col):
+
+```
+depth-0             depth-1
+[[4    2]           [[7    5]
+ [3    1]]          [6    0]]
+```
+
+**Sort axis 0** (across the two depth “pages”):
+
+```python
+np.sort(B, axis=0)
+```
+
+Result:
+
+```
+depth-0 after sort     depth-1 after sort
+[[4 2]                 [[7 5]
+ [3 0]]                [6 1]]
+```
+
+For each (row, col) pair you look **through** the stack.
+
+**Sort axis 1** (within each page, down the rows):
+
+```python
+np.sort(B, axis=1)
+```
+
+Result:
+
+```
+depth-0                depth-1
+[[3 1]   [[6 0]
+ [4 2]]  [7 5]]
+```
+
+**Sort axis 2** (within each row, across columns):
+
+```python
+np.sort(B, axis=2)
+```
+
+Result:
+
+```
+depth-0                depth-1
+[[2 4]   [[5 7]
+ [1 3]]  [0 6]]
+```
 
 #### Using Argsort
 
@@ -182,6 +279,7 @@ print("Array sorted using indices:\n", array[sorted_indices])
 ```
 
 Expected output:
+
 ```
 Sorted indices:
 [1 3 0 2 4]
