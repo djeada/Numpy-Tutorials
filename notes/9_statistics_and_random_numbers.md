@@ -162,8 +162,6 @@ Expected Output (your values will vary):
 [4 5 6 7 5]
 ```
 
----
-
 #### Poisson Distribution
 
 The **Poisson distribution** models the count of events occurring in a fixed interval of time or space when these events happen with a known constant rate $\lambda$ and independently of the time since the last event.  Its probability mass function is
@@ -193,8 +191,6 @@ Expected Output:
 ```
 [3 4 7 2 6]
 ```
-
----
 
 #### Exponential Distribution
 
