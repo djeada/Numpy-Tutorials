@@ -181,7 +181,7 @@ $$
 Common Special Cases:
 
 |    $p$   | Name          | Unit-Ball in $\mathbb{R}^2$         | Geometric Intuition                              |
-| :------: | ------------- | ----------------------------------- | ------------------------------------------------ |
+| -------- | ------------- | ----------------------------------- | ------------------------------------------------ |
 |     1    | **Manhattan** | Diamond (rotated square) $\diamond$ | Distance measured along axes (like city blocks)  |
 |     2    | **Euclidean** | Circle $\bigcirc$                   | “Straight-line” distance in the plane            |
 | $\infty$ | **Chebyshev** | Axis-aligned square $\square$       | Maximum coordinate difference (chess-king moves) |
