@@ -133,7 +133,7 @@ Expected Output:
 The **binomial distribution** describes the probability of obtaining exactly $k$ successes in $n$ independent Bernoulli trials (each trial with success probability $p$).  Its probability mass function is
 
 $$
-P(X = k) \;=\; \binom{n}{k} p^k (1 - p)^{\,n - k},
+P(X = k) \;=\; \binom{n}{k} p^k (1 - p)^{\,n - k}
 $$
 
 for $k = 0, 1, \dots, n$.  **Generation** here means **sampling** a collection of independent draws $X_1, X_2, \dots$ from this distribution.
@@ -167,7 +167,7 @@ Expected Output (your values will vary):
 The **Poisson distribution** models the count of events occurring in a fixed interval of time or space when these events happen with a known constant rate $\lambda$ and independently of the time since the last event.  Its probability mass function is
 
 $$
-P(X = k) \;=\; \frac{\lambda^k e^{-\lambda}}{k!},
+P(X = k) \;=\; \frac{\lambda^k e^{-\lambda}}{k!}
 $$
 
 for $k = 0, 1, 2, \dots$.  **Generation** means drawing samples whose frequencies of occurrence match this distribution.
@@ -197,7 +197,7 @@ Expected Output:
 The **exponential distribution** is a continuous distribution often used to model waiting times between independent events that occur at a constant average rate.  Its probability density function is
 
 $$
-f(x; \beta) \;=\; \frac{1}{\beta} \exp\!\biggl(-\frac{x}{\beta}\biggr),
+f(x; \beta) \;=\; \frac{1}{\beta} \exp\!\biggl(-\frac{x}{\beta}\biggr)
 $$
 
 for $x \ge 0$ and scale parameter $\beta > 0$.  **Generation** refers to sampling real values whose distribution of inter-arrival times follows this law.
@@ -227,7 +227,7 @@ Expected Output:
 A pseudorandom number generator (PRNG) in NumPy uses an internal **state vector** and a deterministic algorithm (by default, the Mersenne Twister) to produce a sequence of values.  **Seeding** means initializing that state vector from a single integer $s$, so that all subsequent “random” outputs are **fully determined** by $s$.  Mathematically, if you denote the PRNG’s state-update and output function as
 
 $$
-\text{state}_{i+1},\,x_i \;=\; F(\text{state}_i),
+\text{state}_{i+1},\,x_i \;=\; F(\text{state}_i)
 $$
 
 then setting $\text{state}_0 = \text{Init}(s)$ ensures the sequence $\{x_0, x_1, \dots\}$ is reproducible.
