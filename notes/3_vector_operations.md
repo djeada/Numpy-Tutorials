@@ -380,7 +380,7 @@ print(θ_deg)   # → 90.62 °
 
 ### Broadcasting
 
-#### What broadcasting means—formally
+#### What broadcasting means—formally
 
 For any binary **ufunc** $f$ (e.g., `+`, `*`, `np.maximum`), NumPy will try to apply
 
