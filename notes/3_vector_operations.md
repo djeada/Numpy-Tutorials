@@ -87,7 +87,7 @@ v =
 $$
 
 $$
-\text{is a }3\times1\text{ column vector in }\mathbb{R}^3.
+\text{is a }3\times1\text{ column vector in }\mathbb{R}^3
 $$
 
 #### Transpose
@@ -236,7 +236,7 @@ When you enforce a norm constraint (e.g., $||x||_p \le 1$), the shape of that fe
 For $\mathbf{u},\mathbf{v}\in\mathbb{R}^n$ the sum is
 
 $$
-\mathbf{u}+\mathbf{v}= \bigl(u_1+v_1,u_2+v_2,\dots,u_n+v_n\bigr).
+\mathbf{u}+\mathbf{v}= \bigl(u_1+v_1,u_2+v_2,\dots,u_n+v_n\bigr)
 $$
 
 * Commutative $\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}$
@@ -266,7 +266,7 @@ print(res)                  # → [ 6 10  7]
 Given a scalar $\alpha\in\mathbb{R}$ and $\mathbf{u}\in\mathbb{R}^n$,
 
 $$
-\alpha\mathbf{u}= \bigl(\alpha u_1,\alpha u_2,\dots,\alpha u_n\bigr).
+\alpha\mathbf{u}= \bigl(\alpha u_1,\alpha u_2,\dots,\alpha u_n\bigr)
 $$
 
 Multiplies the magnitude by $|\alpha|$; for negative $\alpha$ the direction is flipped (180° rotation).
@@ -355,9 +355,9 @@ From the dot-product identity above:
 
 $$
 \theta = \arccos\!\Bigl(\frac{\mathbf{u}\cdot\mathbf{v}}
-                              {\lVert\mathbf{u}\rVert_2\lVert\mathbf{v}\rVert_2}\Bigr),
+                              {\lVert\mathbf{u}\rVert_2\lVert\mathbf{v}\rVert_2}\Bigr)
 \qquad
-0\le\theta\le\pi.
+0\le\theta\le\pi
 $$
 
 ```python
