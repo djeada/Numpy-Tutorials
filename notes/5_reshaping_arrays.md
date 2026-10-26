@@ -1,318 +1,278 @@
-## Manipulating the Shape of Matrices and Arrays
+# Reshaping arrays: index order, axis meaning, and memory
 
-In data manipulation and analysis, adjusting the shape or dimensionality of arrays and matrices is a common task. Reshaping allows you to reorganize data without altering its underlying values, making it suitable for various applications such as data preprocessing, machine learning model input preparation, and visualization. Understanding how to effectively reshape arrays using NumPy's versatile functions is crucial for efficient data handling and computational performance.
-
-### Mathematical Intro
-
-In linear-algebra terms, an **\$k\$-dimensional array** (or *tensor*) is just an ordered collection of scalars indexed by a Cartesian product of finite sets.
-If
+Reshaping preserves the number of elements:
 
 $$
-\mathbf{A}=\bigl(a_{i_1,i_2,\dots ,i_k}\bigr)
-\quad\text{with}\quad  
-1\le i_j\le n_j,\; j=1,\dots ,k
+\prod_i n_i=\prod_j m_j.
 $$
 
-we say that $shape(\mathbf{A})=(n\_1,n\_2,\dots ,n\_k)$ and that the array lives in the vector space
+That condition makes a shape possible; it does not make the new axes meaningful.
+Changing `(height, width, channels)` into `(channels, height, width)` requires
+an axis permutation, not merely a new tuple with the same product.
+
+## Reshape follows an enumeration of the values
+
+In C order, the last index varies fastest. For a two-dimensional target with
+$n$ columns, flat position $k$ becomes
 
 $$
-\mathbb{R}^{n_1\times n_2\times\!\cdots\!\times n_k} 
+i=\lfloor k/n\rfloor,\qquad j=k\bmod n.
 $$
 
-#### Total size is invariant
-
-The *cardinality* of the indexing set
-
-$$
-N\;=\;\prod_{j=1}^{k}n_j
-$$
-
-equals the number of stored scalars.  Any operation that merely *reshapes* an array must preserve this product; it is therefore a **bijection**
-
-$$
-\varphi:\{1,\dots ,N\}\;\longrightarrow\;\{1,\dots ,m_1\}\times\dots\times\{1,\dots ,m_\ell\}
-\quad\text{with}\quad\prod_{r=1}^{\ell}m_r=N,
-$$
-
-where the left-hand side is usually taken to be the *flattened* (1-D) index.  In NumPy, calling `arr.reshape(m₁,…,m_ℓ)` simply installs the mapping \$\varphi\$ without moving data in memory.
-
-#### Rank-1 vs. Higher-Rank Views
-
-A **vector** in \$\mathbb{R}^N\$ can be *viewed* as
-
-* a row vector: \$\mathbb{R}^{1\times N}\$
-* a column vector: \$\mathbb{R}^{N\times 1}\$
-
-These are not new data structures—only different indexings of the same ordered list of \$N\$ scalars.  Likewise, an RGB image of size \$H\times W\$ can be regarded as
-
-* a matrix in \$\mathbb{R}^{H\times 3W}\$ (channel-concatenated), or
-* a 3-tensor in \$\mathbb{R}^{H\times W\times 3}\$ (height × width × channel),
-
-depending on what a downstream algorithm expects.
-
-#### Reshaping as Vector-Space Isomorphism
-
-Because reshaping is a bijection of index sets, it yields a linear isomorphism of vector spaces:
-
-$$
-\mathcal{R}:\mathbb{R}^{n_1\times\!\cdots\!\times n_k}\;\overset{\cong}{\longrightarrow}\;\mathbb{R}^{m_1\times\!\cdots\!\times m_\ell}
-$$
-
-$$
-\mathcal{R}\bigl(a_{i_1,\dots ,i_k}\bigr)=a_{\varphi^{-1}(j_1,\dots ,j_\ell)}
-$$
-
-Hence **no numerical information is lost or gained**—only the *interpretation* of the indices changes.
-
-### The Basics of Reshaping
-
-Reshaping an array involves changing its structure—such as the number of dimensions or the size of each dimension—while keeping the total number of elements unchanged. This transformation is vital for preparing data in the required format for different computational tasks.
+In Fortran order, the first index varies fastest. `order="C"` and `order="F"`
+describe how indices are traversed when reading and placing values; they do not
+by themselves promise a particular physical memory layout for every result.
 
 ```python
 import numpy as np
-arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
-# Reshape to a 2x5 matrix
-reshaped_arr = arr.reshape(2, 5)
-print(reshaped_arr)
+a = np.arange(6)
+print(a.reshape(2, 3, order="C").tolist())
+print(a.reshape(2, 3, order="F").tolist())
+print(a.reshape(3, -1).tolist())
+print(a.reshape(1, -1).shape, a.reshape(-1, 1).shape)
 ```
 
-Expected output:
-
+```text
+[[0, 1, 2], [3, 4, 5]]
+[[0, 2, 4], [1, 3, 5]]
+[[0, 1], [2, 3], [4, 5]]
+(1, 6) (6, 1)
 ```
-[[ 1  2  3  4  5]
- [ 6  7  8  9 10]]
-```
 
-- `arr.reshape(2, 5)` transforms the original 1D array of 10 elements into a 2x5 matrix.
-- The product of the new dimensions (2 * 5) matches the total number of elements in the original array, ensuring a valid reshape.
-- Reshaping is useful when transitioning data between different formats, such as converting a flat list of features into a matrix suitable for machine learning algorithms that expect 2D input.
+`-1` asks NumPy to infer one dimension from the element count. It can appear at
+most once. Six elements can form `(3,2)`, but cannot form `(4,k)` for any
+integer $k$.
 
-### From One Dimension to Many
+## Transpose changes which index names a value
 
-Transforming 1D arrays into multi-dimensional structures is a frequent requirement, especially when dealing with data that inherently possesses multiple dimensions, such as images or time-series data.
+For a matrix, transpose means $(A^\top)_{ij}=A_{ji}$.
+Reshaping in C order instead preserves the C-order flat sequence.
 
 ```python
-arr = np.array([1, 2, 3, 4, 5, 6])
+import numpy as np
 
-# Convert to 1x6 row vector
-row_vector = arr.reshape(1, -1)
-print("Row Vector:\n", row_vector)
+A = np.arange(6).reshape(2, 3)
+transposed = A.T
+reshaped = A.reshape(3, 2)
 
-# Convert to 6x1 column vector
-column_vector = arr.reshape(-1, 1)
-print("\nColumn Vector:\n", column_vector)
+print(A.tolist())
+print(transposed.tolist())
+print(reshaped.tolist())
+print(np.array_equal(transposed, reshaped))
+print(np.shares_memory(A, transposed), np.shares_memory(A, reshaped))
 ```
 
-Expected output:
-
-```
-Row Vector:
- [[1 2 3 4 5 6]]
-
-Column Vector:
- [[1]
- [2]
- [3]
- [4]
- [5]
- [6]]
+```text
+[[0, 1, 2], [3, 4, 5]]
+[[0, 3], [1, 4], [2, 5]]
+[[0, 1], [2, 3], [4, 5]]
+False
+True True
 ```
 
-- Using `-1` in the `reshape()` method allows NumPy to automatically determine the appropriate dimension size based on the total number of elements.
-- `arr.reshape(1, -1)` converts the array into a row vector with 1 row and as many columns as needed.
-- `arr.reshape(-1, 1)` converts the array into a column vector with as many rows as needed and 1 column.
-- Reshaping arrays into row or column vectors is useful when performing matrix multiplications or when interfacing with libraries that require specific input shapes.
+Both results have shape `(3,2)` and share storage with `A`, yet contain
+different arrangements. Shape and memory sharing do not establish semantic
+equivalence.
 
-### Higher-Dimensional Reshaping
+## Image channels: a plausible shape can hide scrambled data
 
-Reshaping isn't limited to two dimensions; NumPy allows the creation of arrays with three or more dimensions, which are useful in more complex data representations like 3D models, color images, or time-series data across multiple sensors.
+Suppose an image batch has shape `(batch, height, width, channels)`.
+To make it `(batch, channels, height, width)`, the desired identity is
+
+$$
+Y_{b,c,h,w}=X_{b,h,w,c}.
+$$
+
+Use `moveaxis` or `transpose` to express that identity.
 
 ```python
-# Create a 1D array with 12 elements
-arr = np.arange(12)
+import numpy as np
 
-# Reshape to a 2x3x2 3D array
-reshaped_3d = arr.reshape(2, 3, 2)
-print("3D Array:\n", reshaped_3d)
+image = np.array([[
+    [[10, 11, 12], [20, 21, 22]],
+    [[30, 31, 32], [40, 41, 42]],
+]])  # shape (1, 2, 2, 3); each pixel lists its three channels
+
+correct = np.moveaxis(image, -1, 1)
+scrambled = image.reshape(1, 3, 2, 2)
+
+print(image.shape, correct.shape, scrambled.shape)
+print(correct[0, 0].tolist())    # channel zero over all pixels
+print(scrambled[0, 0].tolist())
+print(np.array_equal(correct, image.transpose(0, 3, 1, 2)))
+print(np.shares_memory(image, correct))
 ```
 
-Expected output:
-
-```
-3D Array:
- [[[ 0  1]
-  [ 2  3]
-  [ 4  5]]
-
- [[ 6  7]
-  [ 8  9]
-  [10 11]]]
+```text
+(1, 2, 2, 3) (1, 3, 2, 2) (1, 3, 2, 2)
+[[10, 20], [30, 40]]
+[[10, 11], [12, 20]]
+True
+True
 ```
 
-- `np.arange(12)` creates a 1D array with elements from 0 to 11.
-- `arr.reshape(2, 3, 2)` reshapes the array into a 3D structure with dimensions 2x3x2.
-- The total number of elements remains consistent (2 * 3 * 2 = 12).
-- 3D reshaping is commonly used in image processing where images are represented as 3D arrays (height x width x color channels) or in processing volumetric data like medical scans.
+The wrong reshape mixes different channels and pixels. A downstream model might
+accept the shape and still receive incorrect data. If a consumer requires a
+C-contiguous channel-first buffer, use `np.ascontiguousarray(correct)` after
+moving the axis; that may require a copy.
 
-### Flattening Arrays
+## Strides explain how a view can avoid moving elements
 
-Converting multi-dimensional arrays back to a single dimension is known as flattening. This operation is useful when you need to preprocess data for algorithms that require input in a specific shape or when simplifying data for certain analyses.
+For a numeric array with byte strides $s_0,\ldots,s_{d-1}$, the byte address at
+index $(i_0,\ldots,i_{d-1})$ is
+
+$$
+\text{address}(i)=\text{address of first logical element}+\sum_k i_ks_k.
+$$
+
+Strides can be negative or skip elements. Arrays are not all contiguous grids
+in memory.
 
 ```python
-arr = np.array([[1, 2, 3], [4, 5, 6]])
+import numpy as np
 
-# Using flatten
-flat_arr = arr.flatten()
-print("Using flatten:\n", flat_arr)
+A = np.arange(12, dtype=np.int64).reshape(3, 4)
+print(A.itemsize, A.strides)
+print(A.T.strides)
+print(A[:, ::-1].strides)
+print(A[:, ::-1][0].tolist())
 
-# Using reshape
-one_d_arr = arr.reshape(-1)
-print("\nUsing reshape:\n", one_d_arr)
+# (row=2, col=1) lies 2*32 + 1*8 = 72 bytes from A[0, 0].
+print(2 * A.strides[0] + A.strides[1], A[2, 1])
 ```
 
-Expected output:
-
-```
-Using flatten:
- [1 2 3 4 5 6]
-
-Using reshape:
- [1 2 3 4 5 6]
+```text
+8 (32, 8)
+(8, 32)
+(32, -8)
+[3, 2, 1, 0]
+72 9
 ```
 
-- `arr.flatten()` creates a copy of the original array in a 1D format.
-- `arr.reshape(-1)` reshapes the array into a 1D array without creating a copy, providing a view of the original data.
-- Flattening can be used when preparing data for machine learning models that expect input features as flat vectors or when performing certain types of statistical analyses that require data in a single dimension.
+Transposition swaps strides. Reversing columns starts at the last column and
+walks backward by eight bytes. Creating these views changes metadata; a later
+operation that computes or copies values still has to visit those values.
 
-### Practical Applications and Considerations
+## Reshape can copy, and noncontiguous does not always mean “must copy”
 
-Reshaping arrays is a fundamental skill in data science and machine learning, facilitating the preparation and transformation of data to fit various computational models and visualization requirements. Here are some practical applications and important considerations when reshaping arrays:
+`reshape` returns a view when the requested layout can be expressed with strides;
+otherwise it copies. `ravel` produces a contiguous one-dimensional result,
+copying when necessary. `flatten` always copies.
 
-- Reshaping is used in **data preparation** to ensure the data conforms to the input shape requirements of machine learning models. For example, a list of pixel values can be converted into a 2D image matrix or a 3D tensor for convolutional neural networks.
-- During **batch processing**, data is organized into batches to facilitate efficient training and processing. An example is reshaping data into batches of samples to be input into a neural network.
-- **Data augmentation** often involves reshaping to create variations in datasets. For example, images can be flipped or rotated to increase the diversity of training data for better model generalization.
-- In **memory management**, reshaping can help optimize memory usage. For instance, using reshaped views is more memory-efficient than creating copies, as views avoid duplicating data in memory.
-- **Matrix operations** often require reshaping to align data structures for mathematical computations. For example, vectors may be reshaped into matrices to enable matrix multiplication or inversion in linear algebra tasks.
-
-### Reshape Examples and Edge Cases
-
-Understanding both standard and edge case scenarios in reshaping helps in writing robust and error-free code.
-
-#### Example: Invalid Reshaping
-
-Attempting to reshape an array into an incompatible shape—where the total number of elements does not match—will raise an error. This ensures data integrity by preventing mismatched transformations.
+A noncontiguous array can still reshape without a copy when its stride pattern
+is regular enough:
 
 ```python
-arr = np.array([1, 2, 3, 4, 5, 6])
+import numpy as np
 
-try:
-    invalid_reshape = arr.reshape(3, 3)
-except ValueError as e:
-    print("Error:", e)
+A = np.arange(24).reshape(4, 6)
+stepped = A[:, ::2]  # keep columns 0, 2, 4
+flat_view = stepped.reshape(-1)
+flat_contiguous = stepped.ravel()
+flat_copy = stepped.flatten()
+
+print(stepped.flags.c_contiguous)
+print(np.shares_memory(stepped, flat_view))
+print(np.shares_memory(stepped, flat_contiguous))
+print(np.shares_memory(stepped, flat_copy))
+flat_view[0] = -99
+print(A[0, 0], flat_contiguous[0], flat_copy[0])
 ```
 
-Expected output:
-
+```text
+False
+True
+False
+False
+-99 0 0
 ```
-Error: cannot reshape array of size 6 into shape (3,3)
-```
 
-- The original array has 6 elements.
-- Attempting to reshape it into a 3x3 matrix requires 9 elements (3 * 3), which is not possible, resulting in a `ValueError`.
-- This scenario emphasizes the importance of ensuring that the product of the new dimensions matches the total number of elements in the original array when reshaping.
-
-#### Example: Reshaping for Machine Learning
-
-Machine learning models often require data in specific shapes. For example, convolutional neural networks expect image data with channel dimensions.
+The selected values are every second element of the original buffer, including
+across row boundaries. A single stride can describe the flattened view.
+By contrast, flattening a transposed rectangular matrix in C order generally
+needs a different traversal:
 
 ```python
-# Example: Reshape a batch of images (28x28) to (batch_size, 28, 28, 1)
-batch_size = 100
-images = np.random.rand(batch_size, 28, 28)
+import numpy as np
 
-# Reshape to include the channel dimension
-images_reshaped = images.reshape(batch_size, 28, 28, 1)
-print("Reshaped Images Shape:", images_reshaped.shape)
+A = np.arange(12).reshape(3, 4)
+T = A.T
+flat = T.reshape(-1)  # default C-order enumeration of T
+
+print(flat.tolist())
+print(np.shares_memory(T, flat))
 ```
 
-Expected output:
-
+```text
+[0, 4, 8, 1, 5, 9, 2, 6, 10, 3, 7, 11]
+False
 ```
-Reshaped Images Shape: (100, 28, 28, 1)
-```
 
-- `np.random.rand(batch_size, 28, 28)` creates a batch of 100 grayscale images, each of size 28x28 pixels.
-- `images.reshape(batch_size, 28, 28, 1)` adds a channel dimension, converting the shape to (100, 28, 28, 1), which is required by many deep learning frameworks.
-- Adding or modifying dimensions is crucial when preparing image data for training convolutional neural networks, ensuring compatibility with the model's expected input shape.
+Check sharing with `np.shares_memory` if mutation or memory use depends on it.
+A non-`None` `base` can refer to an intermediate copy, so it does not prove that
+a result shares memory with the particular input you care about.
 
-### Additional Reshaping Techniques
+## Singleton axes and empty arrays need explicit intent
 
-Beyond the basic `reshape` and `flatten`, NumPy offers other methods to manipulate array shapes effectively:
+Adding an axis of length one does not add elements. Removing every singleton
+axis can accidentally remove a batch axis when the batch happens to contain
+one item. Prefer `squeeze(axis=...)` when a particular axis is meant to go away.
 
-I. **`resize()`:** Changes the shape of an array in-place, which can alter the original array.
-  
 ```python
-arr = np.array([1, 2, 3, 4, 5, 6])
-arr.resize((2, 3))
-print(arr)
+import numpy as np
+
+X = np.zeros((1, 2, 1))
+print(X.squeeze().shape)
+print(X.squeeze(axis=2).shape)
+print(np.expand_dims(np.array([5, 6]), axis=0).shape)
+
+for a, target in ((np.arange(6), (4, -1)),
+                  (np.empty((0, 3)), (0, -1))):
+    try:
+        a.reshape(target)
+    except ValueError:
+        print("cannot infer", target)
+print(np.empty((0, 3)).reshape(0, 1, 3).shape)
 ```
 
-Expected output:
-
+```text
+(2,)
+(1, 2)
+(1, 2)
+cannot infer (4, -1)
+cannot infer (0, -1)
+(0, 1, 3)
 ```
-[[1 2 3]
-[4 5 6]]
-```
 
-II. **`swapaxes()`:** Swaps two axes of an array, useful for changing the orientation of multi-dimensional data.
-  
+The empty case is ambiguous: $0\cdot k=0$ for every $k$, so NumPy cannot infer
+a unique missing dimension. Explicit zero-size shapes are valid.
+
+## Resize is not reshape with padding
+
+`np.resize` can change the number of elements. When enlarging a nonempty array,
+it repeats its flattened data; it does not fill the new entries with zeros.
+This is also different from the mutating `ndarray.resize` method.
+
 ```python
-arr = np.array([[1, 2, 3], [4, 5, 6]])
-swapped = arr.swapaxes(0, 1)
-print(swapped)
+import numpy as np
+
+a = np.array([1, 2, 3])
+print(np.resize(a, (2, 4)).tolist())
+print(np.pad(a, (0, 5), constant_values=0).reshape(2, 4).tolist())
+print(a.tolist())
 ```
 
-Expected output:
-
-```
-[[1 4]
-[2 5]
-[3 6]]
+```text
+[[1, 2, 3, 1], [2, 3, 1, 2]]
+[[1, 2, 3, 0], [0, 0, 0, 0]]
+[1, 2, 3]
 ```
 
-III. **`transpose()`:** Permutes the dimensions of an array, similar to `swapaxes` but more general.
-  
-```python
-arr = np.array([[1, 2, 3], [4, 5, 6]])
-transposed = arr.transpose()
-print(transposed)
-```
+For padding, state the fill policy with `np.pad` or allocate and fill a destination.
+For rearranging axes, use an axis permutation. For regrouping a fixed sequence
+of elements, use `reshape`.
 
-Expected output:
-
-```
-[[1 4]
- [2 5]
- [3 6]]
-```
-
-- These additional methods provide more flexibility in manipulating array dimensions, allowing for complex data transformations required in various computational tasks.
-- Transposing and swapping axes are commonly used in data preprocessing steps, such as preparing data for matrix multiplication or reorienting image data for different processing pipelines.
-
-### Summary Table for Manipulating Dimensions
-
-This table summarizes various operations for manipulating the dimensions of arrays in NumPy, along with examples and descriptions of each operation.
-
-| Operation            | Method/Function      | Description                                                                                          | Example Code                                                                                          | Example Output                                     |
-|----------------------|----------------------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| **Reshape**          | `reshape(new_shape)` | Changes the shape of an array without altering its data. Total elements must remain the same.        | `arr = np.array([1, 2, 3, 4, 5, 6])` <br> `reshaped = arr.reshape(2, 3)`                                | `[[1 2 3]` <br> `[4 5 6]]`                         |
-| **Row Vector**       | `reshape(1, -1)`     | Converts a 1D array to a 1xN row vector.                                                             | `row_vector = arr.reshape(1, -1)`                                                                       | `[[1 2 3 4 5 6]]`                                  |
-| **Column Vector**    | `reshape(-1, 1)`     | Converts a 1D array to an Nx1 column vector.                                                         | `column_vector = arr.reshape(-1, 1)`                                                                    | `[[1]` <br> `[2]` <br> `[3]` <br> `[4]` <br> `[5]` <br> `[6]]` |
-| **Flatten**          | `flatten()`          | Flattens a multi-dimensional array into a 1D array, returns a copy.                                  | `flat_arr = np.array([[1, 2, 3], [4, 5, 6]]).flatten()`                                                | `[1 2 3 4 5 6]`                                    |
-| **Flatten with Reshape** | `reshape(-1)`    | Flattens a multi-dimensional array into a 1D array, returns a view.                                  | `one_d_arr = np.array([[1, 2, 3], [4, 5, 6]]).reshape(-1)`                                             | `[1 2 3 4 5 6]`                                    |
-| **3D Reshape**       | `reshape(new_shape)` | Converts a 1D array into a 3D array.                                                                 | `reshaped_3d = np.arange(12).reshape(2, 3, 2)`                                                          | `[[[ 0  1]` <br> ` [ 2  3]` <br> ` [ 4  5]]` <br> `[[ 6  7]` <br> ` [ 8  9]` <br> ` [10 11]]]`         |
-| **Transpose**        | `transpose()`        | Permutes the dimensions of an array.                                                                 | `transposed = np.array([[1, 2, 3], [4, 5, 6]]).transpose()`                                            | `[[1 4]` <br> `[2 5]` <br> `[3 6]]`                 |
-| **Resize**           | `resize(new_shape)`  | Changes the shape and size of an array, modifying the array in-place.                                 | `arr = np.array([1, 2, 3, 4, 5, 6])` <br> `arr.resize(2, 3)`                                            | `[[1 2 3]` <br> `[4 5 6]]`                         |
-| **Expand Dimensions**| `expand_dims(a, axis)` | Expands the shape of an array by inserting a new axis.                                              | `expanded = np.expand_dims(np.array([1, 2, 3]), axis=0)`                                                | `[[1 2 3]]`                                        |
-| **Squeeze Dimensions** | `squeeze()`       | Removes single-dimensional entries from the shape of an array.                                       | `squeezed = np.array([[[1], [2], [3]]]).squeeze()`                                                     | `[1 2 3]`                                          |
+See NumPy's [reshape](https://numpy.org/doc/stable/reference/generated/numpy.reshape.html),
+[moveaxis](https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html), and
+[copies and views](https://numpy.org/doc/stable/user/basics.copies.html) references.

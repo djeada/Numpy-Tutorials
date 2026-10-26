@@ -1,297 +1,230 @@
-## Accessing and Modifying Array Elements
+# Accessing and modifying elements: selection versus shared storage
 
-In NumPy, arrays are data structures that store elements in a grid-like fashion. Understanding how to access and modify these elements is helpful for efficient data manipulation and analysis. NumPy arrays are 0-indexed, meaning the first element is accessed with index 0, the second with index 1, and so forth. Mastering indexing and slicing techniques allows you to retrieve, update, and manipulate specific parts of an array with ease.
+Indexing answers two questions: **which values are selected**, and **whether the
+selection shares storage with the original**. The second question determines
+whether a later assignment changes your input.
 
-### Mathematical Background
+All indices below start at zero. For a matrix $A\in\mathbb R^{m\times n}$,
+`A[i, j]` denotes $A_{ij}$, with $0\leq i<m$ and $0\leq j<n$.
 
-Arrays in NumPy are best formalized as **discrete tensor-valued functions**
+## A slice excludes its stop; an integer index removes an axis
 
-First let's introduce the shorthand
-
-$$
-[n_k]=\{0,1,\dots,n_k-1\}
-$$
-
-Then you can simply say
-
-$$
-A\colon\prod_{k=1}^d[n_k]\longrightarrow\mathbb F,
-\qquad
-(i_1,\dots,i_d) A_{i_1\cdots i_d}
-$$
-
-Equivalently, one often abbreviates
-
-$$
-A = \bigl(A_{i_1\cdots i_d}\bigr)_{0\le i_k < n_k}
-\in
-\mathbb F^{n_1\times\cdots\times n_d}
-$$
-
-where $\mathbb F=\mathbb R$ or $\mathbb C$.  *Indexing* a single element is the evaluation $A(i_1,\dots ,i_d)=A_{i_1,\dots ,i_d}$; a *slice* such as
-
-$$
-A_{[r_1:r_2,c_1:c_2]}
-= \{A_{i,j}\mid r_1 \le i < r_2,c_1 \le j < c_2\}
-$$
-
-
-is the restriction of $A$ to the Cartesian sub-domain $[r_1,r_2)\times[c_1,c_2)$, while *assignment* $A_{i_1,\dots ,i_d}\leftarrow \alpha$ re-defines the function at the chosen point(s).  Because the domain is a regular grid that NumPy stores in row-major (C-order) or column-major (Fortran-order) contiguous memory, these operations reduce to constant-time pointer arithmetic, giving mathematically natural vector– and matrix-manipulations the computational efficiency of low-level loops without writing any Python loops at all.
-
-```
-# 1-D array (vector) layout and indexing
-Index →   0    1    2    3
-Value   [ a0 ][ a1 ][ a2 ][ a3 ]
-               ↑
-           A[1] = a1
-```
-
-```
-# 3 × 4 matrix A and a 2 × 2 slice A[0:2,1:3]
-            columns →
-          0      1      2      3
-row 0  [ a00 |  a01 |  a02 |  a03 ]
-row 1  [ a10 |  a11 |  a12 |  a13 ]
-row 2  [ a20 |  a21 |  a22 |  a23 ]
-
-Slice A[0:2,1:3] (rows 0–1, cols 1–2)
-          1      2
-row 0  [ a01 |  a02 ]
-row 1  [ a11 |  a12 ]
-```
-
-### Accessing 1-D Array Elements
-
-One-dimensional (1-D) arrays are simple lists of elements where each element can be accessed using its unique index. Accessing elements in a 1-D array is straightforward and forms the basis for more complex operations in multi-dimensional arrays.
+For a positive step, `a[start:stop:step]` visits indices
+$start,start+step,\ldots$ strictly below `stop`. With a negative step the direction
+and default endpoints reverse. `a[::-1]` therefore reverses an axis.
 
 ```python
 import numpy as np
-# Creating a 1D array
-arr = np.array([1, 2, 3, 4])
-# Accessing the second element (index 1)
-print(arr[1])
+
+a = np.arange(8)
+print(a[1:7:2].tolist())
+print(a[-1])
+print(a[::-1].tolist())
+print(a[5:1:-2].tolist())
+
+A = np.arange(12).reshape(3, 4)
+print(A[1, 2])
+print(A[:2, 1:3].tolist())
+print(A[1].shape, A[1:2].shape)
+print(A[:, 1].shape, A[:, 1:2].shape)
 ```
 
-Expected output:
-
+```text
+[1, 3, 5]
+7
+[7, 6, 5, 4, 3, 2, 1, 0]
+[5, 3]
+6
+[[1, 2], [5, 6]]
+(4,) (1, 4)
+(3,) (3, 1)
 ```
-2
+
+`A[:, 1:2]` retains a column axis. This matters when the result will be
+broadcast against another matrix. A slice extending beyond the end is clipped;
+a single out-of-bounds integer index raises `IndexError`.
+
+## Basic slices are views; integer-array selections are copies
+
+For ordinary numeric arrays, a basic slice can be described by an offset and
+strides into the existing buffer. Selecting arbitrary integer positions gathers
+values into a separate buffer.
+
+```python
+import numpy as np
+
+a = np.array([10, 20, 30, 40])
+window = a[1:3]       # basic slice: a view
+gathered = a[[1, 2]]  # advanced indexing: a copy
+detached = a[1:3].copy()
+
+window[0] = -1
+gathered[1] = 999
+print(a.tolist())
+print(gathered.tolist())
+print(detached.tolist())
+print(np.shares_memory(a, window), np.shares_memory(a, gathered))
 ```
 
-- `arr[1]` accesses the element at index 1 of the array `arr`, which is the second element, `2`.
-- NumPy's indexing starts at 0, so `arr[0]` would return `1`.
-- Accessing specific elements is useful when you need to retrieve data points for calculations, such as fetching a particular measurement from a dataset for analysis.
+```text
+[10, -1, 30, 40]
+[20, 999]
+[20, 30]
+True False
+```
 
-### Accessing 2-D Array Elements
+The assignment `window[0] = -1` updates `a[1]`. Modifying `gathered` or
+`detached` does not update `a`. Use `np.shares_memory` when investigating a
+specific pair of arrays; `b.base is a` is not a reliable general test because
+a view may refer to an earlier owner in a chain of views.
 
-Two-dimensional (2-D) arrays, or matrices, consist of rows and columns, allowing for more complex data structures. Accessing elements in a 2-D array requires specifying both the row and column indices.
+These copying rules describe **reading** a selection. Direct indexed assignment
+has different behavior: `a[[1, 2]] = values` writes to `a`.
 
-Let's consider the following matrix:
+## Chained indexing can silently throw away an update
+
+Boolean indexing also gathers a copy. Consequently, `a[mask][0] = value` updates
+a temporary, while `a[mask] = value` updates the original array.
+
+```python
+import numpy as np
+
+a = np.array([1, 6, 8, 2])
+mask = a > 5
+a[mask][0] = 100
+print(a.tolist())
+
+a[mask] = -1
+print(a.tolist())
+
+# To change only the first matching entry, select its original index.
+b = np.array([1, 6, 8, 2])
+first = np.flatnonzero(b > 5)[0]  # assumes at least one match
+b[first] = 100
+print(b.tolist())
+```
+
+```text
+[1, 6, 8, 2]
+[1, -1, -1, 2]
+[1, 100, 8, 2]
+```
+
+If there might be no match, check the size of `np.flatnonzero(...)` before taking
+element zero. Also remember that `mask` records the condition when it was
+computed; changing `a` does not recompute an existing mask.
+
+## Two index arrays select pairs, not a rectangular submatrix
+
+Given row indices $r_k$ and column indices $c_k$, `A[rows, cols]` selects
+$A_{r_k,c_k}$. To select every combination $A_{r_i,c_j}$, use `np.ix_`
+or reshape the row indices to a column so that the indices broadcast.
+
+```python
+import numpy as np
+
+A = np.arange(12).reshape(3, 4)
+rows = np.array([0, 2])
+cols = np.array([1, 3])
+
+paired = A[rows, cols]
+rectangle = A[np.ix_(rows, cols)]
+print(A.tolist())
+print(paired.tolist(), paired.shape)
+print(rectangle.tolist(), rectangle.shape)
+np.testing.assert_array_equal(rectangle, A[rows[:, None], cols])
+```
+
+```text
+[[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]]
+[1, 11] (2,)
+[[1, 3], [9, 11]] (2, 2)
+```
+
+The first selection is $(A_{0,1},A_{2,3})=(1,11)$.
+The rectangle also includes $A_{0,3}=3$ and $A_{2,1}=9$.
+Both selections above are advanced indexing and therefore return copies.
+
+## Repeated indices do not make `+=` a counting operation
+
+An expression like `a[idx] += 1` gathers selected values, modifies the temporary,
+and writes values back. When an index repeats, this does not accumulate one
+increment per occurrence. `np.add.at` performs the repeated updates.
+
+```python
+import numpy as np
+
+buffered = np.zeros(3, dtype=np.int64)
+buffered[[0, 0, 2]] += 1
+print(buffered.tolist())
+
+accumulated = np.zeros(3, dtype=np.int64)
+np.add.at(accumulated, [0, 0, 2], 1)
+print(accumulated.tolist())
+```
+
+```text
+[1, 0, 1]
+[2, 0, 1]
+```
+
+This distinction matters in histograms, graph degrees, and scatter-add algorithms.
+Do not rely on a particular write order when repeated indices are assigned
+different values.
+
+A concrete aggregation problem: events have group labels $g_i$ and amounts $w_i$.
+The desired total for group $j$ is
 
 $$
-\begin{bmatrix}
-7 & 1 & 2 & 6 \\
-6 & 4 & 9 & 3 \\
-2 & 1 & 4 & 5 \\
-2 & 7 & 3 & 8 \\
-\end{bmatrix}
+t_j=\sum_{\{i:g_i=j\}}w_i.
 $$
 
-To retrieve the value `9` from the matrix, which is located at the second row and third column:
+```python
+import numpy as np
+
+group = np.array([0, 2, 0, 2])
+amount = np.array([5, 7, 11, 13])
+totals = np.zeros(3, dtype=np.int64)
+np.add.at(totals, group, amount)
+
+print(totals.tolist())
+print(np.bincount(group, weights=amount, minlength=3).tolist())
+```
+
+```text
+[16, 0, 20]
+[16.0, 0.0, 20.0]
+```
+
+Group zero receives $5+11=16$, group two receives $7+13=20$, and group one
+receives zero. `bincount` requires nonnegative integer labels; its weighted
+form returns floating values, so consider precision if accumulating very large
+integers.
+
+## Broadcasting assignments still obey selection shape
+
+Assignment does not require a separate right-hand value for every selected entry.
+A compatible shape can broadcast: a vector of column values can fill several rows.
 
 ```python
-# Creating a 2D array (matrix)
-arr = np.array([
-  [7, 1, 2, 6], 
-  [6, 4, 9, 3], 
-  [2, 1, 4, 5], 
-  [2, 7, 3, 8]
-])
-# Accessing the element at row index 1 and column index 2
-print(arr[1, 2])
+import numpy as np
+
+A = np.zeros((3, 4), dtype=np.int64)
+A[:2, 1:3] = [10, 20]  # selection shape (2, 2), values shape (2,)
+print(A.tolist())
+
+A[:, 0] = [1, 2, 3]
+print(A.tolist())
 ```
 
-Expected output:
-```
-9
-```
-
-- `arr[1, 2]` accesses the element at the second row (`index 1`) and third column (`index 2`), which is `9`.
-- In 2-D arrays, the first index corresponds to the row, and the second index corresponds to the column.
-- Retrieving specific elements from a matrix is essential in applications like image processing, where you might need to access pixel values, or in linear algebra operations where specific matrix elements are manipulated.
-
-### Modifying Array Elements
-
-One of the powerful features of NumPy arrays is their mutability, allowing you to change elements after the array has been created. Modifying array elements is as simple as assigning a new value to a specific index.
-
-```python
-# Creating a 1D array
-arr = np.array([1, 2, 3, 4])
-# Modifying the third element (index 2)
-arr[2] = 5
-print(arr)
+```text
+[[0, 10, 20, 0], [0, 10, 20, 0], [0, 0, 0, 0]]
+[[1, 10, 20, 0], [2, 10, 20, 0], [3, 0, 0, 0]]
 ```
 
-Expected output:
-```
-[1 2 5 4]
-```
+The shape and dtype of the destination remain fixed. Assigning a fractional value
+to this integer array would not turn it into a floating array.
 
-- `arr[2] = 5` assigns the value `5` to the element at index `2`, changing the third element from `3` to `5`.
-- The array `arr` is updated in place, reflecting the change immediately.
-- Modifying array elements is useful in scenarios where data needs to be updated based on computations or user input, such as adjusting sensor readings in real-time or correcting data anomalies in a dataset.
-
-### Slicing Arrays
-
-Slicing is a technique used to extract portions of an array, resulting in a subarray that shares data with the original array. This method is efficient and allows for selective data manipulation without copying the entire array.
-
-#### 1-D Array Slicing
-
-For one-dimensional arrays, slicing uses the `start:stop:step` notation. Each parameter is optional and can be omitted to use default values:
-
-- **Start:** The beginning index of the slice (inclusive). Defaults to `0` if omitted.
-- **Stop:** The end index of the slice (exclusive). Defaults to the length of the array if omitted.
-- **Step:** The interval between indices. Defaults to `1` if omitted.
-
-```python
-# Creating a 1D array
-arr = np.array([1, 2, 3, 4])
-# Slicing the array with different parameters
-print(arr[::2])  # Every second element
-print(arr[1:])   # From the second element to the end
-print(arr[:-3])  # From the start to the third-last element
-```
-
-Expected output:
-
-```
-[1 3]
-[2 3 4]
-[1]
-```
-
-- `arr[::2]` retrieves every second element, resulting in `[1, 3]`.
-- `arr[1:]` retrieves elements from the second element to the end, resulting in `[2, 3, 4]`.
-- `arr[:-3]` retrieves elements from the start up to but not including the third-last element, resulting in `[1]`.
-- Slicing is commonly used for tasks like selecting specific data ranges for analysis, creating training and testing datasets in machine learning, or extracting features from a dataset for further processing.
-
-#### 2-D Array Slicing
-
-In two-dimensional arrays, slicing can be applied to both rows and columns simultaneously. The syntax `arr[start_row:end_row, start_col:end_col]` allows for precise extraction of submatrices.
-
-```python
-# Creating a 2D array (matrix)
-arr = np.array([
-  [7, 1, 2, 6], 
-  [6, 4, 9, 3], 
-  [2, 1, 4, 5], 
-  [2, 7, 3, 8]
-])
-# Slicing the array to get the first two rows and the second and third columns
-print(arr[0:2, 1:3])
-```
-
-Expected output:
-
-```
-[[1 2]
- [4 9]]
-```
-
-- `arr[0:2, 1:3]` slices the array to include rows with indices `0` and `1` (the first two rows) and columns with indices `1` and `2` (the second and third columns).
-- The resulting subarray is:
-
-```
-[[1 2]
- [4 9]]
-```
-
-- Slicing 2-D arrays is useful in image processing for selecting specific regions of an image, in data analysis for extracting particular features, or in machine learning for selecting subsets of a feature matrix.
-
-#### More Slicing Examples
-
-Exploring additional slicing scenarios can enhance your ability to manipulate arrays effectively.
-
-```python
-# Slicing the array to get the first three rows and columns from the third onwards
-print(arr[:3, 2:])
-```
-
-Expected output:
-
-```
-[[2 6]
- [9 3]
- [4 5]]
-```
-
-- `arr[:3, 2:]` slices the array to include rows with indices `0`, `1`, and `2` (the first three rows) and columns starting from index `2` to the end (the third and fourth columns).
-- The resulting subarray is:
-
-```
-[[2 6]
- [9 3]
- [4 5]]
-```
-
-- This type of slicing is beneficial when you need to separate data into different sections for analysis, such as dividing a dataset into training and validation sets or isolating specific features for feature engineering.
-
-### Practical Applications
-
-Understanding how to access and modify array elements opens up a wide range of practical applications in data science, machine learning, engineering, and more. Here are some common scenarios where these techniques are essential.
-
-#### Accessing and Modifying Multiple Elements
-
-Beyond single-element access, you can manipulate multiple elements simultaneously using slicing or advanced indexing techniques. This capability allows for efficient data updates and transformations.
-
-```python
-# Creating a 1D array
-arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
-# Modifying multiple elements
-arr[2:5] = [10, 11, 12]
-print(arr)
-```
-
-Expected output:
-
-```
-[ 1  2 10 11 12  6  7  8]
-```
-
-- `arr[2:5] = [10, 11, 12]` assigns the values `10`, `11`, and `12` to the elements at indices `2`, `3`, and `4`, respectively.
-- The original array `[1, 2, 3, 4, 5, 6, 7, 8]` is updated to `[1, 2, 10, 11, 12, 6, 7, 8]`.
-- Batch updating elements is useful in data cleaning processes where multiple data points need correction or transformation, such as replacing outliers or applying scaling factors to specific sections of a dataset.
-
-#### Boolean Indexing
-
-Boolean indexing allows for selecting elements based on conditional statements, enabling dynamic and flexible data selection without explicit loops.
-
-```python
-# Creating a 1D array
-arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
-# Boolean indexing
-bool_idx = arr > 5
-print(arr[bool_idx])
-```
-
-Expected output:
-
-```
-[6 7 8]
-```
-
-- `arr > 5` creates a boolean array `[False, False, False, False, False, True, True, True]`.
-- `arr[bool_idx]` uses this boolean array to filter and retrieve elements where the condition `arr > 5` is `True`, resulting in `[6, 7, 8]`.
-- Boolean indexing is widely used in data analysis for filtering datasets based on specific criteria, such as selecting all records where a sales figure exceeds a certain threshold or extracting all entries that meet particular quality standards.
-
-### Summary Table
-
-| Operation               | Description                               | Example Code                                     | Expected Output                       |
-|-------------------------|-------------------------------------------|-------------------------------------------------|--------------------------------------|
-| **Access 1D**           | Access an element by index.               | `arr = np.array([1, 2, 3, 4])`<br>`arr[1]`      | `2`                                  |
-| **Access 2D**           | Access an element by row and column index.| `arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])`<br>`arr[1, 2]` | `6`                                  |
-| **Modify Element**      | Change the value of an element.           | `arr = np.array([1, 2, 3, 4])`<br>`arr[2] = 5`  | `[1, 2, 5, 4]`                       |
-| **Slice 1D**            | Slice a 1D array.                         | `arr = np.array([1, 2, 3, 4])`<br>`arr[::2]`, `arr[1:]`, `arr[:-3]` | `[1, 3]`, `[2, 3, 4]`, `[1]`         |
-| **Slice 2D**            | Slice a 2D array.                         | `arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])`<br>`arr[0:2, 1:3]`, `arr[:3, 2:]` | `[[2, 3], [5, 6]]`, `[[3], [6], [9]]` |
-| **Modify Multiple**     | Modify multiple elements.                 | `arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])`<br>`arr[2:5] = [10, 11, 12]` | `[1, 2, 10, 11, 12, 6, 7, 8]`        |
-| **Boolean Indexing**    | Access elements based on conditions.      | `arr = np.array([1, 2, 3, 6, 7, 8])`<br>`arr[arr > 5]` | `[6, 7, 8]`                           |
+See NumPy's [indexing rules](https://numpy.org/doc/stable/user/basics.indexing.html),
+[copies and views](https://numpy.org/doc/stable/user/basics.copies.html), and
+[unbuffered `ufunc.at` updates](https://numpy.org/doc/stable/reference/generated/numpy.ufunc.at.html).

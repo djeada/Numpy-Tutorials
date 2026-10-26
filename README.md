@@ -35,6 +35,20 @@ For a broader understanding of NumPy, we recommend these resources:
 - [SciPy Lecture Notes](https://scipy-lectures.org/) - A comprehensive resource covering scientific computing with Python, including NumPy.
 - [Real Python NumPy Tutorials](https://realpython.com/tutorials/numpy/) - A collection of practical tutorials on using NumPy for various applications.
 
+## Checking the note examples
+
+The Markdown notes contain worked calculations and self-contained Python examples.
+Each Python block imports its own dependencies, defines its inputs, and is followed
+by its expected output. With Python 3.10+ and NumPy installed, run:
+
+```bash
+python scripts/check_note_examples.py
+```
+
+The checker executes every example in a fresh namespace, compares its printed
+output, and fails on unexpected warnings. The expanded examples are in the notes;
+the companion scripts and notebooks retain their original lessons.
+
 ## How to Contribute
 
 We encourage contributions that enhance the repository's value. To contribute:
@@ -48,3 +62,4 @@ We encourage contributions that enhance the repository's value. To contribute:
 ## License
 
 This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
+
